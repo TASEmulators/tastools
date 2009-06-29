@@ -6,6 +6,6 @@
  * Written by adelikat
  * Windows only
 
-=== TAS Spreadsheet ===
+=== TASspreadsheet ===
  * Written by adelikat
  * Microsoft Excel Workbook (Windows only)
