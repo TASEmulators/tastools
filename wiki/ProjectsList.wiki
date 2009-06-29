@@ -1,0 +1,11 @@
+#List of TAStools projects and authors
+
+== TAStools Project List ==
+
+= ScreenshotCompressor =
+ * Written by adelikat
+ * Windows only
+
+= TAS Spreadsheet =
+ * Written by adelikat
+ * Microsoft Excel Workbook (Windows only)
