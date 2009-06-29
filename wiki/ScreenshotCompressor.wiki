@@ -1,11 +1,16 @@
 #For optimal compressing of .png screenshots
 
-= Introduction =
-
+== Introduction ==
+ 
 This program is designed to use along with pngout.exe in order to compress .png files as much as possible.  It is designed for Windows users.  It is designed to allow the user to simply drag and drop the .png file onto the .bat.
 
-= Usage =
+== Usage ==
 
  # Download the Screenshot Compression release and extract into the same folder as pngout.exe
  # Capture the screenshot using the appropriate emulator.
  # Drag and Drop the .png onto Compress.bat.  The file will be replaced with a fully compressed .png
+
+== Source Code / Compiling ==
+
+* FileChooser.exe written in C++ (Written in Visual Studio 2008 but should compile with any compiler)
+* Console application
