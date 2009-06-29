@@ -2,10 +2,10 @@
 
 == TAStools Project List ==
 
-= ScreenshotCompressor =
+=== ScreenshotCompressor ===
  * Written by adelikat
  * Windows only
 
-= TAS Spreadsheet =
+=== TAS Spreadsheet ===
  * Written by adelikat
  * Microsoft Excel Workbook (Windows only)
