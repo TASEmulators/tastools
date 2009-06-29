@@ -1,0 +1,5 @@
+#How to contribute TAS tools
+
+= Introduction =
+
+TAStools is maintained by   To contribute utilities to this project, or help maintin existing ones, email the request to [http://tasvideos.org/Adelikat.html adelikat], admin of [http://tasvideos.org/ TASVideos].
