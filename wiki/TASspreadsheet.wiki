@@ -1,0 +1,9 @@
+#Excel workbook for use with TAS movies
+
+= Introduction =
+
+This is a MS Excel workbook designed for recording framecounts and other TAS data for keeping a log of comparisons when making a TAS.  In addition it has worksheets data, tables, notes, RAM/ROM mapping, and version histories.
+
+= Details =
+
+See Documentation sheet for details.
