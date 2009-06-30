@@ -2,6 +2,7 @@
 // written by: adelikat
 // purpose: to use pngout for optimal compression of game screenshots
 
+#include <stdio.h>
 #include <iostream>
 
 using namespace std;
