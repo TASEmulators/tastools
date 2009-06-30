@@ -120,6 +120,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4800,4996"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -173,6 +174,14 @@
 			<File
 				RelativePath=".\SSCompress.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						DisableSpecificWarnings="4996"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
