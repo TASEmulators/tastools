@@ -3,5 +3,6 @@ Using Visual Basic 6
 Also includes Visual Studio 2008 VB.Net version - upgraded by adelikat
 
 This program modifies .fcm (FCEU) files by 
-1) removing the renundant savestate on power-on movies
-2) Validate/fix length issues caused by hex editing
+1) Validating that a movie starts from power-on or reset
+2) removing the renundant savestate on power-on movies
+3) Validate/fix incorrect movie lengths caused by hex editing
