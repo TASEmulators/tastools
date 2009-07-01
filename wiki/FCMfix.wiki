@@ -1,15 +1,14 @@
-
-= Introduction =
+=== Introduction ===
 
 Fixes/Validates issues related to .fcm movie files.  FCM is the movie file format for [http://code.google.com/p/fceu/ FCEU].
 
 This program modifies .fcm (FCEU) files by 
  # Validating that a movie starts from power-on or reset
  # Removing the renundant savestate on power-on movies
- # Validate/fix incorrect movie lengths caused by hex editing
+ # Validating/fixing incorrect movie lengths caused by hex editing
 
 
-= Code / Compiling =
+=== Code / Compiling ===
 
   * Language: Visual Basic
   * VB6 and Visual Studio 2008 projects available
