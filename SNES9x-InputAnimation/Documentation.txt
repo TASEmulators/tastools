@@ -1,0 +1,6 @@
+SNES9x Input Animator
+
+Generates movie input data that produces interesting effects in SNES9x input display feature
+
+Language: Visual Basic 6
+Author: JXQ
