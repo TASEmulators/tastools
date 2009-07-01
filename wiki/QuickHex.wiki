@@ -3,7 +3,7 @@
 QuickHex is a program written by JXQ to quickly splice two movie files together.
 
 Supported formats: 
- * FCM ([http://code.google.com/p/fceu/ FCEU)
+ * FCM ([http://code.google.com/p/fceu/ FCEU])
  * GMV ([http://code.google.com/p/gens-rerecording/downloads/list GENS])
  * M64 (Mupenv8)
  * MMV (Dega)
