@@ -1,5 +1,5 @@
-#Excel workbook for use with TAS movies
 [http://dl-client.getdropbox.com/u/75355/HostedImages/TASspreadsheet.png]
+----
 = Introduction =
 
 TASspreadsheet is an MS Excel workbook designed for recording framecounts and other TAS data for keeping a log of comparisons when making a TAS.  In addition it has worksheets data, tables, notes, RAM/ROM mapping, and version histories.
