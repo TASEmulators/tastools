@@ -1,0 +1,7 @@
+Gens Input Animator
+
+Generates movie input data that produces interesting effects in GENS input display feature
+
+Language: Visual Basic
+Version: VB6 and VS2008 project files
+Author: JXQ
