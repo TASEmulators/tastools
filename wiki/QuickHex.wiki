@@ -1,10 +1,16 @@
 === Introduction ===
 
 QuickHex is a program written by JXQ to quickly splice two movie files together.
-Supported formats: FCM, GMV, M64, MMV, SMV, VBM
 
+Supported formats: 
+ * FCM ([http://code.google.com/p/fceu/ FCEU)
+ * GMV ([http://code.google.com/p/gens-rerecording/downloads/list GENS])
+ * M64 (Mupenv8)
+ * MMV (Dega)
+ * SMV ([http://code.google.com/p/snes9x-rr/ SNES9x]
+ * VBM ([http://code.google.com/p/vba-rerecording/ VBA])
 
-= Code/Compiling =
+=== Code/Compiling ===
 
   * Language: Visual Basic
   * VB6 Project File
