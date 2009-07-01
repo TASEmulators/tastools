@@ -1,0 +1,5 @@
+FCMFix written by JXQ
+Using Visual Basic 6
+
+This program modifies .fcm (FCEU) files by removing the renundant savestate on power-on movies
+TODO: Doesn't it do other things too?
