@@ -2,6 +2,7 @@ TAShex is a project started in 2007 with purpose of making movie file editing ea
 
 <h3>Header file format:</h3>
 
+<pre>
 TEXT - file header
 TYPE=3 - type of original movie (not a subject to change)
 HEADER - here begins data from file header, in hex format, not subject to change)
@@ -10,12 +11,15 @@ POST - here begins data that goes after controller input data (might be save dat
 <data>
 CONTROLLERS
 <list of controller input data files>
+</pre>
 
 <h3>Controller input file format</h3>
 
-CHARS=1234RLXA><v^SsYB - letters, corresponding to every bit of data. To exchange B and A for whole movie you can just change places of those two in this line.
+<pre>
+CHARS=1234RLXA><v^SsYB - letters, corresponding to every bit of data. 
 every next line is like that:
 <frame number>|<pressed buttons>
+</pre>
 
 frame number is not taken into account when encoding, it's there just for convenience of user to search for exact frame, so lines can be edited, moved, removed, copied and pasted without any worries.
 
