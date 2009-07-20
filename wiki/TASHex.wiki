@@ -1,1 +1,25 @@
-TODO: add info here
+TAShex is a project started in 2007 with purpose of making movie file editing easy without having to calculate hex codes for button states and posiotions of needed segments. The idea was simple: program offers a way to convert movie file (as of release time, it supported every format, supported on site, which is not true for now) into few text files: one has header info, while other contain data for all controllers (one file per controller). 
+
+<h3>Header file format:</h3>
+
+TEXT - file header
+TYPE=3 - type of original movie (not a subject to change)
+HEADER - here begins data from file header, in hex format, not subject to change)
+<data>
+POST - here begins data that goes after controller input data (might be save data for example)
+<data>
+CONTROLLERS
+<list of controller input data files>
+
+<h3>Controller input file format</h3>
+
+CHARS=1234RLXA><v^SsYB - letters, corresponding to every bit of data. To exchange B and A for whole movie you can just change places of those two in this line.
+every next line is like that:
+<frame number>|<pressed buttons>
+
+frame number is not taken into account when encoding, it's there just for convenience of user to search for exact frame, so lines can be edited, moved, removed, copied and pasted without any worries.
+
+<h3>Supported formats:</h3>
+
+vbm, smv, gmv, fcm, fmv - full
+m64 - limited (because it's not frame-based, but input request-based)
