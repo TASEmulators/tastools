@@ -9,3 +9,7 @@
 === TASspreadsheet ===
  * Written by adelikat
  * Microsoft Excel Workbook (Windows only)
+
+=== TAShex ===
+ * Written by Lazy_Zefiris
+ * Windows and Linux versions available
