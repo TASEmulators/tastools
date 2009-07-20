@@ -6,8 +6,10 @@ TAShex is a project started in 2007 with purpose of making movie file editing ea
 TEXT - file header
 TYPE=3 - type of original movie (not a subject to change)
 HEADER - here begins data from file header, in hex format, not subject to change)
+
 <data>
 POST - here begins data that goes after controller input data (might be save data for example)
+
 <data>
 CONTROLLERS
 <list of controller input data files>
@@ -18,6 +20,7 @@ CONTROLLERS
 <pre>
 CHARS=1234RLXA><v^SsYB - letters, corresponding to every bit of data. 
 every next line is like that:
+
 <frame number>|<pressed buttons>
 </pre>
 
