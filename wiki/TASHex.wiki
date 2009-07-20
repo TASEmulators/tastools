@@ -26,4 +26,5 @@ frame number is not taken into account when encoding, it's there just for conven
 <h3>Supported formats:</h3>
 
 vbm, smv, gmv, fcm, fmv - full
+
 m64 - limited (because it's not frame-based, but input request-based)
