@@ -11,5 +11,5 @@
  * Microsoft Excel Workbook (Windows only)
 
 === TAShex ===
- * Written by Lazy_Zefiris
+ * Written by lazyzefiris
  * Windows and Linux versions available
