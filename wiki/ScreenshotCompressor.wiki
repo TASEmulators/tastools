@@ -1,3 +1,6 @@
+=This project is currently removed=
+This was a program I used with an older version of pngout.  The new version has some more advanced features that allow better compression.  I will need to look into this.
+
 #For optimal compressing of .png screenshots
 
 == Introduction ==
