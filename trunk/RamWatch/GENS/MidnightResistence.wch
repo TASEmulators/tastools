@@ -1,0 +1,28 @@
+0
+25
+0290A	00FF090A	b	u	0	Camera X pos 2nd byte
+0290B	00FF090B	b	u	0	Camera X pos
+02B38	00FF0B38	b	u	0	Weapon on/off
+0439B	00FF239B	b	u	0	Camera X position
+0449D	00FF249D	b	u	0	Camera Y pos
+05243	00FF3243	b	s	0	Enemy HP
+0632B	00FF432B	b	u	0	Enemy HP
+06369	00FF4369	b	u	0	Enemy HP
+0639B	00FF439B	b	u	0	Enemy HP
+063AB	00FF43AB	b	u	0	Enemy HP
+063DD	00FF43DD	b	u	0	Enemy HP
+0640F	00FF440F	b	u	0	Enemy HP
+070B2	00FF50B2	b	u	0	Enemy HP
+07405	00FF5405	b	u	0	Enemy HP
+074BC	00FF54BC	b	u	0	Enemy HP
+074C3	00FF54C3	b	u	0	Enemy HP
+074D7	00FF54D7	b	u	0	Enemy HP
+074DC	00FF54DC	b	u	0	Enemy HP
+074FC	00FF54FC	b	u	0	Enemy HP
+0751C	00FF551C	b	s	0	Enemy HP
+0755C	00FF555C	b	s	0	Enemy HP
+0757C	00FF557C	b	u	0	Enemy HP
+076B5	00FF56B5	b	u	0	Enemy HP
+08C1F	00FF6C1F	b	u	0	Player X pos
+08C21	00FF6C21	b	u	0	Player Y pos
+ayer Y pos

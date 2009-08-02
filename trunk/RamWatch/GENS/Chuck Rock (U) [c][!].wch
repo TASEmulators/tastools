@@ -1,0 +1,6 @@
+0
+3
+00000	00FF063C	b	s	0	WhichButtonIsPressed
+00001	00FF065D	b	s	0	X-speed
+00002	00FF0600	w	u	0	X Camera
+0	X-speed

@@ -1,0 +1,9 @@
+0
+4
+028F1	00FF08F1	b	u	0	Camera X 3rd byte
+028F2	00FF08F2	w	u	0	Camera X
+02B1E	00FF0B1E	w	u	0	Level X
+02B19	00FF0B19	w	u	0	X Speed
+el
+02B19	00FF0B19	w	u	0	X Speed
+028F2	00FF08F2	w	u	0	Camera X

@@ -1,0 +1,9 @@
+0
+6
+00000	00FFA2D0	w	u	0	X Level
+00001	00FFA2D2	b	u	0	X Subpix
+00002	00FFA2D9	w	s	0	X Speed
+00003	00FFA2D4	w	u	0	Y Level
+00004	00FFA2D6	b	u	0	Y subpix
+00005	00FFA2DD	w	s	0	Y Speed
+y-speed

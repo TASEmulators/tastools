@@ -1,0 +1,10 @@
+0
+8
+0C2D0	00FFA2D0	w	u	0	x-pos
+0C2D2	00FFA2D2	b	u	0	x-pos subpixel
+0C2D4	00FFA2D4	w	u	0	y-pos
+0C2D6	00FFA2D6	b	u	0	y-pos subpixel
+0C2D8	00FFA2D8	w	s	0	x-speed
+0C2DA	00FFA2DA	b	u	0	x-speed subpixel
+0C2DD	00FFA2DD	b	s	0	y-speed
+0C2DE	00FFA2DE	b	u	0	y-speed subpixel
