@@ -1,0 +1,14 @@
+0
+10
+0CA32	00FFAA32	w	u	0	Pixel Speed
+0CA34	00FFAA34	w	u	0	Subpixel speed
+0CA36	00FFAA36	w	s	0	X Pixel Vel
+0CA38	00FFAA38	w	u	0	X subpixel vel
+0CA3A	00FFAA3A	w	s	0	Y Pixel Vel
+0CA3C	00FFAA3C	w	u	0	Y subpixel vel
+0CB70	00FFAB70	b	s	0	Charge counter
+0D168	00FFB168	w	h	0	3D level speed
+0D19B	00FFB19B	b	s	0	3D Level Charge counter
+0D13E	00FFB13E	w	h	0	3D Level ZPos
+b	s	0	3D Level Charge counter
+0D13E	00FFB13E	w	h	0	3D Level ZPos

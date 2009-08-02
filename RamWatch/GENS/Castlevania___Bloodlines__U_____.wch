@@ -1,0 +1,12 @@
+0
+10
+0B221	00FF9221	b	u	0	camera x pos
+0B220	00FF9220	b	u	0	camera x pos 2nd byte
+0BEC0	00FF9EC0	w	u	0	x-pos on screen
+0DCD4	00FFBCD4	w	s	0	Sub-boss 1
+0DCDC	00FFBCDC	w	s	0	Elizabeth
+0DDD4	00FFBDD4	w	s	0	Sub-boss 2
+0E054	00FFC054	w	s	0	Sub-boss 3
+108D4	00FFE8D4	w	s	0	Boss 1
+0E254	00FFC254	w	s	0	Boss 2
+06FAE	00FF4FAE	w	s	0	Boss 3

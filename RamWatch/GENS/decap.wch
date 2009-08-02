@@ -1,0 +1,7 @@
+0
+5
+0A028	00FF8028	w	u	0	X Level
+0A02A	00FF802A	b	u	0	X subpixel
+0A038	00FF8038	w	u	0	X speed
+0A0AA	00FF80AA	w	u	0	Y Level
+0A03A	00FF803A	w	s	0	Y Speed

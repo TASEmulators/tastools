@@ -1,0 +1,31 @@
+0
+29
+0E349	00FFC349	b	u	0	Player HP
+0E501	00FFC501	b	u	0	Horiztonal cam scroll
+0E51F	00FFC51F	b	u	0	Vertical cam scroll
+0E521	00FFC521	b	s	0	Vertical cam scroll 2nd byte
+0E5BD	00FFC5BD	b	u	0	Game Timer
+0E5C3	00FFC5C3	b	u	0	Player invuln time
+10005	00FFE005	b	u	0	Horiz Pos (Player)
+10035	00FFE035	b	u	0	Vert Pos (Player)
+106F8	00FFE6F8	b	u	0	Enemy HP 2nd byte
+106F9	00FFE6F9	b	u	0	Enemy HP
+10739	00FFE739	b	u	0	Enemy HP
+107B9	00FFE7B9	b	u	0	Enemy HP
+10839	00FFE839	b	s	0	Enemy HP
+10879	00FFE879	b	u	0	Enemy HP
+108B9	00FFE8B9	b	u	0	Enemy HP
+108F9	00FFE8F9	b	u	0	Enemy HP
+10939	00FFE939	b	u	0	Enemy HP
+11039	00FFF039	b	u	0	Enemy HP
+11098	00FFF098	b	u	0	enemy hp (2nd byte to 00FFF099)
+11099	00FFF099	b	u	0	Enemy HP
+110BA	00FFF0BA	b	u	0	00FFF2D9 2nd byte
+110F9	00FFF0F9	b	u	0	Boss HP?
+111B9	00FFF1B9	b	u	0	Enemy HP
+11219	00FFF219	b	u	0	Enemy HP
+11279	00FFF279	b	u	0	Enemy HP
+112D9	00FFF2D9	b	u	0	Enemy HP
+11579	00FFF579	b	u	0	Enemy HP
+115D9	00FFF5D9	b	u	0	Enemy HP
+11639	00FFF639	b	u	0	Enemy HP

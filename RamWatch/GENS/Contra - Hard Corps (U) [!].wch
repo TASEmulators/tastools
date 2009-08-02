@@ -1,0 +1,40 @@
+0
+38
+0C164	00FFA164	w	u	0	X Camera
+0C0E8	00FFA0E8	w	u	0	Y Camera
+0C1E6	00FFA1E6	w	u	0	X Level
+0C1E3	00FFA1E3	b	u	0	Y Level
+0F708	00FFD708	b	u	0	1st Player X sub pixel
+0F707	00FFD707	b	u	0	1st Player On screen
+0F70C	00FFD70C	b	u	0	1st Player Y subpixel
+0F70B	00FFD70B	b	u	0	1st Player Y Screen
+0F788	00FFD788	b	u	0	2nd Player X sub
+0F787	00FFD787	b	u	0	2nd Player On screen
+0F78C	00FFD78C	b	u	0	2nd Player Y sub
+0F7B3	00FFD7B3	b	u	0	2nd Player Y on screen
+00006	00A00006	b	u	0	________________
+0C5B0	00FFA5B0	b	s	0	Fang (p1) Charge Timer
+0C001	00FFA001	b	u	0	255 Timer
+00006	00A00006	b	u	0	________________
+0DE37	00FFBE37	b	u	0	Enemy HP
+0D036	00FFB036	w	u	0	Boss HP 2nd
+0D537	00FFB537	b	s	0	Enemy HP
+0DBB7	00FFBBB7	b	s	0	Enemy HP
+0DEB7	00FFBEB7	b	s	0	Tanker HP
+0E0B7	00FFC0B7	b	s	0	Enemy HP
+0D3F1	00FFB3F1	b	s	0	Mini-Boss HP
+0D070	00FFB070	b	s	0	Boss HP
+0D2B7	00FFB2B7	b	s	0	Mini-Boss HP
+0D6F1	00FFB6F1	b	s	0	Mini-boss HP
+0D070	00FFB070	w	u	0	Boss HP
+0E636	00FFC636	w	u	0	Tanker HP
+0D4BF	00FFB4BF	b	u	0	Mini-boss HP
+0D136	00FFB136	w	u	0	Enemy HP
+0D0B6	00FFB0B6	w	u	0	Mini-boss HP lv 2
+0D336	00FFB336	w	u	0	Boss HP
+0D046	00FFB046	w	u	0	Boss HP
+0E036	00FFC036	w	u	0	Wall HP
+0D1B6	00FFB1B6	w	u	0	Enemy HP
+0A000	00FF8000	w	u	0	Enemy HP
+0A002	00FF8002	w	u	0	Final boss HP
+0A004	00FF8004	w	u	0	Enemy HP
