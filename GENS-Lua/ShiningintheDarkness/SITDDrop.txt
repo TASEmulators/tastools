@@ -1,0 +1,127 @@
+00 Slimy Ooze Item: 5B Herb Drop Rate: 1/64
+01 Cave Slug Item: 5E Wisdom Seed Drop Rate: 1/64
+02 Pit Worm Item: 00 Bronze Knife Drop Rate: 1/128
+03 Man-Ape Item: 5D Angel Feather Drop Rate: 1/64
+04 Dark Jelly Item: 6F Smelling Salts Drop Rate: 1/128
+05 Darkbat Item: 5B Herb Drop Rate: 1/64
+06 Killerbee Item: 5C Depoison Drop Rate: 1/32
+07 Scavenger Item: 5E Wisdom Seed Drop Rate: 1/64
+08 Mad Gnome Item: 00 Bronze Knife Drop Rate: 1/64
+09 Dark Hermit Item: 6F Smelling Salts Drop Rate: 1/64
+0A Neanderthal Item: 5D Angel Feather Drop Rate: 1/64
+0B Widowfang Item: 5C Depoison Drop Rate: 1/32
+0C Cave Goblin Item: 00 Bronze Knife Drop Rate: 1/64
+0D Triklops Item: 5B Herb Drop Rate: 1/64
+0E Vampyre Item: 6F Smelling Salts Drop Rate: 1/64
+0F Skeletar Item: 5C Depoison Drop Rate: 1/32
+10 Punkinhead Item: 5B Herb Drop Rate: 1/64
+11 Vile Ooze Item: 5D Angel Feather Drop Rate: 1/64
+12 Deathguide Item: 5E Wisdom Seed Drop Rate: 1/64
+13 Stinger Item: 5D Angel Feather Drop Rate: 1/64
+14 Killer Gnome Item: 00 Bronze Knife Drop Rate: 1/64
+15 Wild Orc Item: 5B Herb Drop Rate: 1/64
+16 Clodhopper Item: 5E Wisdom Seed Drop Rate: 1/64
+17 Hydrax Item: 5D Angel Feather Drop Rate: 1/64
+18 Nightstalker Item: 6E Healer Fruit Drop Rate: 1/64
+19 Grimfowl Item: 6F Smelling Salts Drop Rate: 1/64
+1A Minotaur Item: 01 Short Sword Drop Rate: 1/64
+1B Dark Wing Item: 1E Wooden Club Drop Rate: 1/64
+1C Toadstool Item: 46 Leather Shield Drop Rate: 1/64
+1D Deathgrin Item: 32 Woven Robe Drop Rate: 1/64
+1E Bullsnout Item: 4B Cloth Hood Drop Rate: 1/64
+1F Tombwalker Item: 6F Smelling Salts Drop Rate: 1/64
+20 Death Rattle Item: 6E Healer Fruit Drop Rate: 1/64
+21 Ostrik Item: 6E Healer Fruit Drop Rate: 1/64
+22 Dark Wizard Item: 35 Straw Robe Drop Rate: 1/64
+23 Jackobutch Item: 5E Wisdom Seed Drop Rate: 1/64
+24 War Lizard Item: 3B Leather Armor Drop Rate: 1/128
+25 Smoke Item: 10 Short Axe Drop Rate: 1/128
+26 Tarantia Item: 33 Fur Robe Drop Rate: 1/128
+27 Mazerunner Item: 02 Sword Drop Rate: 1/128
+28 Nightwraith Item: 4C Woven Hood Drop Rate: 1/64
+29 Cokatoris Item: 6F Smelling Salts Drop Rate: 1/64
+2A Sorceror Item: 36 Hemp Robe Drop Rate: 1/128
+2B Driffid Item: 6F Smelling Salts Drop Rate: 1/64
+2C Fungoid Item: 3D Breast Plate Drop Rate: 1/128
+2D Deadhead Item: 03 Long Sword Drop Rate: 1/128
+2E Reaper Item: 11 Battle Axe Drop Rate: 1/128
+2F Maligator Item: 0B Steel Saber Drop Rate: 1/128
+30 Billow Item: 6D Holy Water Drop Rate: 1/64
+31 Mantoro Item: 12 Double Axe Drop Rate: 1/128
+32 Demi-Wight Item: 34 Worn Robe Drop Rate: 1/64
+33 Berserker Item: 20 Bronze Lance Drop Rate: 1/128
+34 Mandrake Item: 6E Healer Fruit Drop Rate: 1/64
+35 Salamander Item: 3D Breast Plate Drop Rate: 1/128
+36 Kamil Item: 27 Steel Whip Drop Rate: 1/128
+37 Deathserpent Item: 3F Iron Armor Drop Rate: 1/128
+38 Wingblade Item: 4D Fur Hood Drop Rate: 1/128
+39 Tommyhawk Item: 37 Leather Robe Drop Rate: 1/128
+3A Grim Specter Item: 4E Magic Hood Drop Rate: 1/128
+3B Hellknight Item: 6D Holy Water Drop Rate: 1/64
+3C Battle Oxe Item: 13 Greath Axe Drop Rate: 1/128
+3D Mad Tut Item: 1B Enduro Staff Drop Rate: 1/128
+3E Bloodrooster Item: 54 Steel Helm Drop Rate: 1/128
+3F Living Dead Item: 4A Elven Hood Drop Rate: 1/128
+40 Dreampuff Item: 37 Leather Robe Drop Rate: 1/128
+41 Troll Item: 29 Great Flail Drop Rate: 1/128
+42 Gryphon Item: 27 Steel Whip Drop Rate: 1/128
+43 Demonika Item: 0E Ice Saber Drop Rate: 1/128
+44 Necromancer Item: 1A Mercy Staff Drop Rate: 1/128
+45 Living Armor Item: 04 Broad Sword Drop Rate: 1/128
+46 Dragonspawn Item: 21 Iron Lance Drop Rate: 1/128
+47 Vyper Item: 69 Dark Block Drop Rate: 1/64
+48 Warbird Item: 28 Hex Whip Drop Rate: 1/128
+49 Deathbringer Item: 75 Miracle Herb Drop Rate: 1/128
+4A Mandagora Item: 67 Barrier Ring Drop Rate: 1/128
+4B Cerebus Item: 1C Doom Staff Drop Rate: 1/128
+4C Meat Zombie Item: 7E Demon Staff Drop Rate: 1/128
+4D Troglodyte Item: 45 Steel Shield Drop Rate: 1/128
+4E Deathmask Item: 2B Doom Blade Drop Rate: 1/64
+4F Gollum Item: 2A Super Flail Drop Rate: 1/128
+50 Lancerot Item: 06 Storm Sword Drop Rate: 1/128
+51 Hobgoblin Item: 0C Battle Hammer Drop Rate: 1/128
+52 Hellhound Item: 6D Holy Water Drop Rate: 1/64
+53 Gargoyle Item: 3A Dark Robe Drop Rate: 1/128
+54 Ghoul Item: 0F Dark Scimitar Drop Rate: 1/128
+55 Graveroc Item: 22 Steel Lance Drop Rate: 1/128
+56 Chimera Item: 2E Frost Armor Drop Rate: 1/128
+57 Collussus Item: 65 Mithril Ore Drop Rate: 1/64
+58 Dragonfyre Item: 05 Fire Sword Drop Rate: 1/128
+59 Deathpaw Item: 6A Magic Mirror Drop Rate: 1/256
+5A Lokjaw Item: 68 Magic Key Drop Rate: 1/128
+5B Kamiliun Item: 6B Herb Water Drop Rate: 1/128
+5C Demonesk Item: 6B Herb Water Drop Rate: 1/64
+5D Ragnarock Item: 5A Magic Mail Drop Rate: 1/128
+5E Serpi Item: 6C Forbidden Box Drop Rate: 1/128
+5F Ramiun Item: 30 Sun Armor Drop Rate: 1/128
+60 Brimstone Item: 09 Dream Blade Drop Rate: 1/128
+61 Centaurian Item: 40 Steel Armor Drop Rate: 1/128
+62 Warhorse Item: 39 Magic Robe Drop Rate: 1/128
+63 Crystal Ooze Item: 65 Mithril Ore Drop Rate: 1/128
+64 Kromeball Item: 02 Sword Drop Rate: 1/32
+65 Krusher Item: 69 Dark Block Drop Rate: 1/32
+66 Scizzar Item: 50 Mithril Hood Drop Rate: 1/128
+67 Syren Item: 14 Mithril Sword Drop Rate: 1/128
+68 Sea Stallion Item: 77 Madu Drop Rate: 1/64
+69 Killwave Item: 76 Main Gauche Drop Rate: 1/64
+6A Cyblok Item: 18 Fire Staff Drop Rate: 1/64
+6B Brikeye Item: 65 Mithril Ore Drop Rate: 1/64
+6C Blackbone Item: 0D Mithril Axe Drop Rate: 1/128
+6D Tortolyde Item: 70 Orb of Truth Drop Rate: 1/1024
+6E Shellbeast Item: 1D Mithril Rod Drop Rate: 1/128
+6F Grimwall Item: 6E Healer Fruit Drop Rate: 1/32
+70 Bildblok Item: 41 Mithril Armor Drop Rate: 1/128
+71 Kaiserkrab Item: 58 Royal Tiara Drop Rate: 1/1024
+72 Kaiserkrab Item: 6E Healer Fruit Drop Rate: 1/32
+73 Sentinel Item: 54 Steel Helm Drop Rate: 1/32
+74 Guardian Item: 38 Light Robe Drop Rate: 1/128
+75 Doppler Item: 69 Dark Block Drop Rate: 1/16
+76 Headhunter Item: 0F Dark Scimitar Drop Rate: 1/128
+77 Soulthief Item: 0F Dark Scimitar Drop Rate: 1/64
+78 Handeater Item: 7B Black Box Drop Rate: 1/128
+79 Ghost Item: 4E Magic Hood Drop Rate: 1/64
+7A Chestbeak Item: 4D Fur Hood Drop Rate: 1/64
+7B Dark Sol Item: 7F Nothing Drop Rate: 1/1024
+7C Dark Sol Item: 7F Nothing Drop Rate: 1/1024
+7D Dark Knight Item: 7F Nothing Drop Rate: 1/1024
+7E Heal Item: 7F Nothing Drop Rate: 1/1024
