@@ -1,0 +1,85 @@
+$00FB	y-scroll pos [h]
+$00FC	x-scroll pos [l]
+$00FD	x-scroll pos [h]
+
+
+x: 0-F
+	(enemy) sprite 1 at $xxxF,$xxxF; s2 at $xxxE,$xxxE etc.
+	darkwing at $xxx0,$xxx0
+
+$040x	sprite flags
+		xxxxxxxx
+		|||||||unknown
+		||||||unknown
+		|||||unknown
+		||||invisible2(?)
+		|||sprite wraps around and is somewhat faster(dw)/not
+		||walk in front of/behind objects
+		|face left/right (0/1)
+		invisible/visible
+$041x	current animation frame no. (e.g. walking 0-3)
+$042x	sprite state/frame/appearance (e.g. $12=dw falling,$11=dw rising...)
+			Tested in Quackerjack's stage:
+			$00		Nothing
+			$01-$15	Darkwing Duck (?)
+			$16		Normal Gas
+			$17		Gas Arrow
+			$18		Heavy Gas
+			$19		Thunder Gas (current special wpn?)
+			$1A		Thunder Gas (mirrored)
+			$1B		Life Bar
+			$1C		Diamond
+			$1D		Gold
+			$1E		1-Up
+			$1F		Score 100
+			$20		Score 500
+			$21		Score 1-Up
+			$22		Large Medikit
+			$23		Small Medikit
+			$24		Large Gas Container
+			$25		Small Gas Container
+			$26		Powerup Arrow Gas
+			$27		Powerup Heavy Gas
+			$28		Powerup Thunder Gas
+			$29		Gas Arrow
+			$2A		Falling thingy from Quackerjack's stage ;>
+			$2B-$2D	Darkwing Duck
+			$2E-$40	Garbage (?)
+			$41-$43	F.O.W.L. Eggman
+			$44		Garbage
+			$45-$46	Bat
+			$47-$56	Garbage
+			$57,$58	Ropeway Hook
+			$59		Switch
+			$5A		Falling thingy again
+			$5B-$5E	Turtle Enemy
+			$5F-$6B	(presumably) Garbage
+			$6C		looks like a part from that falling thingy... differently colored though
+			$6D...	Garbage
+				-to be continued-
+$043x	weird counter.. counts from 0 to 5 (?); stops when darkwing duck ducks
+$044x	actual y-pos on screen ($00FA holds scrolling pos.. this value is set by substracting $00FA from normal y-pos, l. PC:$803D)
+$045x	actual x-pos on screen ($00FC holds scrolling pos.. this value is set by substracting $00FC from normal x-pos, l. PC:$804D)
+$047x	sub-x-pos
+$048x	counter; if sprite is a drop it will vanish when this value reaches 0
+$04Dx	(?) sprite state flag - e.g. $81 triggers the initial animation of the turtle enemy found in Quackerjack's level, $80 freezes it; anything below $80 (>=0, BPL) will result in death
+$04Ex	(?) affects sprite behavior (e.g. $02 -> heavy gas)
+$04Fx	x-pos [l]
+$050x	x-pos [h]
+$051x	y-pos [l]
+$052x	y-pos [h]
+$053x	sub-walking-speed
+$054x	walking-speed
+$055x	sub-y-pos
+$056x	y-speed
+$057x	collision type flag (?)
+			none (00): none: no collision occurs (no damage)
+			bit0 (01): insensitive: collision occurs when dw walks further into the sprite
+			bit1 (02): sensitive: collision occurs as soon as one pixel is touched
+			bit2 (08): less sensitive: same as bit1, but more sensitive
+			bit6 (40): can be shot by dw
+			bit7 (80): ejects dw upwards when hit (+solid)
+$058x	enemy walk dir (1=right,2=left); may stop at waypoints(?), may jump over obstacles (hey, they've got brains!)
+$05Ax	has got something to do with collision, too
+
+$048E time until power-up 1 disappears ($043E +)
