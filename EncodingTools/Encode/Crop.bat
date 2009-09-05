@@ -1,0 +1,1 @@
+mencoder.exe -oac copy -mc 0 -ovc copy -endpos x -o recorded.avi capture.avi 
