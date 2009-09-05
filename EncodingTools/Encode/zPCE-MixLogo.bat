@@ -1,0 +1,1 @@
+start /wait mencoder.exe -aspect 4:3 -oac copy -mc 0 -ovc lavc -lavcopts vcodec=ffv1:vstrict=-2 -sub test0.sub -subfont-text-scale 4 -sub-bg-alpha 15 -o mixed.avi logoPCE.avi recorded.avi 
