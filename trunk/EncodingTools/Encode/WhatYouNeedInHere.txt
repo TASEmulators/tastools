@@ -1,0 +1,11 @@
+This is designed to go in conjunction with the tutorial guide found here:
+http://tasvideos.org/EmulatorResources/MakingAVI/Common/Windows.html
+
+
+You need these files:
+mkvmerg.exe
+mencoder.exe
+oggenc2.exe
+x264.exe
+
+Use the above linked tutorial for download links and instructions on how to install and set up
