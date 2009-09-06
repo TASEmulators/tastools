@@ -19,8 +19,8 @@ int main(int argc, char* argv[])
 	filenameFull.append(".png");
 	bool failure = false;			//used for error checking with filestream, if this becomes true, abort program
 
-//	if (argc > 1)
-//	filenameFull = argv[1];		//Get a filename if user chose one
+	if (argc > 1)
+	filenameFull = argv[1];		//Get a filename if user chose one
 	
 	cout << "filename is " << filenameFull.c_str() << "\n"; //debug
 	
@@ -47,19 +47,18 @@ int main(int argc, char* argv[])
 		cout << testArray[x].c_str() << "\n"; //Debug
 	}
 
-	SHELLEXECUTEINFO ShExecInfo = {0};
+	SHELLEXECUTEINFOA ShExecInfo = {0};
 	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
 	ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
 	ShExecInfo.hwnd = NULL;
 	ShExecInfo.lpVerb = NULL;
-	ShExecInfo.lpFile = L"pngbat.bat";		
-	ShExecInfo.lpParameters = L"";	
+	ShExecInfo.lpFile = "pngbat.bat";		
+	ShExecInfo.lpParameters = filename.c_str();	
 	ShExecInfo.lpDirectory = NULL;
 	ShExecInfo.nShow = SW_SHOW;
 	ShExecInfo.hInstApp = NULL;	
-	ShellExecuteEx(&ShExecInfo);
+	ShellExecuteExA(&ShExecInfo);
 	WaitForSingleObject(ShExecInfo.hProcess,INFINITE);
-	//ShellExecuteEx();
 	
 	////////////////////////////////////////////////////////////////
 	//Choose the smallest file
