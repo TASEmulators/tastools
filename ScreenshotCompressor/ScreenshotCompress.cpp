@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	FILE* files[16];				//[0] will be dummy
 
 	////////////////////////////////////////////////////////////////
-	// 
+	// Compress screenshot into 16 files
 	////////////////////////////////////////////////////////////////
 
 	//Populate the test array
@@ -46,6 +46,8 @@ int main(int argc, char* argv[])
 		testArray[x].append(".png");
 		cout << testArray[x].c_str() << "\n"; //Debug
 	}
+
+	//ShellExecuteEx();
 	
 	////////////////////////////////////////////////////////////////
 	//Choose the smallest file

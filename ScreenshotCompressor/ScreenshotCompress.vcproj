@@ -160,6 +160,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="xcopy /y .\Release\ScreenshotCompress.exe .\output\"
 			/>
 		</Configuration>
 	</Configurations>
