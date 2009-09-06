@@ -47,6 +47,18 @@ int main(int argc, char* argv[])
 		cout << testArray[x].c_str() << "\n"; //Debug
 	}
 
+	SHELLEXECUTEINFO ShExecInfo = {0};
+	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+	ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+	ShExecInfo.hwnd = NULL;
+	ShExecInfo.lpVerb = NULL;
+	ShExecInfo.lpFile = L"pngbat.bat";		
+	ShExecInfo.lpParameters = L"";	
+	ShExecInfo.lpDirectory = NULL;
+	ShExecInfo.nShow = SW_SHOW;
+	ShExecInfo.hInstApp = NULL;	
+	ShellExecuteEx(&ShExecInfo);
+	WaitForSingleObject(ShExecInfo.hProcess,INFINITE);
 	//ShellExecuteEx();
 	
 	////////////////////////////////////////////////////////////////
