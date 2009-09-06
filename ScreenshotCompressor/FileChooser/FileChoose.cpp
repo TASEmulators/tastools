@@ -1,8 +1,7 @@
-// SSCompress.cpp
+// FileChoser.cpp
 // written by: adelikat
 // purpose: to use pngout for optimal compression of game screenshots
-// It is designed to be a windows application where the user simply needs to drag & drop the screenshot onto Screenshotcompress.exe
-
+// Reads 16 screenshot files, decides which is the smallest, removes the rest, and renames it to the original file
 #include <stdio.h>
 #include <iostream>
 #include <windows.h>

@@ -1,4 +1,4 @@
-pngout test.png test01.png -f0 -b2
+start pngout.exe test.png test01.png -f0 -b2
 pngout test.png test02.png -f0 -b4
 pngout test.png test03.png -f0 -b8
 pngout test.png test04.png -f0 -b16
@@ -13,4 +13,5 @@ pngout test.png test12.png -f0 -b4096
 pngout test.png test13.png -f0 -b8192
 pngout test.png test14.png -f0 -b16384
 pngout test.png test15.png -f0 -b32768
-start ChooseFile.exe
+dir test??.png
+pause
