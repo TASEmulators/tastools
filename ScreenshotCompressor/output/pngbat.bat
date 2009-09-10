@@ -13,4 +13,3 @@ pngout %1 %2test12.png -f0 -b4096
 pngout %1 %2test13.png -f0 -b8192
 pngout %1 %2test14.png -f0 -b16384
 pngout %1 %2test15.png -f0 -b32768
-pause
