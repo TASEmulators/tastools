@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <windows.h>
+#include <Winbase.h>
 #include <shellapi.h>
 
 using namespace std;
@@ -14,19 +15,37 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	string filename = "test";		//Used as the base name for generating the testArray names
-	string filenameFull = filename;
-	filenameFull.append(".png");
 	bool failure = false;			//used for error checking with filestream, if this becomes true, abort program
+	string filename = "test";		//The dafult if nothing is specified by the user
+	string filenameFull;			//Will store the full path to the file that was compressed
 
-	if (argc > 1)
-	filenameFull = argv[1];		//Get a filename if user chose one
 	
-	cout << "filename is " << filenameFull.c_str() << "\n"; //debug
 	
 	string testArray[16];			//Array of filename to test, will be populated based on filename, [0] will be a dummy
 	FILE* files[16];				//[0] will be dummy
 
+	//Get base directory
+	char* getPath = (char*)malloc(2048*sizeof(char));
+	GetModuleFileNameA(NULL, getPath, 2048);
+
+	string baseDirectory = getPath;
+	char slash = '\\';
+	int x = baseDirectory.find_last_of(slash);
+	baseDirectory = baseDirectory.substr(0,x+1);
+	
+	cout << "Working directory is:\n" << baseDirectory.c_str() << "\n\n"; //Debug
+
+	if (argc > 1)
+		filenameFull = argv[1];		//Get a filename if user chose one
+	else
+	{
+		filenameFull = baseDirectory;
+		filenameFull.append(filename);	//If filename isn't specified use test.png in the same dictory as the executable
+		filenameFull.append(".png");
+	}
+
+
+	cout << "Filename is:\n" << filenameFull.c_str() << "\n\n"; //debug
 	////////////////////////////////////////////////////////////////
 	// Compress screenshot into 16 files
 	////////////////////////////////////////////////////////////////
@@ -35,17 +54,28 @@ int main(int argc, char* argv[])
 	char temp[3] = "";
 	for (int x = 1; x <= 15; x++)
 	{
-		testArray[x] = filename;	//Add filename
+		testArray[x] = baseDirectory;
+		testArray[x].append(filename);	//Add filename
 		
 		if (x < 10)
 			testArray[x].append("0");	//Make 01, 02 etc.
 
 		sprintf(temp, "%d", x);			//Append X
 		testArray[x].append(temp);
-
 		testArray[x].append(".png");
-		cout << testArray[x].c_str() << "\n"; //Debug
+
+		//cout << testArray[x].c_str() << "\n"; //Debug
 	}
+	
+	cout << "Opening pngbat.bat...\n";
+
+	string parameters = "\"";
+	parameters.append(filenameFull.c_str());	//Send pngbat.bat the filename
+	parameters.append("\"");					//Enclose in quotes
+	parameters.append(" ");
+	parameters.append(baseDirectory);			//Send the basedirectory as parameter 2 (so it places test01.png in the correct place
+	
+	cout << "With paramters: " << parameters.c_str();
 
 	SHELLEXECUTEINFOA ShExecInfo = {0};
 	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
@@ -53,8 +83,8 @@ int main(int argc, char* argv[])
 	ShExecInfo.hwnd = NULL;
 	ShExecInfo.lpVerb = NULL;
 	ShExecInfo.lpFile = "pngbat.bat";		
-	ShExecInfo.lpParameters = filename.c_str();	
-	ShExecInfo.lpDirectory = NULL;
+	ShExecInfo.lpParameters = parameters.c_str();
+	ShExecInfo.lpDirectory = baseDirectory.c_str();
 	ShExecInfo.nShow = SW_SHOW;
 	ShExecInfo.hInstApp = NULL;	
 	ShellExecuteExA(&ShExecInfo);
@@ -105,7 +135,7 @@ int main(int argc, char* argv[])
 		//cout << "\nThe lowest filsize is file number " << lowestNum << "\n" ;	//Debug
 
 		//Delete all but the smallest file
-		bool fail = false;
+		int fail = 0;
 		
 		fail = remove(filenameFull.c_str());
 
@@ -117,10 +147,10 @@ int main(int argc, char* argv[])
 			if (x != lowestNum)
 			{
 				fail = remove(testArray[x].c_str());
-				if (!fail)
-					cout << "Removing file " << x << "\n";
-				else
-					cout << "Could not remove file " << x << "\n";
+				//if (!fail)
+				//	cout << "Removing file " << x << "\n";
+				//else
+				//	cout << "Could not remove file " << x << "\n";
 			}
 		}
 
@@ -136,8 +166,8 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 	//Keep window open until user presses enter
-	cout << "\nPress Enter key to exit";
-	cin.ignore(cin.rdbuf()->in_avail()+1);
+	//cout << "\nPress Enter key to exit";
+	//cin.ignore(cin.rdbuf()->in_avail()+1);
 
 	return 0;
 }
