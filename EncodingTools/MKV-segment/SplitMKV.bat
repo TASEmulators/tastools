@@ -1,1 +1,0 @@
-start mkvmerge.exe --split 00:19:00 -o %1.mkv %1
