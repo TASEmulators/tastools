@@ -3,3 +3,10 @@ http://www.bunkus.org/videotools/mkvtoolnix/downloads.html#windows
 
 download and install. 
 Browse to install location(default is C:\Program Files\MKVtoolnix), copy the mkvmerge.exe file to this directory.
+
+Make sure you keep these files in this directory:
+libiconv-2.dll
+libintl-8.dll
+magic1.dll
+regex2.dll
+SplitMKV.bat
