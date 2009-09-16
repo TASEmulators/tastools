@@ -1,5 +1,8 @@
 These are batch files designed to aid in TASVideos publication work.
 
+Download link:
+[http://tastools.googlecode.com/files/EncodingUtilities.zip Encoding Tools]
+
 Encoding
 
 The scripts & files in this folder are for encoding TASVideos publications.  They are designed to go along with the [http://tasvideos.org/EmulatorResources/MakingAVI/Common/Windows.html TASVideos encoding tutorial].
