@@ -1,12 +1,13 @@
 These are batch files designed to aid in TASVideos publication work.
 
-Download link:
+=Download link:=
 [http://tastools.googlecode.com/files/EncodingUtilities.zip Encoding Tools]
 
-Encoding
+=Encoding=
 
 The scripts & files in this folder are for encoding TASVideos publications.  They are designed to go along with the [http://tasvideos.org/EmulatorResources/MakingAVI/Common/Windows.html TASVideos encoding tutorial].
 
-MKV-split
+=MKV-split=
 
-This is a script designed to allow an MKV to be split into 19 minute segments by dragging the MKV over the SplitMKV.bat file.  This is intended to make segments of published movies in order to upload them to the [http://www.dailymotion.com/TASVideos TASVideos Dailymotion group].
+This is a automated script designed to allow windows users to split MKV (and AVI) files into 1segments by dragging over one of the SplitMKV batch files.  This is intended to make segments of published movies in order to upload them to the [http://www.dailymotion.com/TASVideos TASVideos Dailymotion group] and [http://www.youtube.com/OfficialTASVideos TASVideos Youtube channel].
+
