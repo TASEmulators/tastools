@@ -15,15 +15,14 @@ To use, drag the video file over the appropriate batch file (either dailymotion 
 
 The script is compatible with AVI files as well.  Simply drag them to the appropriate bat file as usual.  However it will give it a .mkv file extension.  It doesn't reencode teh file or anything, it is simply the changing of the extension.  It should work fine either way.  Or to avoid misleading extension they can be renamed back.
 
-===Necessary downloads===
-You will need mkvmerge.exe available [http://www.bunkus.org/videotools/mkvtoolnix/downloads.html#windows here]
+*Necessary downloads*
+  * You will need mkvmerge.exe available [http://www.bunkus.org/videotools/mkvtoolnix/downloads.html#windows here]
+  * Download and install. 
+  * Browse to install location(default is C:\Program Files\MKVtoolnix), copy the mkvmerge.exe file to this directory.
 
-Download and install. 
-Browse to install location(default is C:\Program Files\MKVtoolnix), copy the mkvmerge.exe file to this directory.
-
-Make sure you keep these files in this directory:
-libiconv-2.dll
-libintl-8.dll
-magic1.dll
-regex2.dll
-SplitMKV.bat
+Make sure you keep these files in the same directory as the batch files directory:
+  * libiconv-2.dll
+  * libintl-8.dll
+  * magic1.dll
+  * regex2.dll
+  * SplitMKV.bat
