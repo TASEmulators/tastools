@@ -1,8 +1,5 @@
-===Direct download link===
-[http://tastools.googlecode.com/files/ScreenshotCompress.zip ScreenshotCompress]
-
-
-#For optimal compressing of .png screenshots
+*Direct download link:*
+  *[http://tastools.googlecode.com/files/ScreenshotCompress.zip ScreenshotCompress]
 
 == Introduction ==
  
