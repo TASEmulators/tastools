@@ -1,5 +1,8 @@
 ==SNES9x Input Animator==
 
+*Direct download link:*
+  * [http://tastools.googlecode.com/files/SNES9x%20Input%20Animator.zip SNES9xInputAnimator]
+
 Generates movie input data that produces interesting effects in [http://code.google.com/p/snes9x-rr/ SNES9x] input display feature
 
 ==Code/Compiling==
