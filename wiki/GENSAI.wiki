@@ -1,6 +1,9 @@
 ==Gens Input Animator==
 
-Generates movie input data that produces interesting effects in [http://code.google.com/p/gens-rerecording/ GENS] input display feature
+*Direct download:*
+  * [http://tastools.googlecode.com/files/GensInputAnimatorv2.1.zip GENSInputAnimator]
+
+Generates movie input data that produces interesting effects in [http://code.google.com/p/gens-rerecording/ GENS] input display feature.
 
 ==Code/Compiling==
 Language: Visual Basic 6
