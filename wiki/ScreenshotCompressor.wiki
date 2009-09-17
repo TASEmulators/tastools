@@ -1,5 +1,5 @@
 *Direct download link:*
-  *[http://tastools.googlecode.com/files/ScreenshotCompress.zip ScreenshotCompress]
+  * [http://tastools.googlecode.com/files/ScreenshotCompress.zip ScreenshotCompress]
 
 == Introduction ==
  
