@@ -1,6 +1,5 @@
-*Direct download link*
-*[http://tastools.googlecode.com/files/TAS-Hex.zip TASHex Windows]
-*[http://tastools.googlecode.com/files/tas-hexl.zip TASHex Linux]
+*Direct download links: *
+[http://tastools.googlecode.com/files/TAS-Hex.zip TASHex Windows], [http://tastools.googlecode.com/files/tas-hexl.zip TASHex Linux]
 
 TAShex is a project started in 2007 with purpose of making movie file editing easy without having to calculate hex codes for button states and posiotions of needed segments. The idea was simple: program offers a way to convert movie file (as of release time, it supported every format, supported on site, which is not true for now) into few text files: one has header info, while other contain data for all controllers (one file per controller). 
 
