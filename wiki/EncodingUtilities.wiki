@@ -1,7 +1,7 @@
-These are batch files designed to aid in TASVideos publication work.
+These are batch files and other accessories designed to aid in TASVideos publication work.
 
-===Direct download link:===
-[http://tastools.googlecode.com/files/EncodingUtilities.zip Encoding Tools]
+*Direct download link:*
+  * [http://tastools.googlecode.com/files/EncodingUtilities.zip Encoding Tools]
 
 ===Encoding===
 
