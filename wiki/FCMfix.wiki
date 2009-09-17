@@ -1,3 +1,6 @@
+*Direct download link:*
+  * [http://tastools.googlecode.com/files/FCMFix.zip FCM fix]
+
 === Introduction ===
 
 Fixes/Validates issues related to .fcm movie files.  FCM is the movie file format for [http://code.google.com/p/fceu/ FCEU].
