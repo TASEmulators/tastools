@@ -2,41 +2,40 @@
 
 == TAStools Project List ==
 
-=== ScreenshotCompressor ===
+*ScreenshotCompressor*
  * Written by adelikat
  * Language: C++
  * Windows only
 
-=== Encoding Utilities ===
+*Encoding Utilities*
  * Written by adelikat/Sp00ky
  * Windows batch files
  * Additional accessories such as .dll & subtitle files
 
-=== TASspreadsheet ===
+*TASspreadsheet*
  * Written by adelikat
  * Microsoft Excel Workbook (Windows only)
 
-=== QuickHex
+*QuickHex*
  * Written by JXQ
  * Language: Visual Basic 6
  * Windows only
 
-=== TAShex ===
+*TAShex*
  * Written by lazyzefiris
  * Windows and Linux versions available
 
-=== SNES9XAI ===
+*SNES9XAI*
  * Written by JXQ
  * Language: Visual Basic 6
  * Windows only
  
-=== GENSAI ===
+*GENSAI*
  * Written by JXQ
  * Language: Visual Basic 6
  * Windows only
 
-
-=== FCMfix ===
+*FCMfix*
  * Written by JXQ
  * Language: Visual Basic 6
  * Windows only
