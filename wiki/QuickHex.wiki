@@ -1,3 +1,6 @@
+*Direct download link:*
+  * [http://tastools.googlecode.com/files/QuickHexv5.1.zip QuickHex]
+
 === Introduction ===
 
 QuickHex is a program written by JXQ to quickly splice two movie files together.
