@@ -1,0 +1,113 @@
+/** \file
+ * \brief Windows Driver
+ *
+ * See Copyright Notice in "iup.h"
+ */
+ 
+#ifndef __IUPWIN_DRV_H 
+#define __IUPWIN_DRV_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+#ifndef WS_EX_COMPOSITED
+#define WS_EX_COMPOSITED        0x02000000L     /* it is defined only when _WIN32_WINNT >= 0x0501 */
+#endif
+
+
+/* global variables */
+/* declared where they are initialized */
+extern HINSTANCE iupwin_hinstance;      /* winopen.c */
+extern HINSTANCE iupwin_dll_hinstance;  /* winmain.c */
+extern int       iupwin_comctl32ver6;   /* winopen.c */
+
+void iupwinShowLastError(void);
+
+/* focus */
+void iupwinWmSetFocus(Ihandle *ih);
+
+/* key */
+int iupwinKeyEvent(Ihandle* ih, int wincode, int press);
+void iupwinButtonKeySetStatus(WORD keys, char* status, int doubleclick);
+void iupwinKeyEncode(int key, unsigned int *keyval, unsigned int *state);
+
+/* tips */
+void iupwinTipsGetDispInfo(LPARAM lp);
+
+/* font */
+char* iupwinGetHFontAttrib(Ihandle *ih);
+HFONT iupwinGetHFont(const char* value);
+char* iupwinFindHFont(HFONT hFont);
+
+/* menu */
+void iupwinMenuDialogProc(Ihandle* ih, UINT msg, WPARAM wp, LPARAM lp);
+
+/* common */
+
+/* Definition of a callback used to return the background brush of controls called "_IUPWIN_CTLCOLOR_CB". */
+typedef int (*IFctlColor)(Ihandle* ih, HDC hdc, LRESULT *result);
+
+/* Definition of a callback used to draw custom controls called "_IUPWIN_DRAWITEM_CB". 
+  drawitem is a pointer to a DRAWITEMSTRUCT struct. */
+typedef void (*IFdrawItem)(Ihandle* ih, void* drawitem);
+
+/* Definition of a callback used to notify custom controls called "_IUPWIN_NOTIFY_CB". 
+  msg_info is a pointer to a NMHDR struct. */
+typedef int (*IFnotify)(Ihandle* ih, void* msg_info, HRESULT *result);
+
+/* Definition of callback used for custom WinProc. Can return 0 or 1.
+   0 = do default processing. 
+   1 = ABORT default processing and the result value should be returned.
+*/
+typedef int (*IwinProc)(Ihandle* ih, UINT msg, WPARAM wp, LPARAM lp, LRESULT *result);
+
+/* Base WinProc used by all native elements. Configure base message handling 
+   and custom IwinProc using "_IUPWIN_CTRLPROC_CB" callback. */
+LRESULT CALLBACK iupwinBaseWinProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
+
+/* Base IwinProc callback used by native controls. */
+int iupwinBaseProc(Ihandle* ih, UINT msg, WPARAM wp, LPARAM lp, LRESULT *result);
+
+/* Base IwinProc callback used by native containers. 
+   Handle messages that are sent to the parent Window.  */
+int iupwinBaseContainerProc(Ihandle* ih, UINT msg, WPARAM wp, LPARAM lp, LRESULT *result);
+
+/* Creates the Window with native parent and child ID, associate HWND with Ihandle*, 
+   and replace the WinProc by iupwinBaseWinProc */
+int iupwinCreateWindowEx(Ihandle* ih, LPCSTR lpClassName, DWORD dwExStyle, DWORD dwStyle);
+
+int iupwinClassExist(const char* name);
+int iupwinGetColorRef(Ihandle *ih, char *name, COLORREF *color);
+int iupwinGetParentBgColor(Ihandle* ih, COLORREF* cr);
+void iupwinDropFiles(HDROP hDrop, Ihandle *ih);
+Ihandle* iupwinMenuGetItemHandle(HMENU hmenu, int menuId);
+Ihandle* iupwinMenuGetHandle(HMENU hMenu);
+int iupwinSetDragDropAttrib(Ihandle* ih, const char* value);
+void iupwinChangeProc(Ihandle *ih, WNDPROC new_proc);
+void iupwinMergeStyle(Ihandle* ih, DWORD old_mask, DWORD value);
+void iupwinSetStyle(Ihandle* ih, DWORD value, int set);
+WCHAR* iupwinStrChar2Wide(const char* str);
+int iupwinButtonUp(Ihandle* ih, UINT msg, WPARAM wp, LPARAM lp);
+int iupwinButtonDown(Ihandle* ih, UINT msg, WPARAM wp, LPARAM lp);
+int iupwinMouseMove(Ihandle* ih, UINT msg, WPARAM wp, LPARAM lp);
+char* iupwinGetClipboardText(Ihandle* ih);
+
+int iupwinGetScreenRes(void);
+/* 1 point = 1/72 inch */
+/* pixel = (point/72)*(pixel/inch) */
+#define IUPWIN_PT2PIXEL(_pt, _res)    MulDiv(_pt, _res, 72)     /* (((_pt)*(_res))/72)    */
+#define IUPWIN_PIXEL2PT(_pixel, _res) MulDiv(_pixel, 72, _res)  /* (((_pixel)*72)/(_res)) */
+
+
+/* child window identifier of the first MDI child window created,
+   should not conflict with any other command identifiers. */
+#define IUP_MDICHILD_START 100000000
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

@@ -1,0 +1,4 @@
+EXPORTS
+  cdluaim_open
+  luaopen_cdluaim
+  luaopen_cdluaim51

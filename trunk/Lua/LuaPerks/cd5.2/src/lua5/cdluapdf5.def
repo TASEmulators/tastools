@@ -1,0 +1,4 @@
+EXPORTS
+  cdluapdf_open
+  luaopen_cdluapdf
+  luaopen_cdluapdf51
