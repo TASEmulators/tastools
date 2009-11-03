@@ -1,0 +1,6 @@
+EXPORTS
+  iupcontrolslua_open
+  iupcontrolslua_close
+  luaopen_iupluacontrols
+  luaopen_iupluacontrols51
+  

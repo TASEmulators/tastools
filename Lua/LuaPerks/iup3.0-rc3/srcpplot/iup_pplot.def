@@ -1,0 +1,11 @@
+EXPORTS
+  IupPPlotOpen
+  IupPPlot
+  IupPPlotBegin
+  IupPPlotAdd
+  IupPPlotAddStr
+  IupPPlotEnd
+  IupPPlotInsertStr
+  IupPPlotInsert
+  IupPPlotTransform
+  IupPPlotPaintTo

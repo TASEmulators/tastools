@@ -1,0 +1,4 @@
+EXPORTS
+  iup_pplotlua_open
+  luaopen_iuplua_pplot
+  luaopen_iuplua_pplot51

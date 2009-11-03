@@ -1,0 +1,4 @@
+cp -f ../lib/${TEC_UNAME}/*.so ../bin/$TEC_UNAME
+cp -f ../../cd/lib/${TEC_UNAME}/*.so ../bin/$TEC_UNAME
+cp -f ../../im/lib/${TEC_UNAME}/*.so ../bin/$TEC_UNAME
+rm -f ../bin/${TEC_UNAME}/*3.so

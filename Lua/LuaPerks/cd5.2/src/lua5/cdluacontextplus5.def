@@ -1,0 +1,4 @@
+EXPORTS
+  luaopen_cdluacontextplus
+  luaopen_cdluacontextplus51
+ 
