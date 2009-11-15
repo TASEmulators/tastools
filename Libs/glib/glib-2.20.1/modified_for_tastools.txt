@@ -1,0 +1,5 @@
+This package was modified for tastools from the official glib-2.20.1 release because I wasnt sure how else to get it running.
+search for //desmume: for differences, though, since that is where this was first used.
+
+Additionally, the entire build process was altered, to fit with the methodology in this libraries depot
+Hopefully we'll never have to upgrade this package.
