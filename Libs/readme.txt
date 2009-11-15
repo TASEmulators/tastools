@@ -26,7 +26,9 @@ The libraries are all built for now with vc8 with standard library symbols omitt
 
 These libraries are all, for now, built with the multithreaded non-dll CRT libraries. Some emulators may have different requirements...
 
-Various other build properties, such as link-time code generation, whole program optimization, and other optimization properties, may vary from library to library according to the library builder's whim, as he attempts to balance performance against humongousness of libraries.
+Various other build properties, specifically optimization properties, may vary from library to library according to the library builder's whim, as he attempts to balance performance against humongousness of libraries.
+
+However, link-time code generation / whole program optimization should not be used as visual studio cannot handle libraries built with these options across different versions.
 
 The emulator should drop the libraries and corresponding header files into its own directory tree, as well as a memo indicating the source of these libraries. For example, create a file with the name:
 
