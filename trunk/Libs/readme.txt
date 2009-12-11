@@ -41,3 +41,7 @@ Also conspicuously absent from the library name is the version number of the lib
 As a consequence of these naming conventions, libraries can be upgraded without having to fiddle with emulator link inputs or link directories, and it is easy to use them since there are not a dozen different library names for different build configurations.
 
 These approaches have been verified with vs2005 and vs2008; vs2010 is an unusable heap of trouble and we haven't yet verified how well these libs will work in it.
+
+As a special exception, some libraries which are useful to debug (such as lua) may have a -debug library available if it is commonly used, but it may not be checked into the individual emulator projects (as it is assumed that one can grab it from tastools)
+
+Directories called includes-copy may be checked in, which you should copy into your emulator project in order to gain supply declarations. These have been stripped out of the source distributions which they sit alongside.
