@@ -1,0 +1,161 @@
+<html><head><meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+ <title>NES movie fileformat converter</title>
+ <style type="text/css"><!--
+TABLE.toc {border:0px}
+A:link,A:visited{text-decoration:none;color:#2A3B83}
+A:hover{text-decoration:underline;color:#002040}
+A:active{text-decoration:underline;color:#004060;background:#CCD8FF}
+TD.toc   {font-size:80%; font-family:Tahoma; text-align:left}
+H1       {font-size:250%; font-weight:bold} .level1 {text-align:center}
+H2       {font-size:200%; font-weight:bold} .level2 {margin-left:1%}
+H3       {font-size:160%; font-weight:bold} .level3 {margin-left:2%}
+H4       {font-size:145%; font-weight:bold} .level4 {margin-left:3%}
+H5       {font-size:130%; font-weight:bold} .level5 {margin-left:4%}
+H6       {font-size:110%; font-weight:bold} .level5 {margin-left:5%}
+BODY{background:white;color:black}
+CODE{font-family:lucida console,courier new,courier;color:#105000}
+PRE.smallerpre{font-family:lucida console,courier new,courier;font-size:80%;color:#500010;margin-left:30px}
+SMALL    {font-size:70%}
+.nonmail { visibility:hidden;position:absolute; top:0px;left:0px }
+.ismail  { font-weight:normal }
+--></style></head>
+ <body>
+  <h1>NES movie fileformat converter</h1>
+  <h2 class=level2> 0. Contents </h2>
+  
+  This is the documentation of nesmock-1.6.1.1.
+<div class=toc><table cellspacing=0 cellpadding=0 class=toc><tr><td width="50%" valign=middle align=left nowrap class=toc>&nbsp;&nbsp;&nbsp;1. <a href="#h0">Purpose</a><br>&nbsp;&nbsp;&nbsp;2. <a href="#usage">Usage</a><br>&nbsp;&nbsp;&nbsp;3. <a href="#h1">Copying</a><br></td>
+<td width="50%" valign=middle align=left nowrap class=toc>&nbsp;&nbsp;&nbsp;4. <a href="#h2">Requirements</a><br>&nbsp;&nbsp;&nbsp;5. <a href="#h3">Thoughs</a><br>&nbsp;&nbsp;&nbsp;6. <a href="#download">Downloading</a><br></td>
+</tr></table></div><H2 id="h0" class="level2"><a name="h0"></a>1. Purpose</H2><div class="level2" id="divh0">
+
+<img src="http://bisqwit.iki.fi/src/nesmock-boxart.png" align="left" alt="nesmock" />
+This program converts different format NES movies to other formats.
+ <p />
+It supports movie files of the following emulators: Famtasia, FCE-Ultra (FCEU),
+Nintendulator, VirtuaNES.
+ <p />
+This paragraph should be made much longer. It being too short now,
+it looks somewhat stupid if the cool image on the left side is all alone
+by itself. There should be more text in here. I'm not going to put some
+latin text here, this rant must do. Something about documentation, or
+about the freedom of open source.
+ <p />
+Nesmock does not support movie files for other systems such as SNES or Sega Genesis,
+because those systems have different hardware.
+<br clear="all" />
+
+</div><H2 id="usage" class="level2"><a name="usage"></a>2. Usage</H2><div class="level2" id="divusage">
+
+<pre class=smallerpre>nesmock v1.5.1 - Copyright (C) 1992,2006 Bisqwit (http://iki.fi/bisqwit/)
+
+Usage: nesmock [&lt;options&gt;] &lt;inputfile&gt; &lt;outputfile&gt;
+
+Transforms NES movie files to different formats.
+ --help, -h     This help
+ --offset, -o   Insert delay at &lt;frame&gt;,&lt;length&gt;
+                Example usage: -o 14501:1
+                Delay length may also be negative, in which case
+                existing frames are deleted instead of copied.
+                Frame numbers are relative to the original movie.
+                Short syntax -o 10 uses frame number 0 by default.
+ --set, -s      Set &lt;var&gt;=&lt;value&gt;
+                Note: All movie formats don't support all values
+                      or may have length/type limitations.
+                Available vars:
+                  PAL         0 or 1
+                  RecordCount 0..n
+                  EmuName     string
+                  MovieName   string
+                  ROMName     string
+                  MD5         string (can be a 32-char hex or a filename)
+                  FCEUver     0..n (example: 9812 (=0.98.12))
+                Example usage: -spal=0 -srom=&quot;Mario Bros.nes&quot; -smd5=mario.nes
+ --state, -t    Copy savestate from &lt;file&gt;
+                Example: nesmock a.fmv a.fcm -t'orig.fcm'
+                Will also make fcm files reset-based (default: poweron-based)
+ --ctrl, -c     Defines how to handle a controller. Examples:
+                  -c2       = delete player 2 input
+                  -c2+      = add second player (zero input)
+                  -c21      = add second player (copy P1 input)
+                  -c21 -c12 = swap players' 1 and 2 inputs
+ --version, -V  Displays version information
+
+Supported formats:
+  FMV  (Famtasia 5.1)        - Read &amp; Write
+  FCM  (FCEU 0.98.12)        - Read &amp; Write
+  NMV  (Nintendulator 0.950) - Read &amp; Write
+  VMV  (VirtuaNES)           - Read
+
+Example:
+  nesmock -o2 smb1a.fcm smb1a.fmv
+
+</pre>
+
+Offsets and delays are usually needed because different emulators
+have different timings in various details.
+Adjusting them is usually trial&amp;error work.
+ <p>
+If you are doubting whether this program actually works at all, try converting
+Super Mario Bros movies. I have had complete success with them.
+ <p>
+Hint: Nesmock can be used for editing FCM files by first
+converting them to FMV (which is easier to edit than FCM)
+and then back to FCM.
+
+</div><H2 id="h1" class="level2"><a name="h1"></a>3. Copying</H2><div class="level2" id="divh1">
+
+nesmock has been written by Joel Yliluoma, a.k.a.
+<a href="http://iki.fi/bisqwit/">Bisqwit</a>,<br>
+and is distributed under the terms of the
+<a href="http://www.gnu.org/licenses/licenses.html#GPL">General Public License</a> (GPL).
+ <p>
+If you are an emulator developer, you are welcome to hack this source
+code and add more format support to the code.<br>
+These planned things are currently missing:
+<ul>
+ <li>Movie support for:
+  <ul>
+   <li>VirtuaNES (write)</li>
+   <li>Nesticle (read, write)</li>
+  </ul></li>
+ <li>Savestate support for:
+  <ul>
+   <li>Nintendulator (read, write)</li>
+   <li>FCEU (read, write (partial support exists))</li>
+   <li>VirtuaNES (read (partial support exists), write)</li>
+   <li>Famtasia (read, write)</li>
+  </ul></li>
+</ul>
+
+</div><H2 id="h2" class="level2"><a name="h2"></a>4. Requirements</H2><div class="level2" id="divh2">
+
+GNU make and C++ compiler is required to recompile the source code.<br>
+For the program (including the Windows binary), you need a commandline.<br>
+
+</div><H2 id="h3" class="level2"><a name="h3"></a>5. Thoughs</H2><div class="level2" id="divh3">
+
+Different emulators emulate differently. This is a fact.
+For this reason, usually straight conversions of the movies
+don't just work.
+ <p>
+It is unfortunately impossible to guess from the movie file alone where
+would the emulator need more / less frames than the other emulator.
+ <p>
+A more elaborate conversion could be made by running the two emulators
+simultaneously and keeping track of their status, and when the other goes
+desync, backtrack and bruteforce the combination that puts it back to track.
+This kind of method is however extremely difficult to implement. And it
+still might be impossible - if the game does calculations based on scanline
+counters, there could be no way to make them match.
+
+</div><H2 id="download" class="level2"><a name="download"></a>6. Downloading</H2><div class="level2" id="divdownload">
+   The official home page of nesmock
+   is at <a href="http://iki.fi/bisqwit/source/nesmock.html">http://iki.fi/bisqwit/source/nesmock.html</a>.<br>
+   Check there for new versions.
+</div> <p align=right><small>Generated from
+       <tt>progdesc.php</tt> (last updated: Wed, 23 Aug 2006 11:02:32 +0300)<br>
+  with <tt>docmaker.php</tt> (last updated: Sun, 12 Jun 2005 06:08:02 +0300)<br>
+  at Fri, 10 Aug 2007 20:37:24 +0300</small>
+ </p>
+</body>
+</html>
