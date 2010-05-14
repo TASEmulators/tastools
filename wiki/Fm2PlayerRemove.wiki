@@ -1,0 +1,10 @@
+*Direct download link:*
+  * [http://tastools.googlecode.com/files/Fm2-PlayerRemove.zip Fm2PlayerRemove]
+
+Introduction
+
+This file is a utility specifically for [http://fceux.com/web/FM2.html FM2] files.  These files are text based and if a user has fourscore enabled by accident, they can end up with 2 controllers worth of useless data.  This program is intended to strip away the unneeded controller info and fix the necessary header flags resulting in a much smaller and tidy input file.
+
+It must be fed the filename through commandline.  Windows users can simply drop the input file on the .exe.
+
+It will output a fixed .fm2 file in the same directory as the existing.
