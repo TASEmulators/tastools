@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 		}
 		else if (!(strcmp(line, "port0 0")))
 			strcpy_s(line, "port0 1");
-		else if (!(strcmp(line, "port1 0")))
+		else if (!(strcmp(line, "port1 1")))
 			strcpy_s(line, "port1 0");
 		else if (!(strcmp(line, "port2 1")))
 			strcpy_s(line, "port2 0");
@@ -57,12 +57,13 @@ int main(int argc, char* argv[])
 		if (line[0] == '|')
 		{
 			//Funny but it works
-			if (numcontrollers = 4)
+			if (numcontrollers == 4)
 			{
 				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 			}
+			lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 			lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 			lineStr = lineStr.substr(0, lineStr.find_last_of("|")+1);
 			lineStr +="|";
