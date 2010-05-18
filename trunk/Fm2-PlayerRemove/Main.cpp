@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 	string fnout = "";
 	fnout.append(fn);
 	fnout = fnout.substr(0, (fnout.length()-4));
-	fnout.append("-2-controller.fm2");
+	fnout.append("-1-controller.fm2");
 	
 	ofstream outFile;				//outgoing .fm2 file
 	outFile.open(fnout.c_str());
@@ -40,13 +40,16 @@ int main(int argc, char* argv[])
 	while (inFile)
 	{
 	
-		
+		int numcontrollers = 2;
 		if (!(strcmp(line, "fourscore 1")))
+		{
+			numcontrollers = 4;
 			strcpy_s(line, "fourscore 0");
+		}
 		else if (!(strcmp(line, "port0 0")))
 			strcpy_s(line, "port0 1");
 		else if (!(strcmp(line, "port1 0")))
-			strcpy_s(line, "port1 1");
+			strcpy_s(line, "port1 0");
 		else if (!(strcmp(line, "port2 1")))
 			strcpy_s(line, "port2 0");
 		
@@ -54,10 +57,15 @@ int main(int argc, char* argv[])
 		if (line[0] == '|')
 		{
 			//Funny but it works
-			lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
-			lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
+			if (numcontrollers = 4)
+			{
+				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
+				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
+				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
+			}
 			lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 			lineStr = lineStr.substr(0, lineStr.find_last_of("|")+1);
+			lineStr +="|";
 		}
 		
 		outFile << lineStr.c_str() << endl;
