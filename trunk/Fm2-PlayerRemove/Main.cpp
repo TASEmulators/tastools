@@ -36,11 +36,10 @@ int main(int argc, char* argv[])
 	string lineStr;
 
 	int count = 1;
+	int numcontrollers = 2;
 	inFile.getline(line,2048);
 	while (inFile)
 	{
-	
-		int numcontrollers = 2;
 		if (!(strcmp(line, "fourscore 1")))
 		{
 			numcontrollers = 4;
@@ -59,7 +58,6 @@ int main(int argc, char* argv[])
 			//Funny but it works
 			if (numcontrollers == 4)
 			{
-				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 				lineStr = lineStr.substr(0, lineStr.find_last_of("|"));
 			}
