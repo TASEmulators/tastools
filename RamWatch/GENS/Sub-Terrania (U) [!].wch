@@ -1,0 +1,22 @@
+0
+18
+07ECD	00FF5ECD	w	u	0	Health
+07ED5	00FF5ED5	w	s	0	Fuel
+07EDD	00FF5EDD	b	s	0	Gun Power
+0F184	00FFD184	w	s	0	Weapon level
+0A09F	00FF809F	w	s	0	x_vel
+0A0A3	00FF80A3	w	s	0	y_vel
+0A0D4	00FF80D4	w	s	0	x_pos
+0A0D8	00FF80D8	w	s	0	y_pos
+0A0E5	00FF80E5	w	h	0	angle
+0AFDE	00FF8FDE	b	h	0	alt_angle
+0CEEB	00FFAEEB	b	s	0	Left Boss 2
+0CEE9	00FFAEE9	b	s	0	Right Boss 2
+0CEED	00FFAEED	b	s	0	Tail Boss 2
+0CEE7	00FFAEE7	b	s	0	Final Boss 2
+08650	00FF6650	w	u	0	Boss 4
+1032E	00FFE32E	w	s	0	Final Boss 1 tail health
+10458	00FFE458	w	s	0	Final Boss 1 health
+102AC	00FFE2AC	w	s	0	Final Boss 2 health
+0BC1D	00FF9C1D	b	s	0	Building
+11E8D	00FFFE8D	b	s	0	Very right bulding?

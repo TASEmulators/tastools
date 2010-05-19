@@ -1,0 +1,12 @@
+0
+10
+0379F	00FF179F	b	s	0	y_pos
+037AB	00FF17AB	w	s	0	x_vel
+037AF	00FF17AF	b	s	0	y_vel
+03992	00FF1992	w	s	0	x_pos
+03BEA	00FF1BEA	w	u	0	Overhead X_pos
+03BEE	00FF1BEE	w	u	0	Overhead Y_pos
+03C65	00FF1C65	w	s	0	Overhead x_vel
+03C69	00FF1C69	w	s	0	Overhead Y_vel
+03FBD	00FF1FBD	b	u	0	Boss health
+045F8	00FF25F8	w	u	0	Final Boss
