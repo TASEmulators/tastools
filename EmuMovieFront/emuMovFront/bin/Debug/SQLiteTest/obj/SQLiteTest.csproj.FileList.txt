@@ -1,0 +1,8 @@
+obj\Debug\SQLiteTest.exe
+obj\Debug\SQLiteTest.pdb
+obj\Debug\ResolveAssemblyReference.cache
+bin\Debug\SQLiteTest.exe
+bin\Debug\SQLiteTest.pdb
+bin\Debug\\SQLiteClient.dll
+bin\Debug\\ConsoleTable.dll
+bin\Debug\\SQLiteClient.pdb

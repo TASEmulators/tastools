@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SQLiteTest">
+</Property><Property Name="Solution File" Value="C:\Documents and Settings\root\My Documents\Visual Studio 2005\Projects\emuMovFront\emuMovFront\bin\Debug\SQLiteTest\SQLiteTest.sln">
+</Property><Property Name="Date" Value="Thursday, March 02, 2006">
+</Property><Property Name="Time" Value="10:58:02 AM">
+</Property></Properties><Event ErrorLevel="0" Project="SQLiteTest" Source="SQLiteTest.csproj" Description="Project file successfully backed up as C:\Documents and Settings\root\My Documents\Visual Studio 2005\Projects\emuMovFront\emuMovFront\bin\Debug\SQLiteTest\Backup\SQLiteTest.csproj">
+</Event><Event ErrorLevel="0" Project="SQLiteTest" Source="SQLiteTest.csproj.user" Description="Project user file successfully backed up as C:\Documents and Settings\root\My Documents\Visual Studio 2005\Projects\emuMovFront\emuMovFront\bin\Debug\SQLiteTest\Backup\SQLiteTest.csproj.user">
+</Event><Event ErrorLevel="0" Project="SQLiteTest" Source="AssemblyInfo.cs" Description="File successfully backed up as C:\Documents and Settings\root\My Documents\Visual Studio 2005\Projects\emuMovFront\emuMovFront\bin\Debug\SQLiteTest\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="SQLiteTest" Source="SQLiteDotNetTest.cs" Description="File successfully backed up as C:\Documents and Settings\root\My Documents\Visual Studio 2005\Projects\emuMovFront\emuMovFront\bin\Debug\SQLiteTest\Backup\SQLiteDotNetTest.cs">
+</Event><Event ErrorLevel="0" Project="SQLiteTest" Source="App.ico" Description="File successfully backed up as C:\Documents and Settings\root\My Documents\Visual Studio 2005\Projects\emuMovFront\emuMovFront\bin\Debug\SQLiteTest\Backup\App.ico">
+</Event><Event ErrorLevel="0" Project="SQLiteTest" Source="SQLiteTest.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SQLiteTest" Source="SQLiteTest.csproj" Description="Converted">
+</Event></UpgradeLog>

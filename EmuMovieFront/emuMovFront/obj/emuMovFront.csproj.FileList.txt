@@ -1,0 +1,5 @@
+obj\Debug\ResolveAssemblyReference.cache
+bin\Debug\emuMovFront.exe
+bin\Debug\emuMovFront.pdb
+obj\Debug\emuMovFront.exe
+obj\Debug\emuMovFront.pdb
