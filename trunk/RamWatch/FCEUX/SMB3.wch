@@ -1,0 +1,27 @@
+
+25
+00000	00BD	b	s	0	X Speed
+00001	0075	b	u	0	X Level 2nd
+00002	0090	b	u	0	X Level
+00003	074D	b	u	0	X Subpix
+00004	00FD	b	u	0	X Camera
+00005	00AB	b	u	0	X Screen
+00006	0000	b	s	0	_______________
+00007	00CF	b	s	0	Y Speed
+00008	0087	b	s	0	Y Level 2nd
+00009	00A2	b	s	0	Y Level
+0000A	075F	b	u	0	Y Subpix
+0000B	0001	b	s	0	______________________
+0000C	03DD	b	s	0	P Meter
+0000D	056E	b	s	0	P Kill Counter
+0000E	0515	b	s	0	Next P
+0000F	0002	b	s	0	_________________
+00010	0079	b	s	0	X Map Position
+00011	0014	b	s	0	Back to Map
+00012	ABCD	b	s	0	_______________
+00013	7CFA	b	s	0	Boss HP
+00014	FFFF	b	s	0	___________________
+00015	05F1	b	u	0	Clock Timer
+00016	055D	b	s	0	8 Frame Timer
+00017	0015	b	s	0	Card Timer
+00018	0781	w	u	0	RNG
