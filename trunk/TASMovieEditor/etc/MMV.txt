@@ -1,0 +1,36 @@
+MMV file format description
+MMV files consist of a 224-byte header, followed by an optionalsave state chunk, then the movie data.
+
+Header format:
+
+     0000: 4-byte signature: "MMV\0"
+     0004: 4-byte little endian unsigned int: dega version
+     0008: 4-byte little endian unsigned int: frame count
+     000c: 4-byte little endian unsigned int: rerecord count
+     0010: 4-byte little endian flag: begin from reset?
+     0014: 4-byte little endian unsigned int: offset of state information
+     0018: 4-byte little endian unsigned int: offset of input data
+     001c: 4-byte little endian unsigned int: size of input packet
+     0020-005f: string: author info (UTF-8)
+     0060: 4-byte little endian flags
+       bit 0: unused
+       bit 1: PAL
+       bit 2: Japan
+       bit 3: Game Gear (version 1.16+)
+       bits 4-31: unused
+     0064-00e3: string: rom name (ASCII)
+     00e4-00f3: binary: rom MD5 digest
+
+Controller data format
+Controller data is made up of one input packet per frame. Each packet currently consists of 2 bytes. The first byte is for controller 1 and the second controller 2. The Game Gear only uses the controller 1 input however both bytes are still present. The bit layout is:
+
+   bit 0: up
+   bit 1: down
+   bit 2: left
+   bit 3: right
+   bit 4: 1
+   bit 5: 2
+   bit 6: start (Master System)
+   bit 7: start (Game Gear)
+
+On the Master System bit 6 will only be set for one frame when the button is depressed. 

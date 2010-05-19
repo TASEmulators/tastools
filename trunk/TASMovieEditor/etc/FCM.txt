@@ -1,0 +1,93 @@
+FCM file format description
+FCM file consists of a variable-length header and various blocks that depend on settings. The header must be a minimum of 56 bytes. The first 32 bytes are interpreted the same between v1 and v2 movies. The header and file layout are completely different between blip's patched version and the unpatched official version of FCEU. Only the savestate and controller data are the same.
+
+Header format:
+
+    000 4-byte signature: 46 43 4D 1A "FCM\x1A"
+    004 4-byte little-endian unsigned int: version number, must be 2
+    008 1-byte flags:
+       bit 0: reserved, set to 0
+       bit 1:
+           if "0", movie begins from an embedded "quicksave" snapshot
+           if "1", movie begins from reset [1]
+       bit 2:
+           if "0", NTSC timing
+           if "1", PAL timing
+           see notes below
+       other: reserved, set to 0
+    009 1-byte flags: reserved, set to 0
+    00A 1-byte flags: reserved, set to 0
+    00B 1-byte flags: reserved, set to 0
+    00C 4-byte little-endian unsigned int: number of frames
+    010 4-byte little-endian unsigned int: rerecord count
+    014 4-byte little-endian unsigned int: length of controller data in bytes
+    018 4-byte little-endian unsigned int: offset to the savestate inside file
+    01C 4-byte little-endian unsigned int: offset to the controller data inside file
+    020 16-byte md5sum of the ROM used
+    030 4-byte int: version of the emulator used
+    034 name of the ROM used - UTF8 encoded nul-terminated string.
+
+After the header comes "metadata", which is UTF8-coded movie title string. The metadata begins after the ROM name and ends at the savestate offset. This string is displayed as "Author Info" in the Windows version of the emulator.
+
+The savestate offset is <header_size + length_of_metadata_in_bytes + padding>. The savestate offset should be 4-byte aligned.
+At the savestate offset there is a savestate file.
+The savestate exists even if the movie is reset-based.
+
+The controller data offset is <savestate_offset + length_of_compressed_savestate + padding>. The controller data offset should be 4-byte aligned.
+The controller data contains <number_of_frames> frames.
+
+Note that the savestate data must come before controller data.
+A gap between the savestate data and the controller data is allowed.
+
+Starting with version 0.98.12 released on September 19, 2004, a PAL flag was added to the header but unfortunately it is not reliable - the emulator does not take the PAL setting from the ROM, but from a user preference. This means that this site cannot calculate movie lengths reliably.
+
+The controller data is written as follows: First there is an "update" byte, followed by zero to three "delta" bytes.
+
+Update byte:
+
+  76543210
+  x.......    if "1" this is a "control" update, if "0", this is a "controller" update.
+  .xx.....    specifies the number of delta bytes to follow
+  ...xxxxx    update data.
+
+The "delta" is the number of emulator frames between this update and the next update. It is encoded in little-endian format and its size depends on the magnitude of the delta:
+
+  Delta of:      Number of bytes:
+  0              0
+  1-255          1
+  256-65535      2
+  65536-(2^24-1) 3
+
+FCEU emits a "dummy" command of 0 if the current delta is about to overflow.
+
+The interpretation of the update data field depends on whether is a "control" or "controller" update. The "control" commands are listed as follows:
+
+   0     Take no action
+   1     Reset
+   2     Power cycle
+   7     VS System Insert Coin
+   8     VS System Dipswitch 0 Toggle
+  24     FDS Insert
+  25     FDS Eject
+  26     FDS Select Side
+
+The controller update data is formatted as follows
+
+  43210
+  xx...  the gamepad number the update applies to.
+  ..xxx  the specific input to toggle.
+
+The inputs are numbered as follows:
+
+  0      A button
+  1      B button
+  2      Select button
+  3      Start button
+  4      Up
+  5      Down
+  6      Left
+  7      Right
+
+Controller update data is emitted to the movie file only when the state of the controller changes.
+
+[1]: Even if the header says "movie begins from reset", the file still contains a quicksave, and the quicksave is actually loaded. This flag can't therefore be trusted. To check if the movie actually begins from reset, you'll have to analyze the events and see if the first non-idle command in the file is a Reset type control command. 

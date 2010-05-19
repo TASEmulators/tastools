@@ -1,0 +1,41 @@
+FMV file format description
+FMV file consists of a 144-byte header and the frame data.
+
+Header format:
+
+    000 4-byte signature: 46 4D 56 1A "FMV\x1A"
+    004 1-byte flags:
+             bit 7: 0=reset-based, 1=savestate-based
+             other bits: unknown, set to 0
+    005 1-byte flags:
+             bit 7: uses controller 1
+             bit 6: uses controller 2
+             bit 5: is a FDS recording
+             other bits: unknown, set to 0
+    006 4-byte little-endian unsigned int: unknown, set to 00000000
+    00A 4-byte little-endian unsigned int: rerecord count minus 1
+    00E 2-byte little-endian unsigned int: unknown, set to 0000
+    010 64-byte zero-terminated emulator identifier string
+    050 64-byte zero-terminated movie title string
+    090 frame data begins here
+
+each frame consists of 1 or more bytes.
+Controller 1 takes 1 byte, controller 2 takes 1 byte, FDS data takes 1 byte.
+If all three exist, frame is 3 bytes. If the movie is a regular NES game with only controller 1 data, a frame is 1 bytes.
+
+The file has no terminator byte or frame count. The number of frames is the <filesize minus 144> divided by <number of bytes per frame>.
+
+The rerecord count stored in the file is the number of times a savestate was loaded. If a savestate was never loaded, the number is 0. Famtasia however displays "1" in such case. It always adds 1 to the number found in the file.
+
+The file format has no means of identifying NTSC/PAL. It is always assumed that the game is NTSC - that is, 60 fps.
+
+The bit values in hex for the buttons are as follows.
+
+  01 Right
+  02 Left
+  04 Up
+  08 Down
+  10 B
+  20 A
+  40 Select
+  80 Start
