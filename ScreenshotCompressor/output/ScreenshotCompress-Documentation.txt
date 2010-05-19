@@ -1,10 +1,10 @@
 ScreenshotCompress.exe
 
-This program is designed to compress a .png file optimally using pngout.exe.  (You will need this program for this to work).
+This program is designed to compress a .png file optimally using pngout.exe and deflopt.exe.  (You will need those programs for this to work).
 It is intended to be used with 2D video game screenshots.
-It runs 15 variations of the -b options in pngout and determines the lowest filesize.
+It runs a configurable amount (see ScreenshotCompress.cfg; default 100) of random trials and chooses the lowest file size.
 
-ScreenshotCompress.exe, pngout.exe, and pngbat.bat must all be in the same directory.
+ScreenshotCompress.exe, ScreenshotCompress.cfg, pngout.exe, and deflopt.exe  must all be in the same directory.
 
 
 __Using__
