@@ -1,0 +1,79 @@
+SMV file format description
+SMV file consists of a 32-byte header and various blocks that depend on settings.
+
+Header format:
+
+    000 4-byte signature: 53 4D 56 1A "SMV\x1A"
+    004 4-byte little-endian unsigned int: version number, must be 1
+    008 4-byte little-endian integer: movie "uid" - identifies the movie-savestate relationship,
+               also used as the recording time in Unix epoch format
+    00C 4-byte little-endian unsigned int: rerecord count
+    010 4-byte little-endian unsigned int: number of frames
+    014 1-byte flags "controller mask":
+       bit 0: controller 1 in use
+       bit 1: controller 2 in use
+       bit 2: controller 3 in use
+       bit 3: controller 4 in use
+       bit 4: controller 5 in use
+       other: reserved, set to 0
+    015 1-byte flags "movie options":
+       bit 0:
+           if "0", movie begins from an embedded "quicksave" snapshot
+           if "1", a SRAM is included instead of a quicksave; movie begins from reset
+       bit 1: if "0", movie is NTSC (60 fps); if "1", movie is PAL (50 fps)
+       other: reserved, set to 0
+    016 1-byte flags: reserved, set to 0
+    017 1-byte flags "sync options":
+       bit 0: MOVIE_SYNC_DATA_EXISTS
+           if "1", the following bits are defined.
+           if "0", the following bits have no meaning.
+       bit 1: MOVIE_SYNC_WIP1TIMING
+       bit 2: MOVIE_SYNC_LEFTRIGHT
+       bit 3: MOVIE_SYNC_VOLUMEENVX
+       bit 4: MOVIE_SYNC_FAKEMUTE
+       bit 5: MOVIE_SYNC_SYNCSOUND
+       bit 6: MOVIE_SYNC_HASROMINFO
+           if "1", there is extra ROM info located right
+           in between of the metadata and the savestate.
+    018 4-byte little-endian unsigned int: offset to the savestate inside file
+    01C 4-byte little-endian unsigned int: offset to the controller data inside file
+
+After the header comes "metadata", which is UTF16-coded movie title string (author info). The metadata begins from position 32 (0x20) and ends at <savestate_offset - length_of_extra_rom_info_in_bytes>.
+
+Extra ROM info is an optional 30-byte record which contains the following structure:
+
+    000 3 bytes of zero padding: 00 00 00
+    003 4-byte integer: CRC32 of the ROM
+    007 23-byte ascii string:
+       the game name copied from the ROM, truncated to 23 bytes
+       (the game name in the ROM is 21 bytes)
+
+Extra ROM info is always positioned right before the savestate.
+Its size is 30 bytes if MOVIE_SYNC_HASROMINFO is used (and MOVIE_SYNC_DATA_EXISTS is set), 0 bytes otherwise.
+
+The savestate offset is <32 + length_of_metadata_in_bytes + length_of_extra_rom_info_in_bytes>.
+At the savestate offset there is a gzip-compressed file.
+
+    * If the movie is snapshot-anchored, it is a structured Snes9x savestate.
+    * If the movie is reset-anchored, it is a SRAM snapshot (which should decompress into 0x20000 bytes in length). 
+
+The controller data offset is <savestate_offset + length_of_compressed_savestate>.
+The controller data contains <number_of_frames + 1> frames. Each frame consists of 2 bytes per controller. So if there are 3 controllers, a frame is 6 bytes and if there is only 1 controller, a frame is 2 bytes.
+
+Note that the savestate data must come before controller data - Snes9x uses the savestate offset to calculate the length of the metadata.
+A gap between the savestate data and the controller data is allowed.
+
+The controller data's format as it appears in a hex editor is as follows:
+
+  0001 = Right
+  0002 = Left
+  0004 = Down
+  0008 = Up
+  0010 = Start
+  0020 = Select
+  0040 = Y
+  0080 = B
+  1000 = R
+  2000 = L
+  4000 = X
+  8000 = A

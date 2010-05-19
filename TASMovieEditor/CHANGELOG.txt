@@ -1,0 +1,349 @@
+//////////////////////
+// CURRENT FEATURES //
+//////////////////////
+
+    VIEW HEADER VIEW INPUT  ADD FRAMES  REMOVE FRAMES   EDIT FRAMES   SPLICE   SAVE 
+SMV*    [x]         [x]         [x]          [x]            [x]         [x]     [x]
+FCM     [x]         [x]         [x]          [x]            [x]         [x]     [x]
+GMV     [x]         [x]         [x]          [x]            [x]         [x]     [x] 
+FMV     [x]         [x]         [x]          [x]            [x]         [x]     [x]
+VBM     [x]         [x]         [x]          [x]            [x]         [x]     [x]
+M64**   [x]         [x]         [x]          [x]            [x]         [ ]     [X]
+MMV     [x]         [x]         [x]          [x]            [x]         [?]     [x]
+PXM     [x]         [x]         [x]          [x]            [x]         [?]     [x]
+
+*only snes v1.43 is supported
+*mupen support is difficult since there's not direct correlation between how often an input sample
+is applied to a particular frame
+
+///////////////////////
+// OUTSTANDING TASKS //
+///////////////////////
+TODO::Why don't I just replace the movie's input collection instead of working with another frameData object? No updates are made till the save is invoked, so this is just wasting memory, as the original copy is never used other than to populate the listview initially.
+
+TODO::Undo still buggy on updates (add/remove works fine though)
+
+high priority
+-------------
+TODO::Add exception handlers to format loads (in case headers check out but input is corrupt)
+TODO::Add exception handlers for FCM's that terminate input population early (null entries in input table)
+TODO::Finish mupen support (will have to be controller inputs ... not frame inputs :(
+   
+medium priority
+---------------
+TODO::FCM doesn't track control updates (figure out best way to implement)
+TODO::SMV support doesn't include control events (RESET is all I can see at the moment)
+TODO::Add block overwrite on paste (as opposed to just inserting the block)
+TODO::Add controller muxing/demuxing (add/remove controllers)
+TODO::Add ZSNES support
+TODO::Add ability to extract save-state from movie
+
+low priority
+------------
+TODO::Overhaul frame input editing
+TODO::Line up input (fake columns of data, so if <>A, < AB, v  BS, ... etc)
+      (This prolly won't happen until I figure out how I want to display input)
+
+not likely to happen any time soon
+----------------------------------
+TODO::Add FinalBurnAlpha support?
+TODO::Add GMV2 support? (not sure if the format is completely defined yet)
+TODO::Add Nestopia, VirtuaNES support? (not sure if it's even necessary)
+
+///////////////
+// CHANGELOG //
+///////////////
+
+v0-12-2
+
+- MMV::Added MMV support.
+- PXM::Experimental PXM support (untested).
+- GMV::Fixed file saving.
+- FMV::Fixed file saving.
+- FCM::Fixed saving the wrong movie start type and length of the controller data.
+- ETC::Fixed display of movie start types.
+- ETC::Fixed a bug that ReadHEX didn't generate the leading 0 when the HEX number was less than 0x10.
+- ETC::Fixed high CPU usage.
+- ETC::Handled a few IO exceptions.
+- ETC::The editor console will now be automatically closed when a new movie is loaded.
+- ETC::Added insufficient specifications to MMV, ZMV and PXM formats.
+- ETC::Fixed recent file list.
+- ETC::Tweaked Save As dialog.
+- ETC::Fixed several shortcut keys.
+- ETC::Tweaked menu items.
+- ETC::Placed all the 4 Controller checkboxes in the edit dialog over the texts that could obscure them on some systems.
+
+v0-12-1
+
+- M64::M64 file saving (thanks to bkDJ). If you do not modify the length of the movie things will be ok.
+       However, if you do modify it (append/remove frames), due to difficulties with the emulator the m64
+       file will state an incorrect movie length.
+       To fix this you have to play your movie, pause right at the end of it, change to write-mode,
+       create a savestate, and reload your savestate. This will force the emulator to fix this piece of
+       information on your movie file. Remember to do this before releasing.
+       * tas-movie-editor does not have the information required to do this. *
+- ETC::Automatic Movie generator (thanks to gia). Generates movies. Each with a different combination of
+       inputs given a base movie provided by the user. Useful for bots. Check generator.config for an
+       extensive list of parameters.
+- ETC::Better code for application resize.
+- ETC::Usability improvements. Go To, Find, Replace, etc, dialogs.
+
+v0-12
+
+- SMV::Fixed a bug that prevented loading of 5-player movie files
+- VBM::Fixed reading / writing of L/R values
+- ETC::Added a movie comparisson module
+- ETC::Added file-lock checks when saving (if an emulator has the file locked for writing, 
+       the applicaiton will crash if you try to save) - thanks Halamantariel
+
+v0-11
+
+- ETC::Implemented an AVI subtitle export (only supports SubRip SRTs at the moment)
+- ETC::Fixed the misspelling of my own name in the about screen (heh, thanks moozooh)
+- ETC::Recent files tracked in an external ini file now (and are available via the File menu)
+- ETC::Help menu item now links to the brand-spankin' new CHM file that comes with the release
+- FCM::Fixed reading of start/timing flags (not sure how long this hasn't worked, but it does now ... yay)
+- SMV::Extraneous input reading/writing implemented (the extra values 0, 1 & 2 used for input animation)
+
+
+v0-10-1
+
+-  UI::Virtual list caching implemented (for greater efficiency ... or, if you will, FOR GREAT JUSTICE!!!)
+-  UI::Navigating the frame data via the keyboard (up/down/pageup/pagedown ... etc) now updates the
+       required controllers in the editing console
+- ETC::Splicer's close button now works
+- ETC::Zero ranges in the splicer indicate the whole movie (start of 0 = first frame, 
+       end of 0 = last frame)
+- SMV::Fixed a bug with the parser not handling multi-controller input properly
+       (frames were offset ... didn't line up) - thanks Zefiris
+- SMV::Fixed read/write bug that was dropping the last frame - thanks Zefiris
+- SMV::Fixed extra data (rom info) being dropped when metadata was updated
+- VBM::Fixed read/write bug that was dropping the last frame - thanks again Zefiris :)    
+
+
+v0-10
+
+-  UI::Editing control now "hovers" (Hotkey F2)
+-  UI::Editing control now now accepts changes via ENTER key
+-  UI::Editing control can be hidden by hitting ESC
+-  UI::Message History visible via F4 (was CTRL+M)
+-  UI::Populate a format icon on load (this is just for fun :P)
+-  UI::Fixed a bug in the editor that didn't allow you to seek to frame 1
+-  UI::Added an "Add" button to the splicer so drag/drop not the only way to get a movie in there :)
+-  UI::SaveAs now allows you to edit metadata (Author/Description)
+- ETC::Fixed bug in copy buffer that was causing a crash if you tried to view with no movie loaded
+- ETC::Fixed a bug in the splicer that was causing the frame ranges to clear when a new movie is added
+- ETC::Fixed a bug where the splicer was dropping the first frame of input
+- ETC::Added reordering buttons to the splicer (so movie positions can be swapped)
+- ETC::Added append mode to editor (allows you to add an input to the end of a group of frames
+       without replacing the contents)
+- ETC::Splicer now prompts for location of output file       
+- SMV::Fixed metadata reading (not sure what happened there, but i was reading nulls somehow :P)
+- SMV::metadata updating
+- FCM::metadata updating
+- GMV::metadata updating
+- FMV::metadata updating
+- VBM::metadata updating
+
+v0-9-2
+
+-  UI::Drag and drop of a movie onto the main Frames listview now loads a file also
+-  UI::Paste or remove now ensures that the position where the action was initiated remains visible
+       (as opposed to the list resetting to the top position each time)
+-  UI::Added option to toggle editing prompts (Options -> Confirm Editing Actions)
+-  UI::Updating frames doesn't cause the input to scroll back to the top
+-  UI::Main form is now sizable :)
+-  UI::Adding/Removing now no longer repositions the position within the list unless a large remove
+       is performed
+-  UI::Pasted blocks are now inserted AFTER the target frame 
+       (who'd a thought that adding 1 to an index would be so complicated :P)    
+-  UI::Added undo functionality          
+-  UI::SaveAs now defaults a filename ("new-" prepended to existing filename)
+- ETC::Application messages now written out to the Message History (CTRL+M)       
+- M64::Input now parses (ControlInput though, there's no way to match it up directly to the frames)
+
+
+v0-9-1
+
+-  UI::Fixed a bug where autoFire updates wouldn't set alternating frames properly (oops)
+-  UI::Fixed a bug where removing frames would throw an ArguementOutOfRangeException
+-  UI::Added elipses to the Open/SaveAs menu options to denote that they make a dialog call
+-  UI::Sorted formats alphabetically in Open/SaveAs filter dropdown
+-  UI::Added message if input pattern not found
+-  UI::Double-buffered listviews (probably should have done that from the start :P)
+       - scrolling through the input list doesn't "flash" anymore
+-  UI::Edit text fields weren't clearing after a file was closed (oops)
+- ETC::Re-wrote splicing logic and interface
+- M64::Fixed movie start flag read (was interpreting wrong byte pair)
+
+
+v0-9
+
+-  UI::Removed WorkingFrame (Frame number above edit button). This was a throwback to the days
+       when the app still used paging.
+-  UI::Selected block remains visible when the listview loses focus (when the editing 
+       controls are clicked)
+-  UI::Selection no longer clears following an update (so you can re-edit the same block without 
+       re-selecting it)
+-  UI::Added checkboxes next to controller edit field so individual controller tracks
+       can be updated during a group edit (as opposed to everything for all tracks being replicated)      
+-  UI::Replacing the System.Collections.ArrayList dependance has solved a bug that forced
+       me to clear the copy buffer after each paste (if I didn't, the app would crash). This means
+       that you can paste the same buffer block as many times as you'd like.
+       This also addresses the memory deallocation issue that was occuring randomly when accessing
+       data in the FrameData list (I may never know wtf was up with that)      
+-  UI::Completely rewrote add / remove frame(s) routines
+-  UI::Fixed a bug that caused the application to crash if a large block of frames was removed
+       (basically, the virtual list was still trying to access elements that were out of range)
+-  UI::Autofire update option enabled (Options -> Auto-Fire Updated). Checking this only updates
+       alternating frames. (May prove useful to some).   
+-  UI::Find Input enabled (This allows you to search for the first instance of an input pattern
+       in the current movie. Searching begins from either the currently selected frame, or from zero.
+       Note that this is beta, so search patterns must conform to the order input is displayed)           
+- SMV::Completely rewrote format handler code
+- FCM::Completely rewrote format handler code
+- FMV::Completely rewrote format handler code
+- GMV::Completely rewrote format handler code
+- GMV::XYZ-Mode input on 6 button controllers now writes to file
+- VBM::Completely rewrote format handler code
+- M64::Completely rewrote format handler code (still only header though, no input)
+- ETC::Completely rewrote splicing logic 
+
+
+v0-8-1
+
+- UI::Fixed timing display for FCM files (was showing as PAL if no timing info existed)
+- UI::Fixed copy-buffer save/load filter (contained a closing parentheses)
+- UI::Fixed pasting from a loaded copy buffer (bad, bad, bad logic error)
+- UI::Reintroduced the frame counter to the statusbar (updates on edit)
+- GMV::Loaded movie now display's XYZMode values (doesn't save these yet though)
+- SMV::Fixed saving (wasn't handling null input gracefully)
+- M64::Header parsing implemented (not 100% ... controller selection still wonky)
+- ETC::Rewrote format validation routine
+
+
+v0-8
+
+- UI::Changed application title to TAS Movie Editor (no longer TAS Movie Splicer)   
+- UI::Tabbed interface removed. Replaced by a treeview.
+- UI::Fixed a bug where the app would crash if trying to access a locked file
+- UI::Removed frame count and file name from status bar (frame count no longer used in 
+      buffer length calculations)
+- UI::Buffer saving to file implemented
+- UI::Buffer loading from file implemented
+- VBM::Header parsing implemented
+- VBM::Controller data parsing implemented
+- VBM::Splicing implemented
+- VBM::Saving implemented
+- FMV::Saving implemented
+- FMV::Splicing implemented
+- FMV::Fixed a bug where the bytesPerFrame kept increasing when an FMV was closed 
+       (crashed after about 3 loads)
+
+
+v0-7-1
+
+- UI::Trying to clear an empty buffer was causing an unhandled exception (fixed)
+- UI::Buffer ListView now virtual as well (fixes lag issue when copying large blocks)
+- UI::Fixed the tab locking when a movie's loaded (the old method was annoying since
+    the ui would flash if you clicked a tab)
+- UI::Fixed a bug in the splicer that wasn't allowing source movies to be loaded
+    
+
+v0-7
+
+- UI::OpenFileDialog now displays a default filter of All Movie Files (as opposed to *.*)
+- UI::Frame Data listview now virtual, so all paging functions have been depreciated
+- UI::Frame Data alternating rows now coloured (ummmmmmmm, BlanchedAlmond)
+- UI::Insertion of Multiple Frames added
+- UI::Removal of Multiple Frames added
+- UI::Group editing (multiple frames) added
+- UI::Copy Input selection to buffer (CTRL+C)
+- UI::Pasting copied input from the buffer into the current movie added (CTRL+V)
+- UI::View Buffer (CTRL+B)
+- UI::Added VisualBoyAdvance layout
+- FMV::Header data parsing added
+- FMV::Input parsing added
+- FCM::Fixed Save bug (wasn't writing the last command properly)
+
+
+v0-6
+
+- UI::Closing a movie didn't clear all Snes9x data (fixed)
+- UI::Cleaned and optimized a lot of routines
+- UI::Splicing routine re-written
+- FCM::Save/SaveAs now work (99% functional -- last byte of input being dropped)
+- FCM::Splicing enabled
+- FCM::Add/Remove/Edit frame data enabled
+- SMV::Edit functions now work from the context menu
+    (no more seperate menu options to add/remove)
+- SMV::Save/SaveAs now work with this format   
+- GMV::Splicing enabled 
+
+
+v0-5-1
+
+- UI::Jump to Frame fixed
+- UI::Removed Compare input (it sucks way too badly right now)
+- UI::Re-wrote the add/remove logic (I have no idea why I thought that would work =P)
+- UI::Closing a movie didn't clear the Gens data (fixed)
+- GMV::Remove Frames implemented
+
+
+v0-5
+
+- UI::Standardized and unified all the format pagination routines (should be faster)
+- UI::Movies can now be closed (reclaim memory and allow tabs to be clicked again)
+- UI::Loaded movie name now displayed in status bar
+- UI::FrameCount now displayed in status bar as well (this will be used for frame editing)
+- UI::Added Frame Editing layout
+- UI::Add/Remove frames now a right-click context menu of the Controller Input list
+    (not all formats have the related update code though)
+- GMV::Initial support added (reads header information)
+- GMV::Frame input populates (all controllers work, but XYZ-Mode still not supported)
+- GMV::Edits made to frame data can be saved out to file
+- FCM::Frame input for multiple controllers 
+- SMV::Fixed UID (now displayed as DateTime as opposed to UTC integer)
+- SMV::Frame input for multiple controllers now works
+
+
+v0-4
+
+- FCM::Frame Input now populated
+- FCM::Pagination implemented
+- SMV::Fixed bug in Add Frames routine (should work properly now)
+
+
+v0-3
+
+- UI::Added shortcut keys to menu items
+- UI::Initial layout for FMV & FCM support
+- UI::Added Resume position to Copy methods
+- UI::Added Add/Remove Frames (Remove works ... Add is still wonky)
+- UI::Added Movie Input Compare module (preliminary)
+- FCM::Preliminary support introduced (reads header data :P)
+- SMV::Movie Input Compare enabled
+- SMV::Cleaned up properties
+- SMV::Encapsulated write methods (moved out from copy class)
+- SMV::Three splicing methods are now available:
+    - FromSourceStart::Source.Beginning -> Source.TargetFrame + Target.ResumeFrame -> Target.ToEnd
+    - FromRange::Target.Beginning -> Target.InsertPosition + Source.TargetFrame + Source.ResumeFrame + Target.ResumeFrame
+    - FromSourceEnd::Target.Beginning -> Target.TargetFrame + Source.TargetFrame + Source.ToEnd
+
+
+v0-2
+
+- UI::various event handlers put in place to keep the program from crashing
+- UI::implemented jumping to a frame (doesn't calculate accurately 100% of the time though)
+- UI::implemented refreshing (if you want to skip to a specific page, or change the results per page)
+- UI::checks if the loaded file is a valid SMV (currently checks against version since signature read is wonky)
+- UI::movie options now set from file
+- SMV::added metadata read
+- SMV::fixed input anomalies
+- SMV::spliced file frame counts are now updated when written
+
+
+v0-1
+
+- initial release
+

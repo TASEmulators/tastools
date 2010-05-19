@@ -1,0 +1,122 @@
+ZMV file format description
+ZMV file is structured as follows:
+
+Header                   Fixed size, see below.
+Beginning savestate      Always present, but not always used, see below.
+Stream	                 Consists of the key input and chapter data for the movie.
+Internal chapter index   This is an array of pointers to all the chapters embedded in the "stream". The length of this array is described in the header.
+External chapters        Consists of a number of "external chapters". The length of this array is described next.
+External chapter count   Surprise, this field isn't in the header.
+Author name              Author name.
+
+Header
+
+    000 3-byte signature: 5A 4D 56 "ZMV"
+    003 2-byte little-endian unsigned int: zsnes version number
+    005 4-byte little-endian integer: CRC32 of the ROM
+    009 4-byte little-endian unsigned int: number of frames
+    00D 4-byte little-endian unsigned int: number of rerecords
+    011 4-byte little-endian unsigned int: number of frames removed by rerecord
+    015 4-byte little-endian unsigned int: number of frames advanced step by step
+    016 1-byte: average recording frames per second
+    020 4-byte little-endian unsigned int: number of key combos
+    01E 2-byte little-endian unsigned int: number of internal chapters
+    020 2-byte little-endian unsigned int: length of the author name field in bytes
+    022 3-byte little-endian unsigned int: size of an uncompressed save state in bytes
+    025 1-byte flags: initial input configuration
+       bit 7: first input enabled
+       bit 6: second input enabled
+       bit 5: third input enabled
+       bit 4: fourth input enabled
+       bit 3: fifth input enabled
+       bit 2: first mouse input enabled
+       bit 1: second mouse input enabled
+       bit 0: super scope input enabled
+    026 1-byte: reserved
+    027 1-byte flags:
+       bits 7,6:
+           if "00", movie begins from savestate
+           if "10", movie begins from reset
+           if "01", movie begins from power-on
+           if "11", movie begins from power-on with SRAM clear
+       bit 5: if "0", movie is NTSC (60 fps); if "1", movie is PAL (50 fps)
+       other: reserved, set to 0
+    028 3-byte little-endian unsigned int: initial save state size, highest bit specifies compression, next 23 specifies size
+
+Savestate
+Next follows a ZST format savestate. This save state is only loaded if the movie begins from savestate or the version of ZSnes used to make the movie is the different than the one playing it.
+
+On reset or power on without SRAM clear where the version matches, only the SRAM is loaded from the Savestate.
+Stream
+After the optional savestate, comes the actual stream of movie data.
+The number of events in the stream is equal to (number_of_frames + number_of_internal_chapters).
+Each event is at least 1 byte long.
+
+The first byte of the event has the following format:
+
+    000 1-byte flags:
+       bit 7: "1" if controller 1 changed, "0" otherwise
+       bit 6: "1" if controller 2 changed, "0" otherwise
+       bit 5: "1" if controller 3 changed, "0" otherwise
+       bit 4: "1" if controller 4 changed, "0" otherwise
+       bit 3: "1" if controller 5 changed, "0" otherwise
+       bit 2: "1" if this is a "chapter" update, "0" if it's a "controller" update
+       bit 1: "1" if this is RLE data instead of any of the above
+       bit 0: "1" if this is command data instead any of the above
+
+If the event is a command, the other seven bits define the command. The command could be "reset now" or similar things.
+
+If the event is RLE data, next follows 4 bytes which is the frame to repeat current input till.
+
+If the event is a "chapter" update, the packet follows with a ZST format savestate. Using a header of:
+
+    000 3-byte little endian unsigned int: save state size in format defined above
+    001 above size: save state
+    above size+001 4-byte little endian unsigned int: frame number save state loads to
+    above size+005 2-byte: controller status bit field, see below
+    above size+007 9-byte: previous controller input bits
+
+
+If the event is a "controller" update, next comes the controller data for each changed controller, 12 bits per controller, or 20 bits in the case of the super scope, zeropadding up to full bytes. The minimum length of the controller data is 2 bytes, and the maximum length is 9 bytes.
+
+The number of "controller" update events in the stream should be equal to the "number of frames" field in the file header.
+The number of "chapter" update events in the stream should be equal to the "number of internal chapters" field in the file header.
+Internal chapter index
+Position in file: (file_size - author_name_length - 2 - external_chapter_count * (zst_size + 4+2+9+4) - internal_chapter_count*4)
+
+Internal chapters are "chapters" made during the movie recording.
+
+The internal chapter index is an index for quickly finding all the internal chapters in the movie stream. Finding the internal chapter index is another story though...
+
+Each item in the internal chapter index is 4 bytes long, and follows this format:
+
+    000 4-byte little-endian unsigned int: offset of the chapter in the file
+
+The offset is counted from the file beginning (zerobased), and points to the chapter data in the movie stream (after the flag byte).
+External chapters
+Position in file: (file_size - author_name_length - 2 - external_chapter_count * (zst_size + 4+2+9+4
+
+External chapters are "chapters" made during the movie playback.
+
+Each item in the external chapter begins with a savestate, followed by this table:
+
+     000 4-byte little-endian unsigned int: frame number
+     004 2-byte: bit field of controller status
+     006 9-byte array: previous input data (1 scope [20] + 4 regular [12*4] + 4 padded bits)
+     00F 4-byte little-endian unsigned int: offset to movie stream from beginning of file
+
+The size of an external chapter is therefore (zst_size + 4+2+9+4) bytes.
+External chapter count.
+Position in file: (file_size - author_name_length - 2)
+
+This is a 2-byte field.
+
+    000 2-byte little-endian unsigned int: number of external chapters
+
+Author name
+Position in file: (file_size - author_name_length)
+
+Last in the file comes the author name field, which is an UTF-8 encoded text string, no zero terminator. The length of this field is described in the header.
+The number of characters in this field can be calculated only by iterating it.
+
+(Surprise, the length of this field is in the header, even though the number of external chapters isn't.) 
