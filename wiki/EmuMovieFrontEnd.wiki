@@ -1,0 +1,12 @@
+= Emulator Movie Front End = 
+
+author: Hoe
+language: C#
+compiles with: VS2005
+
+==Download == 
+[http://code.google.com/p/tastools/downloads/detail?name=EmuMovieFront.zip&can=2&q= Emulator Movie Front End]
+
+== Description ==
+
+This program was written about 2006 with the intent of being able to associate movie files (such as .fcm) with an Emulator.  It searches your ROM folder for a match to the movie file, if found it will open the emulator + rom and then play the movie.  Watching movies is just one click away!
