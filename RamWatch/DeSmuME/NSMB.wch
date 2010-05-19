@@ -1,0 +1,11 @@
+
+9
+00000	021B6A5D	b	s	0	Speed 1 byte
+00001	021B6A5C	w	s	0	Speed 2 byte
+00002	020CA2EC	w	u	0	X position 2 byte
+00003	020CA2EA	d	u	0	X position 4 byte
+00004	021B6A61	b	s	0	Y speed 1 byte
+00005	021B6A60	w	s	0	Y speed 2 byte
+00006	020CC0EE	d	s	0	Rail position
+00007	0208B384	d	u	0	Score
+00008	0208B37C	b	u	0	# Coins

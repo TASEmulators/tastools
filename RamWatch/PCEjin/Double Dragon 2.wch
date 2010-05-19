@@ -1,0 +1,21 @@
+
+14
+00000	00001351	b	s	0	Jimmy HP
+00001	00000043	w	s	0	Jimmy X Position
+00002	00000047	w	s	0	Jimmy Y Position
+00003	00001352	b	s	0	Bimmy HP
+00004	00000045	w	s	0	Bimmy X Position
+00005	00000049	w	s	0	Bimmy Y Position
+00006	00001258	b	s	0	Speed Bimmy ?
+00007	00001257	b	s	0	Speed Jimmy ?
+00008	00001353	w	s	0	SlotA - Ennemy HP
+00009	00001354	w	s	0	SlotB - Ennemy HP
+0000A	00001355	w	s	0	SlotC - Ennemy HP
+0000B	00001356	w	s	0	SlotD - Ennemy HP
+0000C	00001357	w	s	0	SlotE - Ennemy HP
+0000D	00001359	w	s	0	SlotF - Ennemy HP
+es)
+0000E	00001357	w	s	0	Ennemy HP (2bytes)
+0000F	00001359	w	s	0	Ennemy HP (2bytes)
+00010	00001258	b	s	0	Speed Bimmy ?
+00011	00001257	b	s	0	Speed Jimmy ?

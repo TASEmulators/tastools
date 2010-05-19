@@ -1,0 +1,14 @@
+
+11
+00000	00000094	b	s	0	hearts
+00001	00000098	b	s	0	health
+00002	00000093	b	s	0	weapon
+00003	00001E10	b	u	0	X Cam 2nd byte
+00004	00001E0C	b	u	0	X Cam
+00005	00001E30	b	u	0	X Subpixel
+00006	00000720	b	u	0	y pos
+00007	00000CD0	b	u	0	y pos
+00008	00000D28	b	u	0	Y Subpixel
+00009	00000742	b	s	0	Boss HP
+0000A	000012B8	b	s	0	Boss HP
+000B	00001E10	b	u	0	X Cam 2nd byte
