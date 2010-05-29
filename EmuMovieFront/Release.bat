@@ -1,0 +1,1 @@
+..\ReleaseUtilities\zip.exe -X -9 -r ..\output\EmuMovieFront.zip .\output\emuMovFront.exe .\output\ICSharpCode.SharpZipLib.dll .\output\SQLiteClient.dll
