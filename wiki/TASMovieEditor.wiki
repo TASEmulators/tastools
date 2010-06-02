@@ -1,6 +1,6 @@
 = TAS Movie Editor =
  * written by: Maximus
- * contributers: gia
+ * contributors: gia, klmz
  * language: C#
  * compiles with: VS 2005, 2008, 2010
 
