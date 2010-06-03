@@ -2,4 +2,4 @@
 
 = Introduction =
 
-TAStools is maintained by   To contribute utilities to this project, or help maintin existing ones, email the request to [http://tasvideos.org/Adelikat.html adelikat], admin of [http://tasvideos.org/ TASVideos].
+TAStools is maintained by [http://code.google.com/p/tastools/people/list us]. To contribute utilities to this project, or help maintain existing ones, email the request to [http://tasvideos.org/Adelikat.html adelikat], admin of [http://tasvideos.org/ TASVideos].
