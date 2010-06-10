@@ -535,7 +535,11 @@ void simLineThick(cdCanvas* canvas, int x1, int y1, int x2, int y2)
   const int dx = x2-x1;
   const int dy = y2-y1;
 
-  const double len = hypot(dx,dy);
+  //gives us trouble in vs2010 for some reason:
+  //luaperks.lib(sim_linepolyfill.obj) : error LNK2001: unresolved external symbol _hypot
+  //const double len = hypot(dx,dy);
+  const double len = sqrt((double)dx*dx+(double)dy*dy);
+
 
   const double dnx = dx/len;
   const double dny = dy/len;
