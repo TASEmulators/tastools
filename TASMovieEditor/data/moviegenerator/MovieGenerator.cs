@@ -868,10 +868,10 @@ public bool frameremove_pushframelist_onremove;
         {
             if (movie == null)
             {
-                MessageBox.Show(
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm,
                     "No movie loaded.",
                     "Preprocessing",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 return false;
             };
 
@@ -1235,10 +1235,10 @@ public bool frameremove_pushframelist_onremove;
 
             if (!frameinsert_do && !frameremove_do && !inputreplace_do)
             {
-                MessageBox.Show(
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm,
                         "Open generator.config and edit the values, you do not want to do any generation according to the file. In any case use the real tas-movie-editor if you want to edit movies as usual, this program only generates random movies.",
                         "Couldn't generate movies",
-                        MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                        MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
 
                 return false;
             };
@@ -1264,7 +1264,7 @@ public bool frameremove_pushframelist_onremove;
                 while(frameremove_current >= frameremove_min)
                 {
                     SaveMoviesForGeneration();
-                    MessageBox.Show("Total Movies Generated so far: " + lastmoviesaved_index.ToString(), "Generation step done", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    MessageBox.Show(MovieSplicer.UI.frmMain.frm, "Total Movies Generated so far: " + lastmoviesaved_index.ToString(), "Generation step done", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                     --frameremove_current;
                     if (finishrunning) break;
                 }
@@ -1275,13 +1275,15 @@ public bool frameremove_pushframelist_onremove;
             frameinsert_current = 0;
 
             //movie.Input.FrameData[0].Controller[0] = lastmoviesaved_index.ToString();
-            MessageBox.Show( "Total Movies Generated so far: " + lastmoviesaved_index.ToString(), "Generation step done", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+            MessageBox.Show(MovieSplicer.UI.frmMain.frm, "Total Movies Generated so far: " + lastmoviesaved_index.ToString(), "Generation step done", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
             if (finishrunning)
-                MessageBox.Show("When there are more than "+maxcombinations_persave.ToString()+" movies generated the generation is stopped and saved, if you want to restart just delete the file generation.save, if you want to continue generating, use Save again. You may close the program anytime you wish or even delete the files already generated (after you finish using them of course).", "The generation is not complete!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm, "When there are more than " + maxcombinations_persave.ToString() +
+                    " movies generated the generation is stopped and saved, if you want to restart just delete the file generation.save, if you want to continue generating, use Save again. You may close the program anytime you wish or even delete the files already generated (after you finish using them of course).",
+                    "The generation is not complete!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
             else
             {
                 System.IO.File.Delete("generator.save");
-                MessageBox.Show("generation.save (if any) was deleted!", "Generation finished!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm, "generation.save (if any) was deleted!", "Generation finished!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
             }
         }
 
@@ -1894,7 +1896,8 @@ public bool frameremove_pushframelist_onremove;
             {
                 fs = System.IO.File.OpenRead("generator.save");
                 sr = new System.IO.StreamReader(fs);
-                MessageBox.Show("generator.save was detected, the generation will continue from this point! If you do not wish this, you will have to delete generator.save.", "Generation restore!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm, "generator.save was detected, the generation will continue from this point! If you do not wish this, you will have to delete generator.save.",
+                    "Generation restore!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -2158,16 +2161,16 @@ public bool frameremove_pushframelist_onremove;
                     {
                         lastmoviesaved_index = int.Parse(line.Substring("lastmoviesaved_index".Length).Trim());
                     }
-               /* }
-                catch (System.SystemException se)
-                {
-                    MessageBox.Show(
-                            "Some error while loading: " + fnfe.GetBaseException(),
-                            "Restore Saved Session",
-                            MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    /* }
+                    catch (System.SystemException se)
+                    {
+                         MessageBox.Show(MovieSplicer.UI.frmMain.frm,
+                                 "Some error while loading: " + fnfe.GetBaseException(),
+                                 "Restore Saved Session",
+                                 MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                     
-                }*/
-            }
+                    }*/
+                }
             sr.Close(); sr = null; fs.Dispose();
 
             restored_fromsave = true;

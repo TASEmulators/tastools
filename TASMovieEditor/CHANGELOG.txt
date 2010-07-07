@@ -8,13 +8,12 @@ FCM     [x]         [x]         [x]          [x]            [x]         [x]     
 GMV     [x]         [x]         [x]          [x]            [x]         [x]     [x] 
 FMV     [x]         [x]         [x]          [x]            [x]         [x]     [x]
 VBM     [x]         [x]         [x]          [x]            [x]         [x]     [x]
-M64**   [x]         [x]         [x]          [x]            [x]         [ ]     [X]
+M64**   [x]         [x]         [x]          [x]            [x]         [ ]     [x]
 MMV     [x]         [x]         [x]          [x]            [x]         [?]     [x]
 PXM     [x]         [x]         [x]          [x]            [x]         [?]     [x]
 
-*only snes v1.43 is supported
-*mupen support is difficult since there's not direct correlation between how often an input sample
-is applied to a particular frame
+* only Snes9x 1.43 is supported.
+** mupen support is difficult since there's not direct correlation between how often an input sample is applied to a particular frame.
 
 ///////////////////////
 // OUTSTANDING TASKS //
@@ -36,6 +35,7 @@ TODO::SMV support doesn't include control events (RESET is all I can see at the 
 TODO::Add block overwrite on paste (as opposed to just inserting the block)
 TODO::Add controller muxing/demuxing (add/remove controllers)
 TODO::Add ZSNES support
+TODO::Add Snes9x 1.51 support
 TODO::Add ability to extract save-state from movie
 
 low priority
@@ -47,7 +47,7 @@ TODO::Line up input (fake columns of data, so if <>A, < AB, v  BS, ... etc)
 not likely to happen any time soon
 ----------------------------------
 TODO::Add FinalBurnAlpha support?
-TODO::Add GMV2 support? (not sure if the format is completely defined yet)
+TODO::Add GM2 support? (not sure if the format is completely defined yet)
 TODO::Add Nestopia, VirtuaNES support? (not sure if it's even necessary)
 
 ///////////////
@@ -66,6 +66,7 @@ v0-12-2
 - ETC::Fixed high CPU usage.
 - ETC::Handled a few IO exceptions.
 - ETC::The editor console will now be automatically closed when a new movie is loaded.
+- ETC::Message boxes no longer pop up as service notifications or deactivate the application.
 - ETC::Added insufficient specifications to MMV, ZMV and PXM formats.
 - ETC::Fixed recent file list.
 - ETC::Tweaked Save As dialog.

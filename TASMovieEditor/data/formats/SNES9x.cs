@@ -31,21 +31,38 @@ namespace MovieSplicer.Data.Formats
         /// </summary>
         public struct FormatSpecific
         {
-            public bool HASROMINFO;
+            public bool DATA_EXISTS;
             public bool WIP1TIMING;
             public bool LEFTRIGHT;
             public bool VOLUMEENVX;
             public bool FAKEMUTE;
             public bool SYNCSOUND;
+            public bool HASROMINFO;
+            public bool NOCPUSHUTDOWN;
 
             public FormatSpecific(byte options)
             {
-                WIP1TIMING = (1 & (options >> 1)) == 1 ? true : false;
-                LEFTRIGHT  = (1 & (options >> 2)) == 1 ? true : false;
-                VOLUMEENVX = (1 & (options >> 3)) == 1 ? true : false;
-                FAKEMUTE   = (1 & (options >> 4)) == 1 ? true : false;
-                SYNCSOUND  = (1 & (options >> 5)) == 1 ? true : false;
-                HASROMINFO = (1 & (options >> 6)) == 1 ? true : false;
+                DATA_EXISTS   = (1 & (options >> 0)) == 1 ? true : false;
+                if (DATA_EXISTS)
+                {
+                    WIP1TIMING = (1 & (options >> 1)) == 1 ? true : false;
+                    LEFTRIGHT = (1 & (options >> 2)) == 1 ? true : false;
+                    VOLUMEENVX = (1 & (options >> 3)) == 1 ? true : false;
+                    FAKEMUTE = (1 & (options >> 4)) == 1 ? true : false;
+                    SYNCSOUND = (1 & (options >> 5)) == 1 ? true : false;
+                    HASROMINFO = (1 & (options >> 6)) == 1 ? true : false;
+                    NOCPUSHUTDOWN = (1 & (options >> 7)) == 1 ? true : false;
+                }
+                else
+                {
+                    WIP1TIMING    = false;
+                    LEFTRIGHT     = false;
+                    VOLUMEENVX    = false;
+                    FAKEMUTE      = false;
+                    SYNCSOUND     = false;
+                    HASROMINFO    = false;
+                    NOCPUSHUTDOWN = false;
+                }
             }
         } 
 
@@ -57,7 +74,7 @@ namespace MovieSplicer.Data.Formats
         private string[] InputValues = { ">", "<", "v", "^", "S", "s", "Y", "B", "0", "1", "2", "R", "L", "X", "A" };
         private int[]    Offsets = {
             0x00, // 4-byte signature: 53 4D 56 1A "SMV\x1A"
-            0x04, // 4-byte little-endian unsigned int: version number, must be 1
+            0x04, // 4-byte little-endian unsigned int: version number, must be either 1 (Snes9x v1.43) or 4 (Snes9x v1.51)
             0x08, // 4-byte little-endian integer: movie "uid" - recording time in Unix epoch format
             0x0C, // 4-byte little-endian unsigned int: rerecord count
             0x10, // 4-byte little-endian unsigned int: number of frames
@@ -70,35 +87,41 @@ namespace MovieSplicer.Data.Formats
                   //    other: reserved, set to 0
             0x15, // 1-byte flags "movie options":
                   //    bit 0:
-                  //    if "0", movie begins from an embedded "quicksave" snapshot
-                  //    if "1", a SRAM is included instead of a quicksave; movie begins from reset
+                  //       if "0", movie begins from an embedded "quicksave" snapshot
+                  //       if "1", a SRAM is included instead of a quicksave; movie begins from reset
                   //    bit 1: if "0", movie is NTSC (60 fps); if "1", movie is PAL (50 fps)
                   //    other: reserved, set to 0
-            0x16, // 1-byte flags: reserved, set to 0
+            0x16, // 1-byte flags "sync options":
+                  //    bit 0: MOVIE_SYNC2_INIT_FASTROM
+                  //       this bit is only used for Snes9x 1.43 and should be "0" for v1.51
+                  //    other: reserved, set to 0
             0x17, // 1-byte flags "sync options":
                   //    bit 0: MOVIE_SYNC_DATA_EXISTS
-                  //        if "1", the following bits are defined.
-                  //        if "0", the following bits have no meaning.
+                  //       if "1", the following bits are defined.
+                  //       if "0", the following bits have no meaning.
+                  //       this bit is only used for Snes9x v1.43 and should be "0" for v1.51.
                   //    bit 1: MOVIE_SYNC_WIP1TIMING
                   //    bit 2: MOVIE_SYNC_LEFTRIGHT
                   //    bit 3: MOVIE_SYNC_VOLUMEENVX
                   //    bit 4: MOVIE_SYNC_FAKEMUTE
                   //    bit 5: MOVIE_SYNC_SYNCSOUND
                   //    bit 6: MOVIE_SYNC_HASROMINFO
-                  //        if "1", there is extra ROM info located right in between of the metadata and the savestate.
+                  //       if "1", there is extra ROM info located right in between of the metadata and the savestate.
+                  //    bit 7: MOVIE_SYNC_NOCPUSHUTDOWN
+                  //       if "0", the "SpeedHacks" config option is on.
+                  //       if "1", the "SpeedHacks" is off.
+                  //       this bit is only used for Snes9x v1.51 and should be "0" for v1.43.
             0x18, // 4-byte little-endian unsigned int: offset to the savestate inside file
             0x1C, // 4-byte little-endian unsigned int: offset to the controller data inside file
             0x20, // Snes9x v1.43: UTF16-coded movie title string (author info)
                   // Snes9x v1.51: 4-byte little-endian unsigned int: number of input samples, primarily for peripheral-using games
-         
-            0x03, // Extra Rom Info -> Rom CRC
-            0x07, // Extra Rom Info -> Rom Name
 
-            0x24, // Snes9x v1.51: 2-byte unsigned ints: what type of controller is plugged into ports 1 and 2 respectively: 0=NONE, 1=JOYPAD, 2=MOUSE, 3=SUPERSCOPE, 4=JUSTIFIER, 5=MULTITAP
-            0x26, // Snes9x v1.51: 4-byte signed ints: controller IDs of port 1, or -1 for unplugged
-            0x2A, // Snes9x v1.51: 4-byte signed ints: controller IDs of port 2, or -1 for unplugged
-            0x2E, // Snes9x v1.51: 18 bytes: reserved for future use
-            0x40, // Snes9x v1.51: UTF16-coded movie title string (author info)
+                  // Snes9x v1.51 has additional bytes at the end of the header.
+            0x24, // 2-byte unsigned ints: what type of controller is plugged into ports 1 and 2 respectively: 0=NONE, 1=JOYPAD, 2=MOUSE, 3=SUPERSCOPE, 4=JUSTIFIER, 5=MULTITAP
+            0x26, // 4-byte signed ints: controller IDs of port 1, or -1 for unplugged
+            0x2A, // 4-byte signed ints: controller IDs of port 2, or -1 for unplugged
+            0x2E, // 18 bytes: reserved for future use
+            0x40, // UTF16-coded movie title string (author info)
         };
 
         public SNES9x(string SMVFile)
@@ -131,8 +154,8 @@ namespace MovieSplicer.Data.Formats
                 Extra.CRC = ReadHEXUnicode(ref FileContents, 0x03 + SaveStateOffset - EXTRAROMINFO_SIZE, 4);
             }
             Extra.Author = (SMVSpecific.HASROMINFO) ?
-                ReadChars16(ref FileContents, Offsets[11], SaveStateOffset - EXTRAROMINFO_SIZE) :
-                ReadChars16(ref FileContents, Offsets[11], SaveStateOffset);
+                ReadChars16(ref FileContents, Header.Version == 1 ? Offsets[11] : Offsets[16], SaveStateOffset - EXTRAROMINFO_SIZE) :
+                ReadChars16(ref FileContents, Header.Version == 1 ? Offsets[11] : Offsets[16], SaveStateOffset);
 
            
             Input = new TASInput(5, false);

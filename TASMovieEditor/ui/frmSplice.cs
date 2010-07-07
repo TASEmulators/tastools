@@ -184,8 +184,8 @@ namespace MovieSplicer.UI
             // check for valid range
             if (start < 0 || start > frames || end < start || end > frames)
             {
-                MessageBox.Show("Invalid range for selected movie", "Ooops",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(frmMain.frm, "Invalid range for selected movie", "Ooops",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 return;
             }
 
@@ -206,8 +206,8 @@ namespace MovieSplicer.UI
             // exit if not enough movies are opened
             if (Movies.Length < 2)
             {
-                MessageBox.Show("At least two (2) movies must be loaded for splicing to be performed", "Movie Count Too Low",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(frmMain.frm, "At least two (2) movies must be loaded for splicing to be performed", "Movie Count Too Low",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 return;
             }
 
@@ -216,8 +216,8 @@ namespace MovieSplicer.UI
             {
                 if (Movies[i].MovieType != Movies[i + 1].MovieType)
                 {
-                    MessageBox.Show("Movies aren't all of the same type", "Type Mismatch",
-                        MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    MessageBox.Show(frmMain.frm, "Movies aren't all of the same type", "Type Mismatch",
+                        MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                     return;
                 }
             }

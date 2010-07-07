@@ -4,7 +4,7 @@ SMV file consists of a 32-byte header and various blocks that depend on settings
 Header format:
 
     000 4-byte signature: 53 4D 56 1A "SMV\x1A"
-    004 4-byte little-endian unsigned int: version number, must be 1
+    004 4-byte little-endian unsigned int: version number, must be either 1 (Snes9x v1.43) or 4 (Snes9x v1.51)
     008 4-byte little-endian integer: movie "uid" - identifies the movie-savestate relationship,
                also used as the recording time in Unix epoch format
     00C 4-byte little-endian unsigned int: rerecord count
@@ -18,27 +18,42 @@ Header format:
        other: reserved, set to 0
     015 1-byte flags "movie options":
        bit 0:
-           if "0", movie begins from an embedded "quicksave" snapshot
-           if "1", a SRAM is included instead of a quicksave; movie begins from reset
+          if "0", movie begins from an embedded "quicksave" snapshot
+          if "1", a SRAM is included instead of a quicksave; movie begins from reset
        bit 1: if "0", movie is NTSC (60 fps); if "1", movie is PAL (50 fps)
        other: reserved, set to 0
-    016 1-byte flags: reserved, set to 0
+    016 1-byte flags "sync options":
+       bit 0: MOVIE_SYNC2_INIT_FASTROM
+          this bit is only used for Snes9x 1.43 and should be "0" for v1.51
+       other: reserved, set to 0
     017 1-byte flags "sync options":
        bit 0: MOVIE_SYNC_DATA_EXISTS
-           if "1", the following bits are defined.
-           if "0", the following bits have no meaning.
+          if "1", the following bits are defined.
+          if "0", the following bits have no meaning.
+          this bit is only used for Snes9x v1.43 and should be "0" for v1.51.
        bit 1: MOVIE_SYNC_WIP1TIMING
        bit 2: MOVIE_SYNC_LEFTRIGHT
        bit 3: MOVIE_SYNC_VOLUMEENVX
        bit 4: MOVIE_SYNC_FAKEMUTE
        bit 5: MOVIE_SYNC_SYNCSOUND
        bit 6: MOVIE_SYNC_HASROMINFO
-           if "1", there is extra ROM info located right
-           in between of the metadata and the savestate.
+          if "1", there is extra ROM info located right
+          in between of the metadata and the savestate.
+       bit 7: MOVIE_SYNC_NOCPUSHUTDOWN
+          if "0", the "SpeedHacks" config option is on.
+          if "1", the "SpeedHacks" is off.
+          this bit is only used for Snes9x v1.51 and should be "0" for v1.43.
     018 4-byte little-endian unsigned int: offset to the savestate inside file
     01C 4-byte little-endian unsigned int: offset to the controller data inside file
 
-After the header comes "metadata", which is UTF16-coded movie title string (author info). The metadata begins from position 32 (0x20) and ends at <savestate_offset - length_of_extra_rom_info_in_bytes>.
+Snes9x v1.51 has 32 additional bytes at the end of the header.
+    020 4-byte little-endian unsigned int: number of input samples, primarily for peripheral-using games
+    024 2-byte unsigned ints: what type of controller is plugged into ports 1 and 2 respectively: 0=NONE, 1=JOYPAD, 2=MOUSE, 3=SUPERSCOPE, 4=JUSTIFIER, 5=MULTITAP
+    026 4-byte signed ints: controller IDs of port 1, or -1 for unplugged
+    02A 4-byte signed ints: controller IDs of port 2, or -1 for unplugged
+    02E 18 bytes: reserved for future use
+
+After the header comes "metadata", which is UTF16-coded movie title string (author info). The metadata begins from either position 32 (0x20, v1.43) or position 64 (0x40, v1.51) and ends at <savestate_offset - length_of_extra_rom_info_in_bytes>.
 
 Extra ROM info is an optional 30-byte record which contains the following structure:
 
@@ -77,3 +92,15 @@ The controller data's format as it appears in a hex editor is as follows:
   2000 = L
   4000 = X
   8000 = A
+  
+Here is how to calculate the size in bytes of a frame or sample of controller data in a v1.51 SMV:
+
+  sizeof(InputSample) == 2*number_of_controllers + 5*num_mouse_ports + 6*num_superscope_ports + 11*num_justifier_ports
+
+where
+
+  number_of_controllers == the sum of the bits in byte 0x014 in the header.
+  num_mouse_ports == the number of bytes 0x024 - 0x025 inclusive that are 2=MOUSE
+  num_superscope_ports == the number of bytes 0x024 - 0x025 inclusive that are 3=SUPERSCOPE
+  num_justifier_ports == the number of bytes 0x024 - 0x025 inclusive that are 4=JUSTIFIER
+

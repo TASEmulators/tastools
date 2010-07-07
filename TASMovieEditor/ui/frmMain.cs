@@ -48,7 +48,9 @@ using MovieSplicer.Components;
 namespace MovieSplicer.UI
 {    
     public partial class frmMain : TASForm
-    {        
+    {
+        public static frmMain frm;
+
         private TASMovie                Movie;
         private TASMovieInputCollection FrameData;
         private TASMovieInputCollection FrameBuffer;
@@ -262,10 +264,10 @@ namespace MovieSplicer.UI
             try { System.IO.File.OpenRead(filename); }
             catch
             {
-                MessageBox.Show(
+                MessageBox.Show(this,
                     filename + " cannot be accessed at the moment.\nEither the file is locked or it doesn't exist.",
                     "File Access Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                  return;
             }
 
@@ -449,10 +451,10 @@ namespace MovieSplicer.UI
         /// </summary>
         private void mnuSave_Click(object sender, EventArgs e)
         {
-            DialogResult verifyOverwrite = MessageBox.Show(
+            DialogResult verifyOverwrite = MessageBox.Show(this,
                     "Are you sure you want to overwrite the existing file?",
                     "Confirm Overwrite",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
  
             if (verifyOverwrite != DialogResult.OK)
                 return;
@@ -599,10 +601,10 @@ namespace MovieSplicer.UI
             if (lvInput.SelectedIndices.Count > 1 && mnuEditingPrompt.Checked)
             {
                 DialogResult confirmAdd = 
-                MessageBox.Show(
+                MessageBox.Show(this,
                         "Are you sure you want to insert " + totalFrames + " frames after frame " + framePosition,
                         "Confirm Multiple Frame Insertion",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
  
                 if (confirmAdd != DialogResult.OK) return;
             }
@@ -630,10 +632,10 @@ namespace MovieSplicer.UI
             // prompt for multiple frame insertion
             if (lvInput.SelectedIndices.Count > 1 && mnuEditingPrompt.Checked)
             {
-                DialogResult confirmDelete = MessageBox.Show(
+                DialogResult confirmDelete = MessageBox.Show(this,
                         "Are you sure you want to remove the selected " + totalFrames + " frames", 
                         "Confirm Multiple Frame Removal",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
  
                 if (confirmDelete != DialogResult.OK) return;
             }
@@ -718,10 +720,10 @@ namespace MovieSplicer.UI
             if (mnuEditingPrompt.Checked)
             {
                 DialogResult confirmPaste = 
-                MessageBox.Show(
+                MessageBox.Show(this,
                         "Are you sure you want to paste " + FrameBuffer.Input.Length + " frames after frame " + framePosition, 
                         "Confirm Paste",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
  
                 if (confirmPaste != DialogResult.OK) return;
             }
@@ -811,10 +813,10 @@ namespace MovieSplicer.UI
             }
             else
             {
-                MessageBox.Show(
+                MessageBox.Show(this,
                         "Input pattern not found between selected position and end of movie",
                         "Sorry",
-                        MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                        MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
  
                 return false;
             }
@@ -873,10 +875,10 @@ namespace MovieSplicer.UI
                 }
             }
             updateControlsAfterEdit();
-            MessageBox.Show(
+            MessageBox.Show(this,
                 "" + totalReplacements + " cases replaced.",
                 "Replace",
-                MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
  
             Msg.AddMsg("Replaced frame(s) on position with " + lvInput.SelectedIndices[0]);
         }
@@ -950,10 +952,10 @@ namespace MovieSplicer.UI
             mg.Generate(this);
 
             /*
-                        MessageBox.Show(
+                        MessageBox.Show(this,
                                 "",
                                 "",
-                                MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                                MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
  
              */
         }
