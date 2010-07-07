@@ -35,7 +35,8 @@ namespace MovieSplicer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            frmMain.frm = new frmMain();
+            Application.Run(frmMain.frm);
         }
     }
 }

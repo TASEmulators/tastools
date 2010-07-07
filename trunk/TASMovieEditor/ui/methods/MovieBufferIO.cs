@@ -48,8 +48,8 @@ namespace MovieSplicer.UI.Methods
             // TODO::This is a weak validation routine
             if (header.Length != 3)
             {
-                MessageBox.Show("Buffer file appears to be invalid", "Oops",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(frmMain.frm, "Buffer file appears to be invalid", "Oops",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 return;
             }
 

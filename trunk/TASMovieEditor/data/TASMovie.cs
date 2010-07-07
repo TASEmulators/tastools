@@ -160,8 +160,8 @@ namespace MovieSplicer.Data
             try { System.IO.File.OpenRead(filename); }
             catch
             {
-                System.Windows.Forms.MessageBox.Show(filename + " cannot be accessed at the moment", "File Possibly Locked",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm, filename + " cannot be accessed at the moment", "File Possibly Locked",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 return;
             }
         }
@@ -179,8 +179,8 @@ namespace MovieSplicer.Data
             try { fs = File.OpenRead(filename); }
             catch
             {
-                System.Windows.Forms.MessageBox.Show(filename + " cannot be accessed at the moment", "File Possibly Locked",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm, filename + " cannot be accessed at the moment", "File Possibly Locked",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 return;
             }
             BinaryReader br = new BinaryReader(fs);
@@ -203,8 +203,8 @@ namespace MovieSplicer.Data
             try { fs = File.Open(filename, FileMode.Create); }
             catch
             {
-                MessageBox.Show(filename + " cannot be accessed at the moment", "File Possibly Locked",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm, filename + " cannot be accessed at the moment", "File Possibly Locked",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 return;
             }
             BinaryWriter writer = new BinaryWriter(fs);
@@ -224,8 +224,8 @@ namespace MovieSplicer.Data
 
             writer.Close(); writer = null; fs.Dispose();
 
-            MessageBox.Show(filename + " written successfully", " Save",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+            MessageBox.Show(MovieSplicer.UI.frmMain.frm, filename + " written successfully", " Save",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
 
         }
         

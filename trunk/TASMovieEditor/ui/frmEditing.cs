@@ -141,8 +141,8 @@ namespace MovieSplicer.UI
             // prompt for multiple frame insertion
             if (lvInput.SelectedIndices.Count > 1 && EditingPrompts)
             {
-                DialogResult confirmUpdate = MessageBox.Show("Are you sure you want to update the " + totalFrames + " frames with the same input?", "Confirm Multiple Frame Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                DialogResult confirmUpdate = MessageBox.Show(MovieSplicer.UI.frmMain.frm, "Are you sure you want to update the " + totalFrames + " frames with the same input?",
+                    "Confirm Multiple Frame Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                 if (confirmUpdate != DialogResult.OK) return;
             }
 
@@ -202,8 +202,8 @@ namespace MovieSplicer.UI
             }
             else
             {
-                MessageBox.Show("Input pattern not found between selected position and end of movie", "Sorry",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show(MovieSplicer.UI.frmMain.frm, "Input pattern not found between selected position and end of movie", "Sorry",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
             }
         }
 

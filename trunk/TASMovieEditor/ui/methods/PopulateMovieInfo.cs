@@ -58,6 +58,7 @@ namespace MovieSplicer.UI.Methods
             tv.Nodes[1].Nodes[2].Nodes.Add("SYNCSOUND:  " + movie.SMVSpecific.SYNCSOUND.ToString());
             tv.Nodes[1].Nodes[2].Nodes.Add("VOLUMEENVX: " + movie.SMVSpecific.VOLUMEENVX.ToString());
             tv.Nodes[1].Nodes[2].Nodes.Add("WIP1TIMING: " + movie.SMVSpecific.WIP1TIMING.ToString());
+            tv.Nodes[1].Nodes[2].Nodes.Add("SPEEDHACKS: " + (!movie.SMVSpecific.NOCPUSHUTDOWN).ToString());
 
             tv.Nodes.Add("Metadata");
             tv.Nodes[2].Nodes.Add("Author: " + movie.Extra.Author);
