@@ -135,9 +135,11 @@ namespace MovieSplicer.UI.Methods
             tv.Nodes[1].Nodes.Add("BIOS Flags");
             tv.Nodes[1].Nodes[2].Nodes.Add("useBiosFile:  " + movie.VBMSpecific.BIOSFlags[0].ToString());
             tv.Nodes[1].Nodes[2].Nodes.Add("skipBiosFile: " + movie.VBMSpecific.BIOSFlags[1].ToString());
-            tv.Nodes[1].Nodes[2].Nodes.Add("rtcEnable:    " + movie.VBMSpecific.BIOSFlags[2].ToString());
-            tv.Nodes[1].Nodes[2].Nodes.Add("lagReduction: " + movie.VBMSpecific.BIOSFlags[4].ToString());
-            tv.Nodes[1].Nodes[2].Nodes.Add("gbcHdma5Fix:  " + movie.VBMSpecific.BIOSFlags[5].ToString());
+            tv.Nodes[1].Nodes.Add("Emulation Flags");
+            tv.Nodes[1].Nodes[3].Nodes.Add("rtcEnable:    " + movie.VBMSpecific.BIOSFlags[2].ToString());
+            tv.Nodes[1].Nodes[3].Nodes.Add("lagReduction: " + movie.VBMSpecific.BIOSFlags[4].ToString());
+            tv.Nodes[1].Nodes[3].Nodes.Add("gbcHdma5Fix:  " + movie.VBMSpecific.BIOSFlags[5].ToString());
+            tv.Nodes[1].Nodes[3].Nodes.Add("echoRAMFix:   " + movie.VBMSpecific.BIOSFlags[6].ToString());
 
             tv.Nodes.Add("Metadata");
             tv.Nodes[2].Nodes.Add("Author:      " + movie.Extra.Author);

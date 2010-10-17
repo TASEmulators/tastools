@@ -27,7 +27,8 @@ high priority
 TODO::Add exception handlers to format loads (in case headers check out but input is corrupt)
 TODO::Add exception handlers for FCM's that terminate input population early (null entries in input table)
 TODO::Finish mupen support (will have to be controller inputs ... not frame inputs :(
-   
+TODO::Add guide to formats of input strings.
+
 medium priority
 ---------------
 TODO::FCM doesn't track control updates (figure out best way to implement)
@@ -58,6 +59,7 @@ v0-12-2
 
 - MMV::Added MMV support.
 - PXM::Experimental PXM support (untested).
+- VBM::Fixed wrong detection of Frame Count, System Type, BIOS Flags and Emulation Flags.
 - GMV::Fixed file saving.
 - FMV::Fixed file saving.
 - FCM::Fixed saving the wrong movie start type and length of the controller data.
