@@ -581,31 +581,38 @@ namespace MovieSplicer.UI
             // DEBUG::Not the most elegant solution
             Editor.LoadSharedObjects(ref lvInput, ref FrameData.Input, ref UndoHistory, ref Msg); 
             
-        }   
-   
+        }
+
         /// <summary>
         /// Insert a blank row into the listview at the selectedIndex point and
         /// update the inputArray, or prompt for insertion of multiple frames based
         /// on how many frames were selected.
         /// </summary>
-        private void cmnuitemAddFrame_Click(object sender, EventArgs e)
+        private void cmnuitemInsertFrame_Click(object sender, EventArgs e)
         {
-            // make sure something is selected
-            if (lvInput.SelectedIndices.Count == 0) return;
+            int framePosition = FrameData.Input.Length - 1;
+            int totalFrames = 1;
 
-            int frameIndex    = lvInput.SelectedIndices[0];
-            int framePosition = Convert.ToInt32(lvInput.Items[frameIndex].Text);
-            int totalFrames   = lvInput.SelectedIndices[lvInput.SelectedIndices.Count - 1] - frameIndex + 1;
+            // make sure something is selected
+            if (lvInput.SelectedIndices.Count > 0)
+            {
+                framePosition = lvInput.SelectedIndices[0];
+                totalFrames = lvInput.SelectedIndices.Count;
+            }
+
+            if (FrameData.Input.Length == 0)
+            {
+                framePosition = 0;
+            }
 
             // prompt for multiple frame insertion
             if (lvInput.SelectedIndices.Count > 1 && mnuEditingPrompt.Checked)
             {
-                DialogResult confirmAdd = 
-                MessageBox.Show(this,
-                        "Are you sure you want to insert " + totalFrames + " frames after frame " + framePosition,
+                DialogResult confirmAdd = MessageBox.Show(this,
+                        "Are you sure you want to insert " + totalFrames + " frames at frame " + framePosition,
                         "Confirm Multiple Frame Insertion",
                         MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
- 
+
                 if (confirmAdd != DialogResult.OK) return;
             }
 
@@ -613,7 +620,47 @@ namespace MovieSplicer.UI
             TASMovieInput.Insert(ref FrameData.Input, framePosition, totalFrames);
 
             updateControlsAfterEdit();
-            Msg.AddMsg("Added " + totalFrames + " frame(s) after position " + framePosition);
+            Msg.AddMsg("Inserted " + totalFrames + " frame(s) at position " + framePosition);
+        }
+   
+        /// <summary>
+        /// Append a blank row into the listview after the selectedIndex point and
+        /// update the inputArray, or prompt for insertion of multiple frames based
+        /// on how many frames were selected.
+        /// </summary>
+        private void cmnuitemAppendFrame_Click(object sender, EventArgs e)
+        {
+            int framePosition = FrameData.Input.Length;
+            int totalFrames = 1;
+
+            // make sure something is selected
+            if (lvInput.SelectedIndices.Count > 0)
+            {
+                framePosition = lvInput.SelectedIndices[lvInput.SelectedIndices.Count - 1] + 1;
+                totalFrames = lvInput.SelectedIndices.Count;
+            }
+
+            if (FrameData.Input.Length == 0)
+            {
+                framePosition = 0;
+            }
+
+            // prompt for multiple frame insertion
+            if (lvInput.SelectedIndices.Count > 1 && mnuEditingPrompt.Checked)
+            {
+                DialogResult confirmAdd = MessageBox.Show(this,
+                        "Are you sure you want to append " + totalFrames + " frames after frame " + framePosition,
+                        "Confirm Multiple Frame Insertion",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                if (confirmAdd != DialogResult.OK) return;
+            }
+
+            UndoBuffer.Add(ref UndoHistory, ref FrameData.Input);
+            TASMovieInput.Insert(ref FrameData.Input, framePosition, totalFrames);
+
+            updateControlsAfterEdit();
+            Msg.AddMsg("Appended " + totalFrames + " frame(s) after position " + framePosition);
         }
 
         /// <summary>
@@ -651,9 +698,13 @@ namespace MovieSplicer.UI
                 // if we've removed all frames up to this point, the index == selected, so decrement
                 if (selected == FrameData.Input.Length) selected--;
 
-                lvInput.Items[selected].Selected = true;
-                lvInput.Focus();
-                lvInput.EnsureVisible(selected);
+                // if we haven't removed all frames...
+                if (selected >= 0)
+                {
+                    lvInput.Items[selected].Selected = true;
+                    lvInput.Focus();
+                    lvInput.EnsureVisible(selected);
+                }
             }
 
             updateControlsAfterEdit();
@@ -935,11 +986,12 @@ namespace MovieSplicer.UI
 
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             for (int i = 0; i < lvInput.Items.Count; i++ )
             {
                 lvInput.Items[i].Selected = true;
-            } 
+            }
+
+            lvInput.Select();
         }
         #endregion
 

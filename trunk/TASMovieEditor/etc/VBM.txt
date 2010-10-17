@@ -40,6 +40,8 @@ Header format:
          if "0" and the movie is of a GBA game, the movie was made using the old excessively laggy GBA timing, otherwise it wasn't.
        bit 5: (gbcHdma5Fix)
          if "0" and the movie is of a GBC game, the movie was made using the old buggy HDMA5 timing, otherwise it wasn't.
+       bit 6: (echoRAMFix)
+         if "1" and the movie is of a GB, GBC, or SGB game, the movie was made with Echo RAM Fix on, otherwise it wasn't.
        other: reserved, set to 0
     018 4-byte little-endian unsigned int: theApp.winSaveType (value of that emulator option)
     01C 4-byte little-endian unsigned int: theApp.winFlashSize (value of that emulator option)

@@ -40,8 +40,8 @@ namespace MovieSplicer.Data.Formats
             public FormatSpecific(int sys, int bios)
             {
                 SystemType = new bool[4];
-                BIOSFlags  = new bool[6];
-
+                BIOSFlags  = new bool[7];
+ 
                 for (int i = 0; i < SystemType.Length; i++)
                     SystemType[i] = ((sys >> i) == 1) ? true : false;
 
@@ -50,7 +50,7 @@ namespace MovieSplicer.Data.Formats
                     SystemType[3] = true;
 
                 for (int j = 0; j < BIOSFlags.Length; j++)
-                    BIOSFlags[j] = ((bios >> j) == 1) ? true : false;                
+                    BIOSFlags[j] = ((1 & (bios >> j)) == 1) ? true : false;
             }
         }        
         
@@ -96,6 +96,8 @@ namespace MovieSplicer.Data.Formats
                   //    if "0" and the movie is of a GBA game, the movie was made using the old excessively laggy GBA timing, otherwise it wasn't.
                   //    bit 5: (gbcHdma5Fix)
                   //    if "0" and the movie is of a GBC game, the movie was made using the old buggy HDMA5 timing, otherwise it wasn't.
+                  //    bit 6: (echoRAMFix)
+                  //    if "1" and the movie is of a GB, GBC, or SGB game, the movie was made with Echo RAM Fix on, otherwise it wasn't.
                   //    other: reserved, set to 0
             0x18, // 4-byte little-endian unsigned int: theApp.winSaveType (value of that emulator option)
             0x1C, // 4-byte little-endian unsigned int: theApp.winFlashSize (value of that emulator option)
@@ -125,19 +127,30 @@ namespace MovieSplicer.Data.Formats
             Header.Signature     = ReadHEX(ref FileContents, Offsets[0], 4);
             Header.Version       = Read32(ref FileContents, Offsets[1]);
             Header.UID           = ConvertUNIXTime(Read32(ref FileContents, Offsets[2]));
-            Header.FrameCount    = Read32(ref FileContents, Offsets[3]);
+            Header.FrameCount    = Read32(ref FileContents, Offsets[3]);    // FIXME: unreliable
             Header.RerecordCount = Read32(ref FileContents, Offsets[4]);
             
             Options = new TASOptions(true);
-            Options.MovieStartFlag[0] = (1 & (FileContents[Offsets[5]] >> 0)) == 1 ? true : false;
-            Options.MovieStartFlag[1] = (1 & (FileContents[Offsets[5]] >> 1)) == 1 ? true : false;
-            Options.MovieStartFlag[2] = (!Options.MovieStartFlag[0] && !Options.MovieStartFlag[1]) ? true : false;            
+            Options.MovieStartFlag[0] = ((1 & (FileContents[Offsets[5]] >> 0)) == 1) ? true : false;
+            Options.MovieStartFlag[1] = ((1 & (FileContents[Offsets[5]] >> 1)) == 1) ? true : false;
+            Options.MovieStartFlag[2] = (!Options.MovieStartFlag[0] && !Options.MovieStartFlag[1]) ? true : false;
 
+            int activeControllers = 0;
             Input = new TASInput(4, false);
-            Input.Controllers[0] = ((FileContents[Offsets[6]] >> 0) == 1) ? true : false;
-            Input.Controllers[1] = ((FileContents[Offsets[6]] >> 1) == 1) ? true : false;
-            Input.Controllers[2] = ((FileContents[Offsets[6]] >> 2) == 1) ? true : false;
-            Input.Controllers[3] = ((FileContents[Offsets[6]] >> 3) == 1) ? true : false;           
+            for (int i = 0; i < 4; i++)
+            {
+                if ((1 & (FileContents[Offsets[6]] >> i)) == 1)
+                {
+                    Input.Controllers[i] = true;
+                    activeControllers++;
+                }
+                else
+                {
+                    Input.Controllers[i] = false;
+                }
+            }
+            // deduce the actual frame count from the file content
+            Header.FrameCount = (FileContents.Length - ControllerDataOffset) / (activeControllers * 2);
 
             Extra = new TASExtra();
             Extra.Author      = ReadChars(ref FileContents, HEADER_SIZE, 64);
@@ -145,18 +158,18 @@ namespace MovieSplicer.Data.Formats
             Extra.ROM         = ReadChars(ref FileContents, Offsets[12], 12);
             Extra.CRC         = Convert.ToString((int)Offsets[14]);
 
-            VBMSpecific = new FormatSpecific(Offsets[7], Offsets[8]);
+            VBMSpecific = new FormatSpecific(FileContents[Offsets[7]], FileContents[Offsets[8]]);
 
             getFrameInput(ref FileContents);
         }
 
         private void getFrameInput(ref byte[] byteArray)
         {
-            Input.FrameData = new TASMovieInput[Header.FrameCount + 1];            
+            Input.FrameData = new TASMovieInput[Header.FrameCount];            
             int position = 0;
             int i = 0;
 
-            while (position <= Header.FrameCount)
+            while (position < Header.FrameCount)
             {                
                 Input.FrameData[position] = new TASMovieInput();
                 for (int j = 0; j < 4; j++)
