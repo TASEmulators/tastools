@@ -3537,42 +3537,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\CPP\Common\NewHandler.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="2"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\CPP\Common\StringConvert.cpp"
 				>
 				<FileConfiguration
@@ -5097,11 +5061,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\CPP\Common\Defs.h"
+				RelativePath=".\CPP\Windows\Defs.h"
 				>
 			</File>
 			<File
-				RelativePath=".\CPP\Windows\Defs.h"
+				RelativePath=".\CPP\Common\Defs.h"
 				>
 			</File>
 			<File
@@ -5637,11 +5601,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\C\Types.h"
+				RelativePath=".\CPP\Common\Types.h"
 				>
 			</File>
 			<File
-				RelativePath=".\CPP\Common\Types.h"
+				RelativePath=".\C\Types.h"
 				>
 			</File>
 			<File
