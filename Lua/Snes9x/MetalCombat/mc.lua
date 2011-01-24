@@ -27,6 +27,22 @@ local readword = memory.readwordsigned -- signed! (since I use that a lot more)
 local readlong = memory.readlong
 
 
+-- these are defined to work around some breaking changes and bugs in newer svn revisions of snes9x
+if not gui.fillbox then
+	local fixcolor = function(c) return (type(c) == 'number') and OR(c,0) or c end
+	local nativedrawbox,nativedrawtext = gui.drawbox, gui.drawtext
+	local nativedrawline,nativedrawpixel = gui.drawline, gui.drawpixel
+	gui.fillbox = function(x1,y1,x2,y2,c) nativedrawbox(x1-1,y1-1,x2+1,y2+1,fixcolor(c),0) end -- support legacy function
+	gui.drawbox = function(x1,y1,x2,y2,c) nativedrawbox(x1,y1,x2,y2,0,fixcolor(c)) end -- legacy functionality
+	gui.drawrect = gui.drawbox
+	-- the rest of these are only for fixcolor
+	gui.drawtext = function(x,y,s,c1,c2) nativedrawtext(x,y,s,fixcolor(c1),fixcolor(c2)) end
+	gui.text = gui.drawtext
+	gui.drawline = function(x1,y1,x2,y2,c) nativedrawline(x1,y1,x2,y2,fixcolor(c)) end
+	gui.drawpixel = function(x,y,c) nativedrawpixel(x,y,fixcolor(c)) end
+end
+
+
 -- the hitboxes in metal combat are lots of little rectangles
 -- which would look terrible if drawn individually,
 -- so here are some functions that combine adjacent or overlapping rectangles
