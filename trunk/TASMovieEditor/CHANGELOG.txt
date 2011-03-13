@@ -12,7 +12,7 @@ M64**   [x]         [x]         [x]          [x]            [x]         [ ]     
 MMV     [x]         [x]         [x]          [x]            [x]         [?]     [x]
 PXM     [x]         [x]         [x]          [x]            [x]         [?]     [x]
 
-* only Snes9x 1.43 is supported.
+* only supports Snes9x 1.43, 1.51 and 1.52 joypad controllers.
 ** mupen support is difficult since there's not direct correlation between how often an input sample is applied to a particular frame.
 
 ///////////////////////
@@ -36,7 +36,7 @@ TODO::SMV support doesn't include control events (RESET is all I can see at the 
 TODO::Add block overwrite on paste (as opposed to just inserting the block)
 TODO::Add controller muxing/demuxing (add/remove controllers)
 TODO::Add ZSNES support
-TODO::Add Snes9x 1.51 support
+TODO::Finish Snes9x 1.51 and 1.52 supports
 TODO::Add ability to extract save-state from movie
 
 low priority
@@ -57,8 +57,11 @@ TODO::Add Nestopia, VirtuaNES support? (not sure if it's even necessary)
 
 v0-12-2
 
+- SMV::Added basic SMV 1.51 and 1.52 support for joypad controllers and emulator reset event. Do not mess up with other typed input.
+- SMV::Fixed multiple saving bug, including truncated metadata and zeroed frame at the end.
 - MMV::Added MMV support.
 - PXM::Experimental PXM support (untested).
+- VBM::Added support for VBM 1.1, including the new reset event (represented with "?" instead of the old "!" in VBM 1.0).
 - VBM::Fixed wrong detection of Frame Count, System Type, BIOS Flags and Emulation Flags.
 - GMV::Fixed file saving.
 - FMV::Fixed file saving.

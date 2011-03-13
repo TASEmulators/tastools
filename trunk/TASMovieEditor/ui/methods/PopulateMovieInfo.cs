@@ -120,7 +120,7 @@ namespace MovieSplicer.UI.Methods
 
             tv.Nodes.Add("Header");
             tv.Nodes[0].Nodes.Add("Signature:      " + movie.Header.Signature);
-            tv.Nodes[0].Nodes.Add("Version:        " + movie.Header.Version.ToString());
+            tv.Nodes[0].Nodes.Add("Version:        " + movie.Header.Version.ToString() + "." + movie.VBMSpecific.MinorVersion.ToString());
             tv.Nodes[0].Nodes.Add("UID:            " + movie.Header.UID);
             tv.Nodes[0].Nodes.Add("Frame Count:    " + String.Format("{0:0,0}", movie.Header.FrameCount));
             tv.Nodes[0].Nodes.Add("Rerecord Count: " + String.Format("{0:0,0}", movie.Header.RerecordCount));

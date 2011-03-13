@@ -299,11 +299,12 @@ namespace MovieSplicer.Data
         /// 
         /// NOTE::This can probably work by just returning Encoding.UTF8.GetChars(string)
         /// </summary>
-        protected string ReadChars(ref byte[] byteArray, int position, int length)
+        protected string ReadChars(ref byte[] byteArray, int position, int byteCount)
         {
-            char[] c  = new char[length];
             Decoder d = Encoding.UTF8.GetDecoder();
-            d.GetChars(byteArray, position, length, c, 0);
+            int charCount = d.GetCharCount(byteArray, position, byteCount);
+            char[] c = new char[charCount];
+            d.GetChars(byteArray, position, byteCount, c, 0);
             return (new string(c));
         }
 
@@ -318,11 +319,12 @@ namespace MovieSplicer.Data
         /// <summary>
         /// Convert byte array to UTF-16 encoded character array to a string
         /// </summary>
-        protected string ReadChars16(ref byte[] byteArray, int position, int length)
+        protected string ReadChars16(ref byte[] byteArray, int position, int byteCount)
         {
-            char[]  c = new char[length];
             Decoder d = Encoding.Unicode.GetDecoder();
-            d.GetChars(byteArray, position, length, c, 0);
+            int charCount = d.GetCharCount(byteArray, position, byteCount);
+            char[] c = new char[charCount];
+            d.GetChars(byteArray, position, byteCount, c, 0);
             return (new string(c));
         }
 
