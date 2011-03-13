@@ -36,11 +36,13 @@ namespace MovieSplicer.Data.Formats
         {
             public bool[] SystemType;
             public bool[] BIOSFlags;
+            public byte MinorVersion;
 
             public FormatSpecific(int sys, int bios)
             {
                 SystemType = new bool[4];
                 BIOSFlags  = new bool[7];
+                MinorVersion = 0;
  
                 for (int i = 0; i < SystemType.Length; i++)
                     SystemType[i] = ((sys >> i) == 1) ? true : false;
@@ -57,8 +59,11 @@ namespace MovieSplicer.Data.Formats
         public FormatSpecific VBMSpecific;
 
         private string[] InputValues = { "A", "B", "s", "S", ">", "<", "^", "v", "R", 
-                                         "L", "(reset)", "", "(left)", "(right)", "(down)", "(up)" };       
-        private int[]    Offsets = {
+                                         "L", "!", "?", "(left)", "(right)", "(down)", "(up)" };
+        private string[] InputDescriptions = { "A", "B", "Select", "Start", "D-Pad Right", "D-Pad Left", "D-Pad Up", "D-Pad Down",
+                                               "Shoulder R", "Shoulder L", "Old Reset", "New Reset",
+                                               "Motion Sensor Left", "Motion Sensor Right", "Motion Sensor Down", "Motion Sensor Up" };
+        private int[] Offsets = {
             0x00, // 4-byte signature: 56 42 4D 1A "VBM\x1A"
             0x04, // 4-byte little-endian unsigned int: version number, must be 1
             0x08, // 4-byte little-endian integer: movie "uid" - identifies the movie-savestate relationship,
@@ -104,7 +109,7 @@ namespace MovieSplicer.Data.Formats
             0x20, // 4-byte little-endian unsigned int: gbEmulatorType (value of that emulator option)
             0x24, // 12-byte character array: the internal game title of the ROM
                   //    used while recording, not necessarily null-terminated (ASCII?)
-            0x30, // 1-byte: reserved, set to 0
+            0x30, // 1-byte unsigned char: revision number of current VBM version
             0x31, // 1-byte unsigned char: the internal CRC of the ROM used while recording
             0x32, // 2-byte little-endian unsigned short: the internal Checksum of the ROM used
                   //    while recording, or a calculated CRC16 of the BIOS if GBA
@@ -159,6 +164,7 @@ namespace MovieSplicer.Data.Formats
             Extra.CRC         = Convert.ToString((int)Offsets[14]);
 
             VBMSpecific = new FormatSpecific(FileContents[Offsets[7]], FileContents[Offsets[8]]);
+            VBMSpecific.MinorVersion = FileContents[Offsets[13]];
 
             getFrameInput(ref FileContents);
         }

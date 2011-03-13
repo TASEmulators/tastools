@@ -71,7 +71,7 @@ namespace MovieSplicer.Data.Formats
 
         public FormatSpecific SMVSpecific;
 
-        private string[] InputValues = { ">", "<", "v", "^", "S", "s", "Y", "B", "0", "1", "2", "R", "L", "X", "A" };
+        private string[] InputValues = { ">", "<", "v", "^", "S", "s", "Y", "B", "!", "0", "1", "2", "R", "L", "X", "A" };
         private int[]    Offsets = {
             0x00, // 4-byte signature: 53 4D 56 1A "SMV\x1A"
             0x04, // 4-byte little-endian unsigned int: version number, must be either 1 (Snes9x v1.43) or 4 (Snes9x v1.51)
@@ -136,7 +136,7 @@ namespace MovieSplicer.Data.Formats
             Header.Signature     = ReadHEX(ref FileContents, Offsets[0], 4);
             Header.Version       = Read32(ref FileContents, Offsets[1]);
             Header.UID           = ConvertUNIXTime(Read32(ref FileContents, Offsets[2]));
-            Header.FrameCount    = Read32(ref FileContents, Offsets[4]);
+            Header.FrameCount    = Read32(ref FileContents, Offsets[4]) + 1;    // including the 0th frame
             Header.RerecordCount = Read32(ref FileContents, Offsets[3]);
                       
             Options = new TASOptions(true);
@@ -153,10 +153,10 @@ namespace MovieSplicer.Data.Formats
                 Extra.ROM = ReadChars(ref FileContents, 0x07 + SaveStateOffset - EXTRAROMINFO_SIZE, 23);
                 Extra.CRC = ReadHEXUnicode(ref FileContents, 0x03 + SaveStateOffset - EXTRAROMINFO_SIZE, 4);
             }
-            Extra.Author = (SMVSpecific.HASROMINFO) ?
-                ReadChars16(ref FileContents, Header.Version == 1 ? Offsets[11] : Offsets[16], SaveStateOffset - EXTRAROMINFO_SIZE) :
-                ReadChars16(ref FileContents, Header.Version == 1 ? Offsets[11] : Offsets[16], SaveStateOffset);
 
+            int MetaDataOffset = Header.Version == 1 ? Offsets[11] : Offsets[16];
+            int MetaDataLength = (SaveStateOffset - MetaDataOffset) - (SMVSpecific.HASROMINFO ? (int)EXTRAROMINFO_SIZE : 0);
+            Extra.Author = ReadChars16(ref FileContents, MetaDataOffset, MetaDataLength);
            
             Input = new TASInput(5, false);
             for (int c = 0; c < 5; c++)
@@ -171,10 +171,6 @@ namespace MovieSplicer.Data.Formats
             int controllers = Input.ControllerCount;
 
             // parse frame data
-            // TODO::Figure out why the length needs to be one less than the actual
-            // array length
-            // DEBUG::It seems that if you compare to the length of the FrameData in the
-            // new logic, the last frame is trying to read beyond the length of the file
             for (int i = 0; i < Header.FrameCount; i++)
             {              
                 Input.FrameData[i] = new TASMovieInput();
@@ -182,8 +178,8 @@ namespace MovieSplicer.Data.Formats
                 for (int j = 0; j < controllers; j++)
                 {                                            
                     byte[] frame = ReadBytes(ref byteArray,
-                    ControllerDataOffset + ((i * controllers * BYTES_PER_FRAME) + (j * BYTES_PER_FRAME)),
-                    BYTES_PER_FRAME);
+                        ControllerDataOffset + ((i * controllers * BYTES_PER_FRAME) + (j * BYTES_PER_FRAME)),
+                        BYTES_PER_FRAME);
 
                     Input.FrameData[i].Controller[j] = parseControllerData(frame);                                  
                 }                               
@@ -202,6 +198,12 @@ namespace MovieSplicer.Data.Formats
         {
             string   input = "";
             
+            // check the reset combo
+            if ((byteArray[0] & byteArray[1]) == 0xFF)
+            {
+                return "!";
+            }
+
             // check the first byte of input
             for (int i = 0; i < 8; i++)
             {
@@ -209,10 +211,10 @@ namespace MovieSplicer.Data.Formats
                     input += InputValues[i];
             }
             // check the second byte of input
-            for (int j = 1; j < 8; j++)
+            for (int j = 0; j < 8; j++)
             {
                 if ((1 & (byteArray[0] >> j)) == 1)
-                    input += InputValues[j + 7];
+                    input += InputValues[j + 8];
             }
             return input;
         }
@@ -225,11 +227,17 @@ namespace MovieSplicer.Data.Formats
             byte[] input = { 0x00, 0x00 };
 
             if (frameInput == null || frameInput == "") return input;
-            
+            if (frameInput.Contains("!"))
+            {
+                input[0] = 0xFF;
+                input[1] = 0xFF;
+                return input;
+            }
+
             for (int i = 0; i < 8; i++)            
                 if (frameInput.Contains(InputValues[i])) input[1] |= (byte)(1 << i);                                        
-            for (int j = 1; j < 8; j++)
-                if (frameInput.Contains(InputValues[j + 7])) input[0] |= (byte)(1 << j);                                        
+            for (int j = 0; j < 8; j++)
+                if (frameInput.Contains(InputValues[j + 8])) input[0] |= (byte)(1 << j);                                        
             
             return input;
         }
@@ -249,7 +257,7 @@ namespace MovieSplicer.Data.Formats
                         size += BYTES_PER_FRAME;
 
             // create the output array and copy in the contents
-            byte[] outputFile = new byte[head.Length + size + (BYTES_PER_FRAME * controllers)];
+            byte[] outputFile = new byte[head.Length + size];
             head.CopyTo(outputFile, 0);
 
             // add the controller data
@@ -280,7 +288,7 @@ namespace MovieSplicer.Data.Formats
             //frm.Show();
             /////////////////
 
-            WriteByteArrayToFile(ref outputFile, filename, input.Length, Offsets[4]);  
+            WriteByteArrayToFile(ref outputFile, filename, input.Length - 1, Offsets[4]);  
         }
 
         /// <summary>
@@ -288,7 +296,7 @@ namespace MovieSplicer.Data.Formats
         /// </summary>        
         private void updateMetadata(ref byte[] byteArray)
         {
-            int startPos = Offsets[11];
+            int startPos = (Header.Version == 1) ? Offsets[11] : Offsets[16];
             int extraROMLength = (SMVSpecific.HASROMINFO) ? Convert.ToInt32(EXTRAROMINFO_SIZE) : 0;
             byte[] author = WriteChars16(Extra.Author);
             byte[] temp = new byte[startPos + author.Length + (byteArray.Length - SaveStateOffset + extraROMLength)];

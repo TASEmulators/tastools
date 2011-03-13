@@ -489,15 +489,6 @@ namespace MovieSplicer.UI
         {
             Msg.ShowDialog(this);
         }
-        
-        /// <summary>
-        /// Show the About dialog
-        /// </summary>
-        private void mnuAbout_Click(object sender, EventArgs e)
-        {
-            frmAbout frm = new frmAbout();
-            frm.ShowDialog();
-        }
 
         /// <summary>
         /// Terminate the application
@@ -537,15 +528,6 @@ namespace MovieSplicer.UI
         {
             frmSubtitles frm = new frmSubtitles(ref FrameData);
             frm.ShowDialog(); frm.Dispose();
-        }
-
-        /// <summary>
-        /// Launch the external CHM (Help file)
-        /// </summary>        
-        private void mnuHelp_Click(object sender, EventArgs e)
-        {
-            if (System.IO.File.Exists("tas-movie-editor.chm"))
-                System.Diagnostics.Process.Start("tas-movie-editor.chm");
         }
 
         /// <summary>
@@ -723,8 +705,10 @@ namespace MovieSplicer.UI
             sbarCopyBufferSize.Text     = "0";
             FrameBuffer.Format          = MovieType.None;
             sbarCopyBufferType.Text     = Enum.GetName(typeof(MovieType), FrameBuffer.Format);
-            cmnuitemPasteFrames.Enabled = false;
-            mnuPaste.Enabled            = false;            
+            mnuPasteBefore.Enabled = false;
+            mnuPasteAfter.Enabled = false;
+            cmnuitemPasteFramesBefore.Enabled = false;
+            cmnuitemPasteFramesAfter.Enabled = false;
         }
 
         /// <summary>
@@ -734,8 +718,10 @@ namespace MovieSplicer.UI
         {
             sbarCopyBufferType.Text     = Enum.GetName(typeof(MovieType), FrameBuffer.Format);
             sbarCopyBufferSize.Text     = FrameBuffer.Input.Length.ToString();
-            cmnuitemPasteFrames.Enabled = true;
-            mnuPaste.Enabled            = true;
+            mnuPasteBefore.Enabled = true;
+            mnuPasteAfter.Enabled = true;
+            cmnuitemPasteFramesBefore.Enabled = true;
+            cmnuitemPasteFramesAfter.Enabled = true;
         }
 
         /// <summary>
@@ -759,7 +745,7 @@ namespace MovieSplicer.UI
         /// <summary>
         /// Insert the buffered frame input at the selected position.
         /// </summary>
-        private void pasteFrames()
+        private void pasteFrames(bool after)
         {
             // check for a valid paste position
             if (lvInput.SelectedIndices.Count == 0) return;
@@ -772,18 +758,19 @@ namespace MovieSplicer.UI
             {
                 DialogResult confirmPaste = 
                 MessageBox.Show(this,
-                        "Are you sure you want to paste " + FrameBuffer.Input.Length + " frames after frame " + framePosition, 
+                        "Are you sure you want to paste " + FrameBuffer.Input.Length + " frame(s) " + 
+                        (after ? "after" : "before") + " frame " + framePosition, 
                         "Confirm Paste",
                         MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
  
                 if (confirmPaste != DialogResult.OK) return;
             }
 
-            UndoBuffer.Add(ref UndoHistory, ref FrameData.Input);  
-            TASMovieInput.Paste(ref FrameData.Input, ref FrameBuffer.Input, frameIndex + 1);                        
+            UndoBuffer.Add(ref UndoHistory, ref FrameData.Input);
+            TASMovieInput.Paste(ref FrameData.Input, ref FrameBuffer.Input, (after ? frameIndex + 1 : frameIndex));
             updateControlsAfterEdit();
-            
-            Msg.AddMsg("Pasted " + FrameBuffer.Input.Length + " frame(s) after frame " + framePosition);
+
+            Msg.AddMsg("Pasted " + FrameBuffer.Input.Length + " frame(s)" + (after ? "after" : "before") + " frame " + framePosition);
         }
 
                 
@@ -812,11 +799,19 @@ namespace MovieSplicer.UI
         }
 
         /// <summary>
-        /// Paste frames (main menu)
+        /// Paste frames before (main menu)
         /// </summary>        
-        private void mnuPaste_Click(object sender, EventArgs e)
+        private void mnuPasteBefore_Click(object sender, EventArgs e)
         {
-            pasteFrames();
+            pasteFrames(false);
+        }
+
+        /// <summary>
+        /// Paste frames after (main menu)
+        /// </summary>        
+        private void mnuPasteAfter_Click(object sender, EventArgs e)
+        {
+            pasteFrames(true);
         }
 
         /// <summary>
@@ -828,11 +823,19 @@ namespace MovieSplicer.UI
         }
 
         /// <summary>
-        /// Paste frames (context menu)
+        /// Paste frames before (context menu)
         /// </summary>
-        private void cmnuitemPasteFrames_Click(object sender, EventArgs e)
+        private void cmnuitemPasteFramesBefore_Click(object sender, EventArgs e)
         {
-            pasteFrames();
+            pasteFrames(false);
+        }
+
+        /// <summary>
+        /// Paste frames after (context menu)
+        /// </summary>
+        private void cmnuitemPasteFramesAfter_Click(object sender, EventArgs e)
+        {
+            pasteFrames(true);
         }        
 
     #endregion                                                              
@@ -1045,8 +1048,31 @@ namespace MovieSplicer.UI
         }
 
 
+        /// <summary>
+        /// Show the About dialog
+        /// </summary>
+        private void mnuInputDescriptions_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        /// <summary>
+        /// Launch the external CHM (Help file)
+        /// </summary>        
+        private void mnuContent_Click(object sender, EventArgs e)
+        {
+            if (System.IO.File.Exists("tas-movie-editor.chm"))
+                System.Diagnostics.Process.Start("tas-movie-editor.chm");
+        }
+
+        /// <summary>
+        /// Show the About dialog
+        /// </summary>
+        private void mnuAbout_Click(object sender, EventArgs e)
+        {
+            frmAbout frm = new frmAbout();
+            frm.ShowDialog();
+        }
 
     }
 }

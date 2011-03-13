@@ -34,7 +34,7 @@ namespace MovieSplicer.Components
     {
         public const string APP_TITLE  = "TAS Movie Editor";
         public const string VERSION    = "0.12.2-interim";
-        public const string BUILD_DATE = "2010-10-17 @ 21:00";
+        public const string BUILD_DATE = "2011-03-13 @ 23:30";
 
         public const string TAS_FILTER = ALL_FILTER + "|" + FCM_FILTER + "|" + FMV_FILTER + "|" + 
                                          GMV_FILTER + "|" + M64_FILTER + "|" + MMV_FILTER + "|" +
