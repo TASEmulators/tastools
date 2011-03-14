@@ -157,13 +157,8 @@ namespace MovieSplicer.Data
         /// </summary>        
         public virtual void Save(string filename, ref TASMovieInput[] input) 
         {
-            try { System.IO.File.OpenRead(filename); }
-            catch
-            {
-                MessageBox.Show(MovieSplicer.UI.frmMain.frm, filename + " cannot be accessed at the moment", "File Possibly Locked",
-                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
-                return;
-            }
+            byte[] empty = null;
+            WriteByteArrayToFile(ref empty, filename, 0, 0);
         }
 
     #endregion
@@ -197,6 +192,17 @@ namespace MovieSplicer.Data
         /// </summary>
         protected void WriteByteArrayToFile(ref byte[] outputFile, string filename, int frameCount, int frameCountPosition)
         {
+            if (outputFile != null && frameCount >= 0 && frameCountPosition >= 0)
+            {
+                // convert to 4-byte little-endian
+                byte[] newFrameCount = Write32(frameCount);
+
+                // position in the target stream to insert the new values
+                // NOTE::This assumes a 4-byte little-endian integer
+                for (int i = 0; i < 4; i++)
+                    outputFile[frameCountPosition + i] = newFrameCount[i];
+            }
+
             if (filename == "") filename = this.Filename;
 
             FileStream fs;
@@ -208,17 +214,6 @@ namespace MovieSplicer.Data
                 return;
             }
             BinaryWriter writer = new BinaryWriter(fs);
-            
-            if (frameCount > 0 && frameCountPosition > 0)
-            {
-                // convert to 4-byte little-endian
-                byte[] newFrameCount = Write32(frameCount);
-
-                // position in the target stream to insert the new values
-                // NOTE::This assumes a 4-byte little-endian integer
-                for (int i = 0; i < 4; i++)
-                    outputFile[frameCountPosition + i] = newFrameCount[i];
-            }
 
             foreach (byte b in outputFile) writer.Write(b);
 

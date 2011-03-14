@@ -96,6 +96,8 @@ namespace MovieSplicer.UI
             this.txtMovieFilename = new System.Windows.Forms.TextBox();
             this.grpFrameData = new System.Windows.Forms.GroupBox();
             this.lvInput = new MovieSplicer.Components.TASListView();
+            this.cmnuitemCutFrames = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCut = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.statMain.SuspendLayout();
             this.cmnu_lvInput.SuspendLayout();
@@ -196,9 +198,10 @@ namespace MovieSplicer.UI
             this.mnuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuUndoChange,
             this.toolStripSeparator2,
+            this.mnuCopy,
+            this.mnuCut,
             this.mnuPasteBefore,
             this.mnuPasteAfter,
-            this.mnuCopy,
             this.toolStripSeparator8,
             this.findToolStripMenuItem,
             this.findNextToolStripMenuItem,
@@ -532,10 +535,11 @@ namespace MovieSplicer.UI
             this.undoToolStripMenuItem,
             this.toolStripSeparator10,
             this.cmnuitemCopyFrames,
+            this.cmnuitemCutFrames,
             this.cmnuitemPasteFramesBefore,
             this.cmnuitemPasteFramesAfter});
             this.cmnu_lvInput.Name = "cmnuInput";
-            this.cmnu_lvInput.Size = new System.Drawing.Size(268, 170);
+            this.cmnu_lvInput.Size = new System.Drawing.Size(268, 192);
             // 
             // cmnuitemInsertFrame
             // 
@@ -686,11 +690,28 @@ namespace MovieSplicer.UI
             this.lvInput.UseCompatibleStateImageBehavior = false;
             this.lvInput.View = System.Windows.Forms.View.Details;
             this.lvInput.VirtualMode = true;
+            this.lvInput.DoubleClick += new System.EventHandler(this.mnuEditing_Click);
             this.lvInput.DragDrop += new System.Windows.Forms.DragEventHandler(this.lvInput_DragDrop);
             this.lvInput.DragEnter += new System.Windows.Forms.DragEventHandler(this.lvInput_DragEnter);
             this.lvInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lvInput_KeyPress);
             this.lvInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lvInput_KeyUp);
             this.lvInput.Click += new System.EventHandler(this.lvInput_Clicked);
+            // 
+            // cmnuitemCutFrames
+            // 
+            this.cmnuitemCutFrames.Name = "cmnuitemCutFrames";
+            this.cmnuitemCutFrames.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.cmnuitemCutFrames.Size = new System.Drawing.Size(267, 22);
+            this.cmnuitemCutFrames.Text = "Cu&t Frame(s)";
+            this.cmnuitemCutFrames.Click += new System.EventHandler(this.cmnuitemCutFrames_Click);
+            // 
+            // mnuCut
+            // 
+            this.mnuCut.Name = "mnuCut";
+            this.mnuCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.mnuCut.Size = new System.Drawing.Size(213, 22);
+            this.mnuCut.Text = "Cu&t Selection";
+            this.mnuCut.Click += new System.EventHandler(this.mnuCut_Click);
             // 
             // frmMain
             // 
@@ -790,7 +811,9 @@ namespace MovieSplicer.UI
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem mnuAbout;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem mnuInputDescriptions;       
+        private System.Windows.Forms.ToolStripMenuItem mnuInputDescriptions;
+        private System.Windows.Forms.ToolStripMenuItem cmnuitemCutFrames;
+        private System.Windows.Forms.ToolStripMenuItem mnuCut;       
     }
 }
 

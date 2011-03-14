@@ -26,37 +26,33 @@ namespace MovieSplicer.Data
 {
     public class UndoBuffer
     {
-        public TASMovieInput[] Changes;
+        public TASMovieInput[][] Changes;
         
         /// <summary>
         /// Add a frame data collection to the undo buffer
         /// </summary>        
-        public static void Add(ref UndoBuffer[] buffer, ref TASMovieInput[] change)
+        public static void Add(ref UndoBuffer buffer, ref TASMovieInput[] change)
         {
-            UndoBuffer[] temp = new UndoBuffer[buffer.Length + 1];            
-                  
-            if (buffer.Length > 0) buffer.CopyTo(temp, 0);
+            TASMovieInput[][] temp = new TASMovieInput[buffer.Changes.Length + 1][];
 
-            temp[temp.Length - 1] = new UndoBuffer();
-            temp[temp.Length - 1].Changes = new TASMovieInput[change.Length];
-            change.CopyTo(temp[temp.Length - 1].Changes, 0);       
+            if (buffer.Changes.Length > 0) buffer.Changes.CopyTo(temp, 0);
+
+            temp[temp.Length - 1] = new TASMovieInput[change.Length];
+            change.CopyTo(temp[temp.Length - 1], 0);       
             
-            buffer = temp;
+            buffer.Changes = temp;
         }
 
         /// <summary>
         /// Return the last buffer value and remove it from the collections
-        /// 
-        /// TODO::after an undo, this method should remove the last entry in the collection. 
-        /// Currently, this is done externally (after the call, inline)
         /// </summary>        
-        public static void Undo(ref UndoBuffer[] buffer)
-        {            
-            UndoBuffer[] temp = new UndoBuffer[buffer.Length - 1];
+        public static void Undo(ref UndoBuffer buffer)
+        {
+            TASMovieInput[][] temp = new TASMovieInput[buffer.Changes.Length - 1][];
             for (int i = 0; i < temp.Length; i++)
-                temp[i] = buffer[i];
+                temp[i] = buffer.Changes[i];
 
-            buffer = temp;            
+            buffer.Changes = temp;
         }
     }
 }

@@ -56,12 +56,12 @@ namespace MovieSplicer.UI.Methods
             string lineItem = null;            
             while ((lineItem = reader.ReadLine()) != null)
             {
-                TASMovieInput frame = new TASMovieInput();
-                string[]      split = lineItem.Split('|');
-                for (int i = 0; i < split.Length; i++)                
-                    frame.Controller[i] = split[i];
+                TASMovieInput[] frame = new TASMovieInput[1];
+                string[]        split  = lineItem.Split('|');
+                for (int i = 0; i < split.Length; i++)
+                    frame[0].Controller[i] = split[i];
                                     
-                TASMovieInput.Insert(ref buffer.Input, frame, buffer.Input.Length, 1);
+                TASMovieInput.Insert(ref buffer.Input, ref frame, buffer.Input.Length);
                 controllers = split.Length;
             }
 
