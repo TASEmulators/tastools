@@ -22,39 +22,47 @@ namespace MovieSplicer.UI
         {
         }
 
-        public void SelectedTabIn(int value )
-        {
-            tabControl.SelectedIndex = value;
-            if (tabControl.SelectedIndex == 0)
-            {
-                txtFind.Focus();
-            }
-            else
-            {
-                txtReplace.Focus();
-            }
-        }
-
         private void btnReplaceCancel_Click(object sender, EventArgs e)
         {
             this.Visible = false;
         }
 
+        public void SelectedTabIn(int value)
+        {
+            tagControl.SelectedIndex = value;
+            if (tagControl.SelectedIndex == 0)
+            {
+                txtFind.Focus();
+            }
+            else if (tagControl.SelectedIndex == 1)
+            {
+                txtReplace.Focus();
+            }
+            else
+            {
+                txtFrameNumber.Focus();
+            }
+        }
+
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl.SelectedIndex == 0)
+            if (tagControl.SelectedIndex == 0)
             {
                 txtFind.Text = txtReplace.Text;
                 radUp.Checked = radUpReplace.Checked;
                 radDown.Checked = radDownReplace.Checked; 
                 txtFind.Focus();
             }
-            else
+            else if (tagControl.SelectedIndex == 1)
             {
                 txtReplace.Text = txtFind.Text;
                 radUpReplace.Checked = radUp.Checked;
                 radDownReplace.Checked = radDown.Checked;
                 txtReplace.Focus();
+            }
+            else
+            {
+                txtFrameNumber.Focus();
             }
         }
 
@@ -70,7 +78,7 @@ namespace MovieSplicer.UI
             if (e.KeyChar == 13)
                 btnFind.PerformClick();
             else if (e.KeyChar == 27)
-                btnCancel.PerformClick();
+                btnFindCancel.PerformClick();
         }
 
         private void lblFind_Click(object sender, EventArgs e)
@@ -82,7 +90,6 @@ namespace MovieSplicer.UI
         private void btnFind_Click(object sender, EventArgs e)
         {
             m_parent.findNext(txtFind.Text, radDown.Checked);
-            Focus();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -95,7 +102,7 @@ namespace MovieSplicer.UI
             if (e.KeyChar == 13)
                 txtReplaceWith.Focus();
             else if (e.KeyChar == 27)
-                btnCancel.PerformClick();
+                btnFindCancel.PerformClick();
         }
 
         private void txtReplaceWith_KeyPress(object sender, KeyPressEventArgs e)
@@ -103,13 +110,12 @@ namespace MovieSplicer.UI
             if (e.KeyChar == 13)
                 btnReplaceFindNext.PerformClick();
             else if (e.KeyChar == 27)
-                btnCancel.PerformClick();
+                btnFindCancel.PerformClick();
         }
 
         private void btnReplaceFindNext_Click(object sender, EventArgs e)
         {
             m_parent.findNext(txtReplace.Text, radDownReplace.Checked);
-            Focus();
         }
 
         private void btnReplace_Click(object sender, EventArgs e)
@@ -120,14 +126,34 @@ namespace MovieSplicer.UI
         private void btnReplaceAll_Click(object sender, EventArgs e)
         {
             m_parent.replaceAllItems(txtReplace.Text, txtReplaceWith.Text, radDownReplace.Checked);
-            Focus();
+        }
+
+        private void btnGoto_Click(object sender, EventArgs e)
+        {
+            m_parent.gotoFrameNumber(txtFrameNumber.Text);
+        }
+
+        private void btnGotoCancel_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+        }
+
+        private void txtFrameNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+                btnGotoOk.PerformClick();
+            else if (e.KeyChar == 27)
+                btnGotoCancel.PerformClick();
+            e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != '\b';
+            /*if (e.KeyChar < '0' || e.KeyChar > '9')
+                e.Handled = true;*/
         }
 
         public string FindOut
         {
             get
             {
-                if (tabControl.SelectedIndex == 0)
+                if (tagControl.SelectedIndex == 0)
                 {
                     return txtFind.Text;
                 }
@@ -141,7 +167,7 @@ namespace MovieSplicer.UI
         {
             get
             {
-                if (tabControl.SelectedIndex == 0)
+                if (tagControl.SelectedIndex == 0)
                 {
                     return radDown.Checked;
                 }
@@ -159,9 +185,20 @@ namespace MovieSplicer.UI
         private void FindReplaceDialog_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 27)
-                btnCancel.PerformClick();
+                btnFindCancel.PerformClick();
         }
 
- 
+        public string GotoFrameNumber
+        {
+            get { return txtFrameNumber.Text; }
+        }
+
+        public string GotoFrameNumberLabel
+        {
+            set
+            {
+                lblFrameNumber.Text = "Frame (" + value + "):";
+            }
+        }
     }
 }

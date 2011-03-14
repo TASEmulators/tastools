@@ -89,7 +89,7 @@ namespace MovieSplicer.UI
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(9, 158);
+            this.label5.Location = new System.Drawing.Point(10, 150);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(298, 73);
             this.label5.TabIndex = 3;
@@ -127,6 +127,7 @@ namespace MovieSplicer.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(321, 228);
             this.Controls.Add(this.lnkEmail);
             this.Controls.Add(this.lblBuild);

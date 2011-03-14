@@ -224,7 +224,7 @@ namespace MovieSplicer.UI
 
             TASMovieInput[] spliced = new TASMovieInput[0];
             
-            for(int i = 0; i < Movies.Length; i++)
+            for (int i = 0; i < Movies.Length; i++)
             {
                 // handle zeroes                
                 if (Movies[i].End == 0) Movies[i].End = Movies[i].Movie.Header.FrameCount;

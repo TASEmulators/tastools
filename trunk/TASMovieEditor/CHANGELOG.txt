@@ -76,8 +76,14 @@ v0-12-2
 - ETC::Fixed recent file list.
 - ETC::Tweaked Save As dialog.
 - ETC::Fixed several shortcut keys.
+- ETC::Fixed Undo with Editing Console.
+- ETC::Fixed multiple selections.
+- ETC::Fixed some window focus problems.
 - ETC::Tweaked menu items.
-- ETC::Placed all the 4 Controller checkboxes in the edit dialog over the texts that could obscure them on some systems.
+- ETC::Added Edit->Cut feature.
+- ETC::Combined Goto dialog with Find/Replace dialog.
+- ETC::Double-clicking a row in the list view will now open/focus on the Editing Console.
+- ETC::Tweaked Editing Console. Hint: Double-clicking any text box will synchronize the other corresponding text boxes.
 
 v0-12-1
 
