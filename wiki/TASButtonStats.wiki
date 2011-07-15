@@ -1,0 +1,13 @@
+= TAS Button Stats =
+ * written by: bkDJ
+ * language: C++
+
+== Download == 
+[http://code.google.com/p/tastools/downloads/detail?name=TAS_Button_Stats_v0.7.zip&can=2&q= TAS Button Stats]
+
+== Introduction ==
+
+TAS Button Stats is a program written to display the button stats of a movie file. Stats include how many times a button has been pressed, how many frames a button has been held for, etc. TODO: Expand.
+
+Supported formats:
+TODO: List.
