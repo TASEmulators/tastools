@@ -1,0 +1,17 @@
+= Button Count =
+ * written by: Brandon Evans
+ * language: Lua
+
+== Source== 
+[http://code.google.com/p/tastools/source/browse/trunk/Lua/Button%20Count.lua Button Count]
+
+== Introduction ==
+
+Button Count is a Lua script that displays the number of button presses and button holds (The amount of frames the buttons have been held for). This script counts the presses in real time, and will save / load the stats when save states are used. In addition, if you run the script while a movie with a supported format (listed below) is active, it will parse the initial stats out of the file.
+
+Supported formats:
+ * FM2
+
+Tested on:
+ * FCEUX 2.1.4a
+ * Snes9x rerecording 1.51 v7 svn147
