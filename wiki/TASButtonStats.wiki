@@ -10,4 +10,21 @@
 TAS Button Stats is a program written to display the button stats of a movie file. Stats include how many times a button has been pressed, how many frames a button has been held for, etc. TODO: Expand.
 
 Supported formats:
-TODO: List.
+ * FCM
+ * FM2
+ * GMV (no support for XYZ buttons yet)
+ * SMV
+ * M64 (the analog stick is considered one button, either used or unused per frame)
+
+== Related Lua Script: Button Count ==
+ * written by: Brandon Evans
+ * language: Lua
+
+Button Count is a script that calculates the button presses and holds for in real time. In addition, if you save / load a state while running this script, these stats will go with them. Also, if you run the script while an supported movie is active (See below), it will parse the initial data out of it.
+
+Supported formats:
+ * FM2
+
+Tested on:
+ * FCEUX
+ * Snes9x
