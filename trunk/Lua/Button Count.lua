@@ -2,7 +2,7 @@
 
 --You can change the position of the text here.
 local x = 0
-local y = 0
+local y = 8
 
 local holds = 0
 local players = {}
