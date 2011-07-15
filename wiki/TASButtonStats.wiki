@@ -20,7 +20,7 @@ Supported formats:
  * written by: Brandon Evans
  * language: Lua
 
-Button Count is a script that calculates the button presses and holds for in real time. In addition, if you save / load a state while running this script, these stats will go with them. Also, if you run the script while an supported movie is active (See below), it will parse the initial data out of it.
+[http://code.google.com/p/tastools/source/browse/trunk/Lua/Button%20Count.lua Button Count] is a script that calculates the button presses and holds for in real time. In addition, if you save / load a state while running this script, these stats will go with them. Also, if you run the script while an supported movie is active (See below), it will parse the initial data out of it.
 
 Supported formats:
  * FM2
