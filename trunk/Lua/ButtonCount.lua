@@ -18,13 +18,17 @@ function table.copy(t)
 end
 
 function load(slot)
+    --As Lua starts counting from 1, and there may be a slot 0, increment.
+    slot = slot + 1
     if not states[slot] then
         return
     end
     --Load the data if there is any available for this slot.
-    holds = states[slot].holds
-    players = table.copy(states[slot].players)
-    presses = states[slot].presses
+    if states[slot] then
+        holds = states[slot].holds
+        players = table.copy(states[slot].players)
+        presses = states[slot].presses
+    end
 end
 
 function parse()
@@ -90,6 +94,8 @@ function parse()
 end
 
 function save(slot)
+    --As Lua starts counting from 1, and there may be a slot 0, increment.
+    slot = slot + 1
     while table.maxn(states) < slot do
         table.insert(states, {})
     end
