@@ -130,7 +130,6 @@ while true do
         players = {}
         presses = 0
     end
-    joypad.set(1, {B=true, right=true})
     --Check players one and two.
     for player = 1, 2 do
         local buttons = joypad.getdown(player)
