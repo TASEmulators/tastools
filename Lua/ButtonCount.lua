@@ -24,11 +24,14 @@ function load(slot)
         return
     end
     --Load the data if there is any available for this slot.
-    if states[slot] then
+    if states[slot].holds then
         holds = states[slot].holds
         players = table.copy(states[slot].players)
         presses = states[slot].presses
+        gui.text(x, y + 16, 'Data loaded from slot ' .. tostring(slot - 1))
+        return
     end
+    gui.text(x, y + 16, 'No data loaded from slot ' .. tostring(slot - 1))
 end
 
 function parse()
@@ -103,6 +106,7 @@ function save(slot)
     states[slot].holds = holds
     states[slot].players = table.copy(players)
     states[slot].presses = presses
+    gui.text(x, y + 16, 'Data saved to slot ' .. tostring(slot - 1))
 end
 
 if parse() then
