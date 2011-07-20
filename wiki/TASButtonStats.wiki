@@ -27,5 +27,6 @@ Supported formats:
  * FM2
 
 Tested on:
- * FCEUX
- * Snes9x
+ * FCEUX 2.1.4a, 2.1.5 
+ * Snes9x rerecording 1.51 v7 svn147 
+ * VBA Re-recording svn r232, VBA-ReRecording v23.5a Win32 (Set controllers to 1 or it will count everything twice). Neither support stats saving / loading.
