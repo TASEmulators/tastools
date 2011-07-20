@@ -14,6 +14,7 @@ Supported formats:
  * FM2
  * GMV (no support for XYZ buttons yet)
  * SMV
+ * VBM
  * M64 (the analog stick is considered one button, either used or unused per frame)
 
 == Related Lua Script: Button Count ==
