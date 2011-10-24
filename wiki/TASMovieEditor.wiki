@@ -20,3 +20,4 @@ Supported formats:
  * M64
  * MMV
  * PXM
+ * PJM (binary only)
