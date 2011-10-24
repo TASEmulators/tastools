@@ -220,7 +220,7 @@ namespace MovieSplicer.Data.Formats
                     outputFile[Offsets[6] + i] = 0;
 
             // NOTE::GMV files calculate frameCount based on filesize
-            WriteByteArrayToFile(ref outputFile, filename, 0, 0);  
+            WriteByteArrayToFile(ref outputFile, filename, -1, -1);  
         }
 
         public override string[] GetUsableInputs()

@@ -70,7 +70,8 @@ namespace MovieSplicer.UI
                 case MovieType.VBM: movie = new VisualBoyAdvance(filename); break;
                 case MovieType.M64: movie = new Mupen64(filename); break;
                 case MovieType.MMV: movie = new Dega(filename); break;
-                case MovieType.PXM: movie = new PCSX(filename); break;
+                case MovieType.PXM: movie = new PCSX(filename); break;  // shares with PJM
+                case MovieType.PJM: movie = new PCSX(filename); break;  // shares with PXM
             }
             location.Input       = movie.Input.FrameData;
             location.Controllers = movie.Input.ControllerCount;

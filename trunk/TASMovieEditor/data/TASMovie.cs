@@ -158,7 +158,7 @@ namespace MovieSplicer.Data
         public virtual void Save(string filename, ref TASMovieInput[] input) 
         {
             byte[] empty = null;
-            WriteByteArrayToFile(ref empty, filename, 0, 0);
+            WriteByteArrayToFile(ref empty, filename, -1, -1);
         }
 
     #endregion

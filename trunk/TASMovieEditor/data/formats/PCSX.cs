@@ -26,7 +26,7 @@ namespace MovieSplicer.Data.Formats
 {
     public class PCSX : TASMovie
     {
-        private static int[] BYTES_PER_FRAME = { 1, 4, 0, 0, 2, 6, 0, 6 };
+        private static int[] BYTES_PER_FRAME = { 1, 4, 0, 0, 2, 6, 0, 6, 0 };
         
         /// <summary>
         /// Contains Format Specific items
@@ -38,6 +38,11 @@ namespace MovieSplicer.Data.Formats
             public bool HasEmbeddedMemoryCards;
             public bool HasEmbeddedCheatList;
             public bool UsesHacks;
+            public bool IsTextFile;
+            public bool P1MultitapToggle;
+            public bool P2MultitapToggle;
+            public bool EnabledAnalogHack;
+            public bool EnabledParasiteEveFix;
             public int EmulatorVersion;
             public int MemoryCard1Offset;
             public int MemoryCard2Offset;
@@ -50,6 +55,11 @@ namespace MovieSplicer.Data.Formats
                 HasEmbeddedMemoryCards = false;
                 HasEmbeddedCheatList   = false;
                 UsesHacks              = false;
+                IsTextFile             = false;
+                P1MultitapToggle       = false;
+                P2MultitapToggle       = false;
+                EnabledAnalogHack      = false;
+                EnabledParasiteEveFix  = false;
                 EmulatorVersion   = 0;
                 MemoryCard1Offset = 0;
                 MemoryCard2Offset = 0;
@@ -74,14 +84,26 @@ namespace MovieSplicer.Data.Formats
                     case 1:
                         type = "Mouse";
                         break;
+                    case 2:
+                        type = "Negcon";
+                        break;
+                    case 3:
+                        type = "Konami Gun";
+                        break;
                     case 4:
                         type = "Standard";
                         break;
                     case 5:
                         type = "Analog Joystick";
                         break;
+                    case 6:
+                        type = "Namco Guncon";
+                        break;
                     case 7:
                         type = "Analog Controller";
+                        break;
+                    case 8:
+                        type = "None";
                         break;
                     default:
                         break;
@@ -132,10 +154,17 @@ namespace MovieSplicer.Data.Formats
             0x34  // string: name of the author
         };
 
+        public static void PCSXHelp(object sender, EventArgs e)
+        {
+            // help here;
+       }
+
         public PCSX(string PXMFile)
         {
             Filename = PXMFile;
             FillByteArrayFromFile(PXMFile, ref FileContents);
+            if ((1 & (FileContents[Offsets[3]] >> 6)) == 1)
+                throw new System.Exception();    // this should be done better
 
             ControllerDataOffset = Read32(ref FileContents, Offsets[14]);
             SaveStateOffset      = Read32(ref FileContents, Offsets[9]);
@@ -156,6 +185,12 @@ namespace MovieSplicer.Data.Formats
             PXMSpecific.HasEmbeddedMemoryCards = (1 & (FileContents[Offsets[3]] >> 3)) == 1 ? true : false;
             PXMSpecific.HasEmbeddedCheatList   = (1 & (FileContents[Offsets[3]] >> 4)) == 1 ? true : false;
             PXMSpecific.UsesHacks              = (1 & (FileContents[Offsets[3]] >> 5)) == 1 ? true : false;
+            PXMSpecific.IsTextFile             = (1 & (FileContents[Offsets[3]] >> 6)) == 1 ? true : false;
+            PXMSpecific.P1MultitapToggle       = (1 & (FileContents[Offsets[3]] >> 7)) == 1 ? true : false;
+            PXMSpecific.P2MultitapToggle       = (1 & (FileContents[Offsets[3]] >> 8)) == 1 ? true : false;
+            PXMSpecific.EnabledAnalogHack      = (1 & (FileContents[Offsets[3]] >> 9)) == 1 ? true : false;
+            PXMSpecific.EnabledParasiteEveFix  = (1 & (FileContents[Offsets[3]] >> 10)) == 1 ? true : false;
+
             PXMSpecific.EmulatorVersion   = Read32(ref FileContents, Offsets[2]);
             PXMSpecific.MemoryCard1Offset = Read32(ref FileContents, Offsets[10]);
             PXMSpecific.MemoryCard2Offset = Read32(ref FileContents, Offsets[11]);
@@ -405,6 +440,17 @@ namespace MovieSplicer.Data.Formats
             int ControlSize     = BYTES_PER_FRAME[0];
 
             int oldAuthorNameLength = Read32(ref FileContents, Offsets[15]);
+
+            // PSXjin workaround
+            for (int i = 9; i < 15; ++i)
+            {
+                int minLength = Read32(ref FileContents, Offsets[i]) - Offsets[16];
+                if (minLength > 0 && minLength < oldAuthorNameLength)
+                {
+                    oldAuthorNameLength = minLength;
+                }
+            }
+
             byte[] author = WriteChars(Extra.Author);
             int deltaAuthorNameLength = author.Length - oldAuthorNameLength;
 

@@ -66,7 +66,7 @@ Extra ROM info is an optional 30-byte record which contains the following struct
 Extra ROM info is always positioned right before the savestate.
 Its size is 30 bytes if MOVIE_SYNC_HASROMINFO is used (and MOVIE_SYNC_DATA_EXISTS is set), 0 bytes otherwise.
 
-The savestate offset is <32 + length_of_metadata_in_bytes + length_of_extra_rom_info_in_bytes>.
+The savestate offset is <length_of_header_in_bytes + length_of_metadata_in_bytes + length_of_extra_rom_info_in_bytes>.
 At the savestate offset there is a gzip-compressed file.
 
     * If the movie is snapshot-anchored, it is a structured Snes9x savestate.

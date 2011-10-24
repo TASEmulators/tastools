@@ -93,6 +93,7 @@ namespace MovieSplicer.UI
             this.tvInfo = new System.Windows.Forms.TreeView();
             this.grpMovieInfo = new System.Windows.Forms.GroupBox();
             this.pbFormat = new System.Windows.Forms.PictureBox();
+            pbFormat.Click += new System.EventHandler(this.mnuEditing_Click);
             this.txtMovieFilename = new System.Windows.Forms.TextBox();
             this.grpFrameData = new System.Windows.Forms.GroupBox();
             this.lvInput = new MovieSplicer.Components.TASListView();
