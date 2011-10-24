@@ -317,6 +317,8 @@ namespace MovieSplicer.UI.Methods
             tv.Nodes[1].Nodes.Add("Uses Hacks:   " + movie.PXMSpecific.UsesHacks.ToString());
             tv.Nodes[1].Nodes.Add("Contains Embedded Memory Cards: " + movie.PXMSpecific.HasEmbeddedMemoryCards.ToString());
             tv.Nodes[1].Nodes.Add("Contains Embedded Cheat List:   " + movie.PXMSpecific.HasEmbeddedCheatList.ToString());
+            tv.Nodes[1].Nodes.Add("Uses analog hack:               " + movie.PXMSpecific.EnabledAnalogHack.ToString());
+            tv.Nodes[1].Nodes.Add("Uses Parasite Eve/Vandal Hearts fix: " + movie.PXMSpecific.EnabledParasiteEveFix.ToString());
             tv.Nodes.Add("Metadata");
             tv.Nodes[2].Nodes.Add("Author: " + movie.Extra.Author);
 
@@ -330,6 +332,8 @@ namespace MovieSplicer.UI.Methods
             tv.Nodes.Add("Controllers");
             tv.Nodes[4].Nodes.Add("Controller 1 Type: " + movie.PXMSpecific.GetControllerTypeString(0));
             tv.Nodes[4].Nodes.Add("Controller 2 Type: " + movie.PXMSpecific.GetControllerTypeString(1));
+            tv.Nodes[4].Nodes.Add("P1 Multitap On:    " + movie.PXMSpecific.P1MultitapToggle.ToString());
+            tv.Nodes[4].Nodes.Add("P2 Multitap On:    " + movie.PXMSpecific.P2MultitapToggle.ToString());
 
             movie = null; tv.ExpandAll(); tv.Nodes[0].EnsureVisible();
         }       

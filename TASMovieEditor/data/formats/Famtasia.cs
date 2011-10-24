@@ -169,7 +169,7 @@ namespace MovieSplicer.Data.Formats
                     outputFile[Offsets[7] + i] = 0;
 
             // NOTE::FMV files calculate frameCount based on filesize
-            WriteByteArrayToFile(ref outputFile, filename, 0, 0);  
+            WriteByteArrayToFile(ref outputFile, filename, -1, -1);  
         }
 
 

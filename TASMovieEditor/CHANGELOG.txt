@@ -11,9 +11,11 @@ VBM     [x]         [x]         [x]          [x]            [x]         [x]     
 M64**   [x]         [x]         [x]          [x]            [x]         [ ]     [x]
 MMV     [x]         [x]         [x]          [x]            [x]         [?]     [x]
 PXM     [x]         [x]         [x]          [x]            [x]         [?]     [x]
+PJM***  [x]         [x]         [x]          [x]            [x]         [?]     [x]
 
 * only supports Snes9x 1.43, 1.51 and 1.52 joypad controllers.
 ** mupen support is difficult since there's not direct correlation between how often an input sample is applied to a particular frame.
+*** only supports the binary format.
 
 ///////////////////////
 // OUTSTANDING TASKS //
@@ -57,10 +59,11 @@ TODO::Add Nestopia, VirtuaNES support? (not sure if it's even necessary)
 
 v0-12-2
 
+- PJM::Added incomplete PJM support.
 - SMV::Added basic SMV 1.51 and 1.52 support for joypad controllers and emulator reset event. Do not mess up with other typed input.
 - SMV::Fixed multiple saving bug, including truncated metadata and zeroed frame at the end.
 - MMV::Added MMV support.
-- PXM::Experimental PXM support (untested).
+- PXM::Added incomplete PXM support.
 - VBM::Added support for VBM 1.1, including the new reset event (represented with "?" instead of the old "!" in VBM 1.0).
 - VBM::Fixed wrong detection of Frame Count, System Type, BIOS Flags and Emulation Flags.
 - GMV::Fixed file saving.
