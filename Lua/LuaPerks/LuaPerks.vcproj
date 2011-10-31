@@ -1963,6 +1963,22 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="stevedonovan-winapi"
+			>
+			<File
+				RelativePath=".\stevedonovan-winapi-31-oct-2011\winapi.c"
+				>
+			</File>
+			<File
+				RelativePath=".\stevedonovan-winapi-31-oct-2011\wutils.c"
+				>
+			</File>
+			<File
+				RelativePath=".\stevedonovan-winapi-31-oct-2011\wutils.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
