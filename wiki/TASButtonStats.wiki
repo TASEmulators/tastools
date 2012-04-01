@@ -30,3 +30,5 @@ Tested on:
  * FCEUX 2.1.4a, 2.1.5 
  * Snes9x rerecording 1.51 v7 svn147 
  * VBA-rr 22, 23.5a (Set controllers to 1 or it will count everything twice). Neither support stats saving / loading.
+
+There's a [http://code.google.com/p/bizhawk/source/browse/trunk/BizHawk.MultiClient/output/Lua/ButtonCount.lua BizHawk equivalent], bundled with the emulator, to this script. It works as well as the FCEUX version does with the additional benefit of being able to parse data out of the movie file even if you are re-recording.
