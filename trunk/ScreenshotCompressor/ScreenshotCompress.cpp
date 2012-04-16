@@ -14,7 +14,7 @@ using namespace std;
 
 #define sprintf sprintf_s
 
-#define DEFAULT_COUNT 100
+#define DEFAULT_COUNT 50
 
 int main(int argc, char* argv[])
 {
@@ -27,7 +27,25 @@ int main(int argc, char* argv[])
 	string **testArray;			//Array of filename to test, will be populated based on filename, [0] will be a dummy
 	FILE* thisFile = NULL;
 
-	FILE*  configFile = fopen("ScreenshotCompress.cfg", "r");
+	//Get base directory
+	char* getPath = (char*)malloc(2048*sizeof(char));
+	GetModuleFileNameA(NULL, getPath, 2048);
+
+	string baseDirectory = getPath;
+	char slash = '\\';
+	int x = baseDirectory.find_last_of(slash);
+	baseDirectory = baseDirectory.substr(0,x+1);
+
+	string cfgpath = baseDirectory;
+	cfgpath = cfgpath.append("ScreenshotCompress.cfg");
+
+	string pngoutPath = baseDirectory;
+	pngoutPath = pngoutPath.append("pngout.exe");
+
+	string defloptPath = baseDirectory;
+	defloptPath = defloptPath.append("deflopt.exe");
+
+	FILE*  configFile = fopen(cfgpath.c_str(), "r");
 	if (configFile)
 	{
 		fscanf(configFile, "%d", &count);
@@ -45,7 +63,7 @@ int main(int argc, char* argv[])
 			 << DEFAULT_COUNT << " trials.\n";
 	}
 
-	configFile = fopen("pngout.exe", "r");
+	configFile = fopen(pngoutPath.c_str(), "r");
 	if (configFile)
 	{
 		fclose(configFile);
@@ -56,7 +74,7 @@ int main(int argc, char* argv[])
 		return 3;
 	}
 
-	configFile = fopen("deflopt.exe", "r");
+	configFile = fopen(defloptPath.c_str(), "r");
 	if (configFile)
 	{
 		fclose(configFile);
@@ -67,20 +85,12 @@ int main(int argc, char* argv[])
 		return 3;
 	}
 
-
+	
+	
 	testArray = (string **)malloc((count+1)*sizeof(string *));
 	for (unsigned int i = 0; i <= count; i++)
 		testArray[i] = new string;
 
-	//Get base directory
-	char* getPath = (char*)malloc(2048*sizeof(char));
-	GetModuleFileNameA(NULL, getPath, 2048);
-
-	string baseDirectory = getPath;
-	char slash = '\\';
-	int x = baseDirectory.find_last_of(slash);
-	baseDirectory = baseDirectory.substr(0,x+1);
-	
 	cout << "Working directory is:\n" << baseDirectory.c_str() << "\n\n"; //Debug
 
 	if (argc > 1)
@@ -209,6 +219,7 @@ int main(int argc, char* argv[])
 		delete testArray[i];
 	free(testArray);
 
+	
 	if (failure)
 	{
 		cout << "\nCould not open 1 or more files, aborting...";
