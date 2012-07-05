@@ -3,6 +3,7 @@
  Converts hexadecimal byte strings to strings and vice-versa.
  By FredOverflow - http://stackoverflow.com/users/252000/fredoverflow
 */
+
 #ifndef _HEX_H
 #define _HEX_H
 

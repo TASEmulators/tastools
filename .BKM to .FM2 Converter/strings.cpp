@@ -1,3 +1,9 @@
+/*
+ .BKM to .FM2 Converter - Strings Library
+ Just some custom string functions used in the program.
+ By Brandon Evans - http://www.brandonevans.org/
+*/
+
 #include <algorithm>
 #include "strings.h"
 
