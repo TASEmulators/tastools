@@ -159,7 +159,11 @@ void convert(ifstream &in, ofstream &out)
 		cout << "Error: Can't open output file." << endl;
 		return;
 	}
+	// This converter writes version 3 movie files.
 	out << "version 3" << endl;
+	// Assume that the first two controllers are enabled.
+	out << "port0 1" << endl;
+	out << "port1 1" << endl;
 	// Read each line.
 	while (!in.eof())
 	{
@@ -210,7 +214,8 @@ void convert(ifstream &in, ofstream &out)
 		else if (
 			startsWith("emuVersion", line) || startsWith("Platform", line) ||
 			startsWith("SHA1", line) || startsWith("emuOrigin", line) ||
-			startsWith("MovieOrigin", line) || startsWith("SyncHack", line)
+			startsWith("MovieOrigin", line) || startsWith("SyncHack", line) ||
+			startsWith("port0", line) || startsWith("port1", line)
 		)
 			continue;
 		else
