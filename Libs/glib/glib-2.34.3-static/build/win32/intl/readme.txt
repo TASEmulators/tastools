@@ -1,0 +1,1 @@
+see https://sourceforge.net/projects/libintl-windows/files/latest/download
