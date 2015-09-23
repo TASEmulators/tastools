@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6DD4A2A6-D77D-48D7-A7F7-95B00EAEE649}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libintl</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)obj\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>HAVE_GETCWD;HAVE_CONFIG_H;HAVE_STDINT_H;_LIB;G_OS_WIN32;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>HAVE_GETCWD;HAVE_CONFIG_H;HAVE_STDINT_H;_LIB;G_OS_WIN32;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="libintl-0.14.4-src\eval-plural.h" />
+    <ClInclude Include="libintl-0.14.4-src\gettextP.h" />
+    <ClInclude Include="libintl-0.14.4-src\gmo.h" />
+    <ClInclude Include="libintl-0.14.4-src\hash-string.h" />
+    <ClInclude Include="libintl-0.14.4-src\libgnuintl.h" />
+    <ClInclude Include="libintl-0.14.4-src\loadinfo.h" />
+    <ClInclude Include="libintl-0.14.4-src\localcharset.h" />
+    <ClInclude Include="libintl-0.14.4-src\plural-exp.h" />
+    <ClInclude Include="libintl-0.14.4-src\printf-args.h" />
+    <ClInclude Include="libintl-0.14.4-src\printf-parse.h" />
+    <ClInclude Include="libintl-0.14.4-src\relocatable.h" />
+    <ClInclude Include="libintl-0.14.4-src\vasnprintf.h" />
+    <ClInclude Include="libintl-0.14.4-src\vasnwprintf.h" />
+    <ClInclude Include="libintl-0.14.4-src\wprintf-parse.h" />
+    <ClInclude Include="libintl-0.14.4-src\xsize.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="libintl-0.14.4-src\bindtextdom.c" />
+    <ClCompile Include="libintl-0.14.4-src\dcgettext.c" />
+    <ClCompile Include="libintl-0.14.4-src\dcigettext.c" />
+    <ClCompile Include="libintl-0.14.4-src\dcngettext.c" />
+    <ClCompile Include="libintl-0.14.4-src\dgettext.c" />
+    <ClCompile Include="libintl-0.14.4-src\dngettext.c" />
+    <ClCompile Include="libintl-0.14.4-src\explodename.c" />
+    <ClCompile Include="libintl-0.14.4-src\finddomain.c" />
+    <ClCompile Include="libintl-0.14.4-src\gettext.c" />
+    <ClCompile Include="libintl-0.14.4-src\intl-compat.c" />
+    <ClCompile Include="libintl-0.14.4-src\l10nflist.c" />
+    <ClCompile Include="libintl-0.14.4-src\langprefs.c" />
+    <ClCompile Include="libintl-0.14.4-src\loadmsgcat.c" />
+    <ClCompile Include="libintl-0.14.4-src\localcharset.c" />
+    <ClCompile Include="libintl-0.14.4-src\localealias.c" />
+    <ClCompile Include="libintl-0.14.4-src\localename.c" />
+    <ClCompile Include="libintl-0.14.4-src\log.c" />
+    <ClCompile Include="libintl-0.14.4-src\ngettext.c" />
+    <ClCompile Include="libintl-0.14.4-src\osdep.c" />
+    <ClCompile Include="libintl-0.14.4-src\plural-exp.c" />
+    <ClCompile Include="libintl-0.14.4-src\plural.c" />
+    <ClCompile Include="libintl-0.14.4-src\printf-args.c" />
+    <ClCompile Include="libintl-0.14.4-src\printf-parse.c" />
+    <ClCompile Include="libintl-0.14.4-src\printf.c" />
+    <ClCompile Include="libintl-0.14.4-src\relocatable.c" />
+    <ClCompile Include="libintl-0.14.4-src\textdomain.c" />
+    <ClCompile Include="libintl-0.14.4-src\vasnprintf.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
