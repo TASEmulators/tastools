@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Allegro", "Allegro\Allegro.vcxproj", "{0889308C-5366-4685-B527-B983DB3E1930}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Profile|Win32 = Profile|Win32
+		Release|Win32 = Release|Win32
+		Static Debug|Win32 = Static Debug|Win32
+		Static Profile|Win32 = Static Profile|Win32
+		Static Release, Runtime|Win32 = Static Release, Runtime|Win32
+		Static Release|Win32 = Static Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0889308C-5366-4685-B527-B983DB3E1930}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0889308C-5366-4685-B527-B983DB3E1930}.Profile|Win32.ActiveCfg = Profile|Win32
+		{0889308C-5366-4685-B527-B983DB3E1930}.Release|Win32.ActiveCfg = Release|Win32
+		{0889308C-5366-4685-B527-B983DB3E1930}.Release|Win32.Build.0 = Release|Win32
+		{0889308C-5366-4685-B527-B983DB3E1930}.Static Debug|Win32.ActiveCfg = Static Debug|Win32
+		{0889308C-5366-4685-B527-B983DB3E1930}.Static Profile|Win32.ActiveCfg = Static Profile|Win32
+		{0889308C-5366-4685-B527-B983DB3E1930}.Static Release, Runtime|Win32.ActiveCfg = Static Release, Runtime|Win32
+		{0889308C-5366-4685-B527-B983DB3E1930}.Static Release|Win32.ActiveCfg = Static Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
