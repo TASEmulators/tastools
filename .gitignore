@@ -4,3 +4,10 @@
 /Libs/libffi/libffi-msvc/libffi/Win32
 /Libs/libffi/libffi-msvc/libffi-msvc.suo
 /Libs/libffi/libffi-msvc/libffi/*.user
+/Libs/glib/glib-2.34.3-static/build/win32/vs14/Release
+/Libs/intl/intl/vc14/obj
+/Libs/intl/intl/vc14/.vs/libintl/v14/*.suo
+/Libs/libffi/libffi-vc14/libffi/Win32
+/Libs/libffi/libffi-vc14/libffi/Release
+/Libs/glib/glib-2.34.3-static/build/win32/vs2015/.vs/glib/v14/*.suo
+/Libs/glib/glib-2.34.3-static/build/win32/vs2015/Release
