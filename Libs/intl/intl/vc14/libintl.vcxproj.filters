@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\libintl-0.14.4-src\eval-plural.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\gettextP.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\gmo.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\hash-string.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\libgnuintl.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\loadinfo.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\localcharset.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\plural-exp.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\printf-args.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\printf-parse.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\relocatable.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\vasnprintf.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\vasnwprintf.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\wprintf-parse.h" />
+    <ClInclude Include="..\libintl-0.14.4-src\xsize.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libintl-0.14.4-src\bindtextdom.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\dcgettext.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\dcigettext.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\dcngettext.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\dgettext.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\dngettext.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\explodename.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\finddomain.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\gettext.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\intl-compat.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\l10nflist.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\langprefs.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\loadmsgcat.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\localcharset.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\localealias.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\localename.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\log.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\ngettext.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\osdep.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\plural-exp.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\plural.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\printf-args.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\printf-parse.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\printf.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\relocatable.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\textdomain.c" />
+    <ClCompile Include="..\libintl-0.14.4-src\vasnprintf.c" />
+  </ItemGroup>
+</Project>
