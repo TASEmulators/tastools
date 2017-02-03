@@ -72,9 +72,9 @@ int _packfile_type = 0;
 
 static PACKFILE_VTABLE normal_vtable;
 
-static PACKFILE *pack_fopen_special_file(AL_CONST char *filename, AL_CONST char *mode);
+static PACKFILE *pack_fopen_special_file(AL_CONST char *filename, AL_CONST char *mode, AL_CONST char *password);
 
-static int filename_encoding = U_ASCII;
+static int file_encoding = U_ASCII;
 
 
 #define FA_DAT_FLAGS  (FA_RDONLY | FA_ARCH)
@@ -672,22 +672,22 @@ void put_backslash(char *filename)
  ***************************************************/
 
 
-/* set_filename_encoding:
+/* set_file_encoding:
  *  Sets the encoding to use for filenames. By default, UTF8 is assumed.
  */
-void set_filename_encoding(int encoding)
+void set_file_encoding(int encoding)
 {
-    filename_encoding = encoding;
+    file_encoding = encoding;
 }
 
 
 
-/* get_filename_encoding:
+/* get_file_encoding:
  *  Returns the encoding currently assumed for filenames.
  */
-int get_filename_encoding(void)
+int get_file_encoding(void)
 {
-    return filename_encoding ;
+    return file_encoding ;
 }
 
 
@@ -705,7 +705,7 @@ int file_exists(AL_CONST char *filename, int attrib, int *aret)
    ASSERT(filename);
 
    if (ustrchr(filename, '#')) {
-      PACKFILE *f = pack_fopen_special_file(filename, F_READ);
+      PACKFILE *f = pack_fopen_special_file(filename, F_READ, NULL);
       if (f) {
 	 pack_fclose(f);
 	 if (aret)
@@ -751,11 +751,11 @@ int exists(AL_CONST char *filename)
  *  If the file does not exist or an error occurs, it will return zero
  *  and store the system error code in errno.
  */
-uint64_t file_size_ex(AL_CONST char *filename)
+uint64_t file_size_ex_password(AL_CONST char *filename, AL_CONST char *password)
 {
    ASSERT(filename);
    if (ustrchr(filename, '#')) {
-      PACKFILE *f = pack_fopen_special_file(filename, F_READ);
+      PACKFILE *f = pack_fopen_special_file(filename, F_READ,password);
       if (f) {
 	 long ret;
 	 ASSERT(f->is_normal_packfile);
@@ -769,6 +769,11 @@ uint64_t file_size_ex(AL_CONST char *filename)
       return 0;
 
    return _al_file_size_ex(filename);
+}
+
+uint64_t file_size_ex(AL_CONST char *filename)
+{
+	return file_size_ex_password(filename, NULL);
 }
 
 
@@ -1284,7 +1289,7 @@ int find_allegro_resource(char *dest, AL_CONST char *resource, AL_CONST char *ex
  *  Helper to handle opening files that have been appended to the end of
  *  the program executable.
  */
-static PACKFILE *pack_fopen_exe_file(void)
+static PACKFILE *pack_fopen_exe_file(AL_CONST char *password)
 {
    PACKFILE *f;
    char exe_name[1024];
@@ -1298,7 +1303,7 @@ static PACKFILE *pack_fopen_exe_file(void)
       return NULL;
    }
 
-   f = pack_fopen(exe_name, F_READ);
+   f = pack_fopen_password(exe_name, F_READ, password);
    if (!f)
       return NULL;
 
@@ -1317,7 +1322,7 @@ static PACKFILE *pack_fopen_exe_file(void)
 
    /* rewind */
    pack_fclose(f);
-   f = pack_fopen(exe_name, F_READ);
+   f = pack_fopen_password(exe_name, F_READ, password);
    if (!f)
       return NULL;
 
@@ -1415,7 +1420,7 @@ static PACKFILE *pack_fopen_datafile_object(PACKFILE *f, AL_CONST char *objname)
  *  Helper to handle opening psuedo-files, ie. datafile objects and data
  *  that has been appended to the end of the executable.
  */
-static PACKFILE *pack_fopen_special_file(AL_CONST char *filename, AL_CONST char *mode)
+static PACKFILE *pack_fopen_special_file(AL_CONST char *filename, AL_CONST char *mode, AL_CONST char *password)
 {
    char fname[1024], objname[512], tmp[16];
    PACKFILE *f;
@@ -1432,7 +1437,7 @@ static PACKFILE *pack_fopen_special_file(AL_CONST char *filename, AL_CONST char 
 
    if (ustrcmp(filename, uconvert_ascii("#", tmp)) == 0) {
       /* read appended executable data */
-      return pack_fopen_exe_file();
+      return pack_fopen_exe_file(password);
    }
    else {
       if (ugetc(filename) == '#') {
@@ -1449,7 +1454,7 @@ static PACKFILE *pack_fopen_special_file(AL_CONST char *filename, AL_CONST char 
       }
 
       /* open the file */
-      f = pack_fopen(fname, F_READ_PACKED);
+      f = pack_fopen_password(fname, F_READ_PACKED, password);
       if (!f)
 	 return NULL;
 
@@ -1492,18 +1497,18 @@ void packfile_password(AL_CONST char *password)
 /* encrypt_id:
  *  Helper for encrypting magic numbers, using the current password.
  */
-static int32_t encrypt_id(long x, int new_format)
+static int32_t encrypt_id(long x, int new_format, const char* password)
 {
    int32_t mask = 0;
    int i, pos;
 
-   if (the_password[0]) {
-      for (i=0; the_password[i]; i++)
-	 mask ^= ((int32_t)the_password[i] << ((i&3) * 8));
+   if (password && password[0]) {
+      for (i=0; password[i]; i++)
+	 mask ^= ((int32_t)password[i] << ((i&3) * 8));
 
       for (i=0, pos=0; i<4; i++) {
-	 mask ^= (int32_t)the_password[pos++] << (24-i*8);
-	 if (!the_password[pos])
+	 mask ^= (int32_t)password[pos++] << (24-i*8);
+	 if (!password[pos])
 	    pos = 0;
       }
 
@@ -1519,17 +1524,20 @@ static int32_t encrypt_id(long x, int new_format)
 /* clone_password:
  *  Sets up a local password string for use by this packfile.
  */
-static int clone_password(PACKFILE *f)
+static int clone_password(PACKFILE *f, const char *password)
 {
    ASSERT(f);
    ASSERT(f->is_normal_packfile);
 
-   if (the_password[0]) {
-      if ((f->normal.passdata = _AL_MALLOC_ATOMIC(strlen(the_password)+1)) == NULL) {
+   if(password == NULL)
+	   password = the_password;
+
+   if (password[0]) {
+      if ((f->normal.passdata = _AL_MALLOC_ATOMIC(strlen(password)+1)) == NULL) {
 	 *allegro_errno = ENOMEM;
 	 return FALSE;
       }
-      _al_sane_strncpy(f->normal.passdata, the_password, strlen(the_password)+1);
+      _al_sane_strncpy(f->normal.passdata, password, strlen(password)+1);
       f->normal.passpos = f->normal.passdata;
    }
    else {
@@ -1545,7 +1553,7 @@ static int clone_password(PACKFILE *f)
 /* create_packfile:
  *  Helper function for creating a PACKFILE structure.
  */
-static PACKFILE *create_packfile(int is_normal_packfile)
+static PACKFILE *create_packfile(int is_normal_packfile, AL_CONST char *password)
 {
    PACKFILE *f;
 
@@ -1579,6 +1587,10 @@ static PACKFILE *create_packfile(int is_normal_packfile)
       f->normal.pack_data = NULL;
       f->normal.unpack_data = NULL;
       f->normal.todo = 0;
+	  if (!clone_password(f, password)) {
+	    _AL_FREE(f);
+	    return NULL;
+	  }
    }
 
    return f;
@@ -1599,8 +1611,15 @@ static void free_packfile(PACKFILE *f)
       if (f->is_normal_packfile) {
 	 ASSERT(!f->normal.pack_data);
 	 ASSERT(!f->normal.unpack_data);
-	 ASSERT(!f->normal.passdata);
-	 ASSERT(!f->normal.passpos);
+	 //ASSERT(!f->normal.passdata);
+	 //ASSERT(!f->normal.passpos);
+	 if(f->normal.passdata)
+	 {
+        _AL_FREE(f->normal.passdata);
+        f->normal.passdata = NULL;
+        f->normal.passpos = NULL;
+	 }
+
       }
 
       _AL_FREE(f);
@@ -1619,13 +1638,13 @@ static void free_packfile(PACKFILE *f)
  *  returns NULL and stores an error code in errno. An attempt to read
  *  a normal file in packed mode will cause errno to be set to EDOM.
  */
-PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
+PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode, AL_CONST char *password)
 {
    PACKFILE *f, *f2;
    long header = FALSE;
    int c;
 
-   if ((f = create_packfile(TRUE)) == NULL)
+   if ((f = create_packfile(TRUE, password)) == NULL)
       return NULL;
 
    ASSERT(f->is_normal_packfile);
@@ -1650,23 +1669,24 @@ PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
 	    return NULL;
 	 }
 
-	 if ((f->normal.parent = _pack_fdopen(fd, F_WRITE)) == NULL) {
+	 if ((f->normal.parent = _pack_fdopen(fd, F_WRITE, password)) == NULL) {
 	    free_lzss_pack_data(f->normal.pack_data);
 	    f->normal.pack_data = NULL;
 	    free_packfile(f);
 	    return NULL;
 	 }
 
-	 pack_mputl(encrypt_id(F_PACK_MAGIC, TRUE), f->normal.parent);
+	 pack_mputl(encrypt_id(F_PACK_MAGIC, TRUE, f->normal.passdata), f->normal.parent);
 
 	 f->normal.todo = 4;
       }
       else {
 	 /* write a 'real' file */
-	 if (!clone_password(f)) {
+	 
+	 /*if (!clone_password(f)) {
 	    free_packfile(f);
 	    return NULL;
-	 }
+	 }*/
 
          f->normal.hndl = fd;
 	 f->normal.todo = 0;
@@ -1674,7 +1694,7 @@ PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
 	 errno = 0;
 
 	 if (header)
-	    pack_mputl(encrypt_id(F_NOPACK_MAGIC, TRUE), f);
+	    pack_mputl(encrypt_id(F_NOPACK_MAGIC, TRUE, f->normal.passdata), f);
       }
    }
    else { 
@@ -1688,7 +1708,7 @@ PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
 	    return NULL;
 	 }
 
-         if ((f->normal.parent = _pack_fdopen(fd, F_READ)) == NULL) {
+		 if ((f->normal.parent = _pack_fdopen(fd, F_READ, password)) == NULL) {
 	    free_lzss_unpack_data(f->normal.unpack_data);
 	    f->normal.unpack_data = NULL;
 	    free_packfile(f);
@@ -1698,8 +1718,8 @@ PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
 	 header = pack_mgetl(f->normal.parent);
 
 	 if ((f->normal.parent->normal.passpos) &&
-	     ((header == encrypt_id(F_PACK_MAGIC, FALSE)) ||
-	      (header == encrypt_id(F_NOPACK_MAGIC, FALSE))))
+	     ((header == encrypt_id(F_PACK_MAGIC, FALSE, f->normal.passdata)) ||
+	      (header == encrypt_id(F_NOPACK_MAGIC, FALSE, f->normal.passdata))))
 	 {
 	    /* duplicate the file descriptor */
 	    int fd2 = dup(fd);
@@ -1714,18 +1734,19 @@ PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
 	    /* close the parent file (logically, not physically) */
 	    pack_fclose(f->normal.parent);
   
-	    /* backward compatibility mode */
+		/*
+	    // backward compatibility mode 
 	    if (!clone_password(f)) {
 	       free_packfile(f);
 	       return NULL;
-	    }
+	    }*/
   
 	    f->normal.flags |= PACKFILE_FLAG_OLD_CRYPT;
   
 	    /* re-open the parent file */
 	    lseek(fd2, 0, SEEK_SET);
   
-	    if ((f->normal.parent = _pack_fdopen(fd2, F_READ)) == NULL) {
+	    if ((f->normal.parent = _pack_fdopen(fd2, F_READ, password)) == NULL) {
 	       free_packfile(f);
 	       return NULL;
 	    }
@@ -1734,16 +1755,16 @@ PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
   
 	    pack_mgetl(f->normal.parent);
   
-	    if (header == encrypt_id(F_PACK_MAGIC, FALSE))
-	       header = encrypt_id(F_PACK_MAGIC, TRUE);
+	    if (header == encrypt_id(F_PACK_MAGIC, FALSE, f->normal.passdata))
+	       header = encrypt_id(F_PACK_MAGIC, TRUE, f->normal.passdata);
 	    else
-	       header = encrypt_id(F_NOPACK_MAGIC, TRUE);
+	       header = encrypt_id(F_NOPACK_MAGIC, TRUE, f->normal.passdata);
 	 }
 
-	 if (header == encrypt_id(F_PACK_MAGIC, TRUE)) {
+	 if (header == encrypt_id(F_PACK_MAGIC, TRUE, f->normal.passdata)) {
 	    f->normal.todo = LONG_MAX;
 	 }
-	 else if (header == encrypt_id(F_NOPACK_MAGIC, TRUE)) {
+	 else if (header == encrypt_id(F_NOPACK_MAGIC, TRUE, f->normal.passdata)) {
 	    f2 = f->normal.parent;
 	    free_lzss_unpack_data(f->normal.unpack_data);
 	    f->normal.unpack_data = NULL;
@@ -1770,10 +1791,10 @@ PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
 
          lseek(fd, 0, SEEK_SET);
 
-	 if (!clone_password(f)) {
+	 /*if (!clone_password(f)) {
             free_packfile(f);
 	    return NULL;
-	 }
+	 }*/
 
          f->normal.hndl = fd;
       }
@@ -1805,7 +1826,7 @@ PACKFILE *_pack_fdopen(int fd, AL_CONST char *mode)
  *  it returns NULL and stores an error code in errno. An attempt to read a 
  *  normal file in packed mode will cause errno to be set to EDOM.
  */
-PACKFILE *pack_fopen(AL_CONST char *filename, AL_CONST char *mode)
+PACKFILE *pack_fopen_password(AL_CONST char *filename, AL_CONST char *mode, AL_CONST char *password)
 {
    char tmp[1024];
    int fd;
@@ -1814,7 +1835,7 @@ PACKFILE *pack_fopen(AL_CONST char *filename, AL_CONST char *mode)
    _packfile_type = 0;
 
    if (ustrchr(filename, '#')) {
-      PACKFILE *special = pack_fopen_special_file(filename, mode);
+      PACKFILE *special = pack_fopen_special_file(filename, mode, password);
       if (special)
 	 return special;
    }
@@ -1839,7 +1860,12 @@ PACKFILE *pack_fopen(AL_CONST char *filename, AL_CONST char *mode)
       return NULL;
    }
 
-   return _pack_fdopen(fd, mode);
+   return _pack_fdopen(fd, mode, password);
+}
+
+PACKFILE *pack_fopen(AL_CONST char *filename, AL_CONST char *mode)
+{
+	return pack_fopen_password(filename, mode, NULL);
 }
 
 
@@ -1873,7 +1899,7 @@ PACKFILE *pack_fopen_vtable(AL_CONST PACKFILE_VTABLE *vtable, void *userdata)
    ASSERT(vtable->pf_feof);
    ASSERT(vtable->pf_ferror);
 
-   if ((f = create_packfile(FALSE)) == NULL)
+   if ((f = create_packfile(FALSE, NULL)) == NULL)
       return NULL;
 
    f->vtable = vtable;
@@ -2026,7 +2052,7 @@ PACKFILE *pack_fopen_chunk(PACKFILE *f, int pack)
       }
 
       name = uconvert_ascii(tmp_name, tmp);
-      chunk = _pack_fdopen(tmp_fd, (pack ? F_WRITE_PACKED : F_WRITE_NOPACK));
+	  chunk = _pack_fdopen(tmp_fd, (pack ? F_WRITE_PACKED : F_WRITE_NOPACK), f->normal.passdata);
 
       if (chunk) {
          chunk->normal.filename = ustrdup(name);
@@ -2047,7 +2073,7 @@ PACKFILE *pack_fopen_chunk(PACKFILE *f, int pack)
       _packfile_filesize = pack_mgetl(f);
       _packfile_datasize = pack_mgetl(f);
 
-      if ((chunk = create_packfile(TRUE)) == NULL)
+	  if ((chunk = create_packfile(TRUE, f->normal.passdata)) == NULL)
          return NULL;
 
       chunk->normal.flags = PACKFILE_FLAG_CHUNK;
@@ -2055,7 +2081,10 @@ PACKFILE *pack_fopen_chunk(PACKFILE *f, int pack)
 
       if (f->normal.flags & PACKFILE_FLAG_OLD_CRYPT) {
 	 /* backward compatibility mode */
+     
+	 /*
 	 if (f->normal.passdata) {
+		 
 	    if ((chunk->normal.passdata = _AL_MALLOC_ATOMIC(strlen(f->normal.passdata)+1)) == NULL) {
 	       *allegro_errno = ENOMEM;
 	       _AL_FREE(chunk);
@@ -2065,6 +2094,7 @@ PACKFILE *pack_fopen_chunk(PACKFILE *f, int pack)
 	    chunk->normal.passpos = chunk->normal.passdata + (long)f->normal.passpos - (long)f->normal.passdata;
 	    f->normal.passpos = f->normal.passdata;
 	 }
+	 */
 	 chunk->normal.flags |= PACKFILE_FLAG_OLD_CRYPT;
       }
 
@@ -2119,6 +2149,7 @@ PACKFILE *pack_fclose_chunk(PACKFILE *f)
    if (f->normal.flags & PACKFILE_FLAG_WRITE) {
       /* finish writing a chunk */
       int hndl;
+	  char *password;
 
       /* duplicate the file descriptor to create a readable pack file,
        * the file descriptor must have been opened in read/write mode
@@ -2146,12 +2177,15 @@ PACKFILE *pack_fclose_chunk(PACKFILE *f)
        * because the descriptor has been duplicated
        */
       f->normal.flags &= ~PACKFILE_FLAG_CHUNK;
+	  password = f->normal.passdata;
+	  f->normal.passdata = NULL;
+	  f->normal.passpos = NULL;
       pack_fclose(f);
 
       lseek(hndl, 0, SEEK_SET);
 
       /* create a readable pack file */
-      tmp = _pack_fdopen(hndl, F_READ);
+	  tmp = _pack_fdopen(hndl, F_READ, password);
       if (!tmp)
          return NULL;
 
@@ -2161,7 +2195,7 @@ PACKFILE *pack_fclose_chunk(PACKFILE *f)
 
       pack_mputl(_packfile_filesize, parent);
 
-      if (header == encrypt_id(F_PACK_MAGIC, TRUE))
+      if (header == encrypt_id(F_PACK_MAGIC, TRUE, password))
 	 pack_mputl(-_packfile_datasize, parent);
       else
 	 pack_mputl(_packfile_datasize, parent);
@@ -2173,6 +2207,8 @@ PACKFILE *pack_fclose_chunk(PACKFILE *f)
 
       delete_file(name);
       _AL_FREE(name);
+	  if(password)
+		_AL_FREE(password);
    }
    else {
       /* finish reading a chunk */
