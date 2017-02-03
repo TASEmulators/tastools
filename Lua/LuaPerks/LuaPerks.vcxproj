@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{36835D12-7AE3-47EE-96EF-A50D88737893}</ProjectGuid>
+    <RootNamespace>LuaPerks</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <PlatformToolset>v140_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">obj/$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Full</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>lua5.1.4\src;iup3.0-rc3/include;iup3.0-rc3/src;cd5.2/include;iup3.0-rc3/srccontrols;im3.5/include;cd5.2\src\sim;cd5.2\src\freetype2;cd5.2\src\pdflib\pdflib;im3.5\src\libpng;im3.5\src\libjpeg;im3.5\src\libjasper;im3.5\src\liblzf;im3.5\src\libtiff;im3.5\src\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_SEARCH_H;WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CD_NO_OLD_INTERFACE;_IUP_PPLOT_;USE_IM;FT2_BUILD_LIBRARY;FT_OPTION_AUTOFIT2;IUPLUA_USELOH;_WIN32_WINNT=0x0500;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <OmitDefaultLibName>true</OmitDefaultLibName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)luaperks.lib</OutputFile>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="im3.5\src\im_attrib.cpp" />
+    <ClCompile Include="im3.5\src\im_bin.cpp" />
+    <ClCompile Include="im3.5\src\im_binfile.cpp" />
+    <ClCompile Include="im3.5\src\im_colorhsi.cpp" />
+    <ClCompile Include="im3.5\src\im_colormode.cpp" />
+    <ClCompile Include="im3.5\src\im_colorutil.cpp" />
+    <ClCompile Include="im3.5\src\im_compress.cpp" />
+    <ClCompile Include="im3.5\src\im_convertbitmap.cpp" />
+    <ClCompile Include="im3.5\src\im_convertcolor.cpp" />
+    <ClCompile Include="im3.5\src\im_converttype.cpp" />
+    <ClCompile Include="im3.5\src\im_counter.cpp" />
+    <ClCompile Include="im3.5\src\im_datatype.cpp" />
+    <ClCompile Include="im3.5\src\im_dib.cpp" />
+    <ClCompile Include="im3.5\src\im_dibxbitmap.cpp" />
+    <ClCompile Include="im3.5\src\im_file.cpp" />
+    <ClCompile Include="im3.5\src\im_filebuffer.cpp" />
+    <ClCompile Include="im3.5\src\im_fileraw.cpp" />
+    <ClCompile Include="im3.5\src\im_format.cpp" />
+    <ClCompile Include="im3.5\src\im_format_all.cpp" />
+    <ClCompile Include="im3.5\src\im_format_avi.cpp" />
+    <ClCompile Include="im3.5\src\im_format_bmp.cpp" />
+    <ClCompile Include="im3.5\src\im_format_gif.cpp" />
+    <ClCompile Include="im3.5\src\im_format_ico.cpp" />
+    <ClCompile Include="im3.5\src\im_format_jp2.cpp" />
+    <ClCompile Include="im3.5\src\im_format_jpeg.cpp" />
+    <ClCompile Include="im3.5\src\im_format_krn.cpp" />
+    <ClCompile Include="im3.5\src\im_format_led.cpp" />
+    <ClCompile Include="im3.5\src\im_format_pcx.cpp" />
+    <ClCompile Include="im3.5\src\im_format_png.cpp" />
+    <ClCompile Include="im3.5\src\im_format_pnm.cpp" />
+    <ClCompile Include="im3.5\src\im_format_ras.cpp" />
+    <ClCompile Include="im3.5\src\im_format_raw.cpp" />
+    <ClCompile Include="im3.5\src\im_format_sgi.cpp" />
+    <ClCompile Include="im3.5\src\im_format_tga.cpp" />
+    <ClCompile Include="im3.5\src\im_format_tiff.cpp" />
+    <ClCompile Include="im3.5\src\im_format_wmv.cpp" />
+    <ClCompile Include="im3.5\src\im_image.cpp" />
+    <ClCompile Include="im3.5\src\im_lib.cpp" />
+    <ClCompile Include="im3.5\src\im_palette.cpp" />
+    <ClCompile Include="im3.5\src\im_rgb2map.cpp" />
+    <ClCompile Include="im3.5\src\im_str.cpp" />
+    <ClCompile Include="im3.5\src\im_sysfile_win32.cpp" />
+    <ClCompile Include="im3.5\src\jas_binfile.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_cm.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_debug.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_getopt.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_icc.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_iccdata.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_image.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_init.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_malloc.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_seq.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_stream.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_string.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_tmr.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_tvp.c" />
+    <ClCompile Include="im3.5\src\libjasper\base\jas_version.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jaricom.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcapimin.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcapistd.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcarith.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jccoefct.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jccolor.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcdctmgr.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jchuff.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcinit.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcmainct.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcmarker.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcmaster.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcomapi.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcparam.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcprepct.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jcsample.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jctrans.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdapimin.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdapistd.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdarith.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdatadst.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdatasrc.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdcoefct.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdcolor.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jddctmgr.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdhuff.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdinput.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdmainct.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdmarker.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdmaster.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdmerge.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdpostct.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdsample.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jdtrans.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jerror.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jfdctflt.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jfdctfst.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jfdctint.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jidctflt.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jidctfst.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jidctint.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jmemmgr.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jmemnobs.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jquant1.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jquant2.c" />
+    <ClCompile Include="im3.5\src\libjpeg\jutils.c" />
+    <ClCompile Include="im3.5\src\liblzf\lzf_c.c" />
+    <ClCompile Include="im3.5\src\liblzf\lzf_d.c" />
+    <ClCompile Include="im3.5\src\libpng\png.c" />
+    <ClCompile Include="im3.5\src\libpng\pngerror.c" />
+    <ClCompile Include="im3.5\src\libpng\pnggccrd.c" />
+    <ClCompile Include="im3.5\src\libpng\pngget.c" />
+    <ClCompile Include="im3.5\src\libpng\pngmem.c" />
+    <ClCompile Include="im3.5\src\libpng\pngpread.c" />
+    <ClCompile Include="im3.5\src\libpng\pngread.c" />
+    <ClCompile Include="im3.5\src\libpng\pngrio.c" />
+    <ClCompile Include="im3.5\src\libpng\pngrtran.c" />
+    <ClCompile Include="im3.5\src\libpng\pngrutil.c" />
+    <ClCompile Include="im3.5\src\libpng\pngset.c" />
+    <ClCompile Include="im3.5\src\libpng\pngtrans.c" />
+    <ClCompile Include="im3.5\src\libpng\pngvcrd.c" />
+    <ClCompile Include="im3.5\src\libpng\pngwio.c" />
+    <ClCompile Include="im3.5\src\libpng\pngwrite.c" />
+    <ClCompile Include="im3.5\src\libpng\pngwtran.c" />
+    <ClCompile Include="im3.5\src\libpng\pngwutil.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_aux.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_close.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_codec.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_color.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_compress.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_dir.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_dirinfo.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_dirread.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_dirwrite.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_dumpmode.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_error.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_extension.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_fax3.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_fax3sm.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_flush.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_getimage.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_jpeg.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_luv.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_lzw.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_next.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_ojpeg.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_open.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_packbits.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_pixarlog.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_predict.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_print.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_read.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_strip.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_swab.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_thunder.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_tile.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_version.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_warning.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_write.c" />
+    <ClCompile Include="im3.5\src\libtiff\tif_zip.c" />
+    <ClCompile Include="im3.5\src\old_im.cpp" />
+    <ClCompile Include="im3.5\src\old_imcolor.c" />
+    <ClCompile Include="im3.5\src\old_imresize.c" />
+    <ClCompile Include="im3.5\src\tiff_binfile.c" />
+    <ClCompile Include="im3.5\src\zlib\adler32.c" />
+    <ClCompile Include="im3.5\src\zlib\compress.c" />
+    <ClCompile Include="im3.5\src\zlib\crc32.c" />
+    <ClCompile Include="im3.5\src\zlib\deflate.c" />
+    <ClCompile Include="im3.5\src\zlib\gzio.c" />
+    <ClCompile Include="im3.5\src\zlib\infback.c" />
+    <ClCompile Include="im3.5\src\zlib\inffast.c" />
+    <ClCompile Include="im3.5\src\zlib\inflate.c" />
+    <ClCompile Include="im3.5\src\zlib\inftrees.c" />
+    <ClCompile Include="im3.5\src\zlib\trees.c" />
+    <ClCompile Include="im3.5\src\zlib\uncompr.c" />
+    <ClCompile Include="im3.5\src\zlib\zutil.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_array.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_assert.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_attrib.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_box.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_button.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_callback.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_canvas.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_cbox.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_childtree.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_class.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_classattrib.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_classbase.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_colordlg.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_dialog.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_dlglist.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_filedlg.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_fill.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_focus.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_font.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_fontdlg.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_frame.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_func.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_getparam.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_globalattrib.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_hbox.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_image.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_key.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_label.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_layout.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_ledlex.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_ledparse.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_list.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_mask.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_maskmatch.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_maskparse.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_menu.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_messagedlg.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_names.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_normalizer.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_object.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_open.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_predial.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_progressbar.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_radio.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_register.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_sbox.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_scanf.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_show.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_spin.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_str.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_strmessage.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_table.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_tabs.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_text.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_timer.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_toggle.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_tree.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_user.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_val.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_vbox.c" />
+    <ClCompile Include="iup3.0-rc3\src\iup_zbox.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_brush.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_button.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_canvas.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_clipboard.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_colordlg.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_common.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_dialog.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_draw.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_filedlg.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_focus.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_font.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_fontdlg.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_frame.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_globalattrib.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_handle.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_image.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_info.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_key.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_label.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_list.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_loop.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_menu.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_messagedlg.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_open.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_progressbar.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_tabs.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_text.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_timer.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_tips.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_toggle.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_tree.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwin_val.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwindows_help.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwindows_info.c" />
+    <ClCompile Include="iup3.0-rc3\src\win\iupwindows_main.c" />
+    <ClCompile Include="iup3.0-rc3\srccd\iup_cd.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_cdutil.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_cells.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_colorbar.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_controls.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_dial.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_gauge.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_oldmask.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_oldtabs.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\iup_oldval.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\color\iup_colorbrowser.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\color\iup_colorbrowserdlg.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\color\iup_colorhsi.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_aux.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_colres.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_draw.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_edit.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_focus.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_getset.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_key.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_mark.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_mem.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_mouse.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_numlc.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmat_scroll.c" />
+    <ClCompile Include="iup3.0-rc3\srccontrols\matrix\iupmatrix.c" />
+    <ClCompile Include="iup3.0-rc3\srcgl\iup_glcanvas_win.c" />
+    <ClCompile Include="iup3.0-rc3\srcim\iup_im.c" />
+    <ClCompile Include="iup3.0-rc3\srcimglib\iup_image_library.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="iup3.0-rc3\srclua5\il_button.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_canvas.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_cbox.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_cells.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_clipboard.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_colorbar.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_colorbrowser.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_colordlg.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_dial.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_dialog.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_filedlg.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_fill.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_fontdlg.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_frame.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_gauge.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_getcolor.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_getparam.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_glcanvas.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_hbox.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_image.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_imagergb.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_imagergba.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_item.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_label.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_list.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_mask.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_matrix.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_matrix_aux.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_menu.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_messagedlg.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_multiline.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_normalizer.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_olecontrol.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_pplot.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_progressbar.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_radio.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_sbox.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_scanf.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_separator.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_spin.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_spinbox.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_submenu.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_tabs.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_text.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_timer.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_toggle.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_tree.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_tree_aux.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_user.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_val.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_vbox.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\il_zbox.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\iuplua.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\iuplua_api.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\iuplua_cd.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\iuplua_controls.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\iuplua_glcanvas.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\iuplua_im.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\iuplua_imglib.c" />
+    <ClCompile Include="iup3.0-rc3\srclua5\iuplua_pplot.c" />
+    <ClCompile Include="iup3.0-rc3\srcole\iup_olecontrol.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcole\tAmbientProperties.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcole\tDispatch.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcole\tLegacy.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcole\tOleClientSite.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcole\tOleControlSite.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcole\tOleHandler.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcole\tOleInPlaceFrame.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcole\tOleInPlaceSite.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcpplot\iup_pplot.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcpplot\iupPPlot.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcpplot\iupPPlotInteraction.cpp" />
+    <ClCompile Include="iup3.0-rc3\srcview\iup_view.c" />
+    <ClCompile Include="cd5.2\src\cd.c" />
+    <ClCompile Include="cd5.2\src\cd_active.c" />
+    <ClCompile Include="cd5.2\src\cd_attributes.c" />
+    <ClCompile Include="cd5.2\src\cd_bitmap.c" />
+    <ClCompile Include="cd5.2\src\cd_image.c" />
+    <ClCompile Include="cd5.2\src\cd_primitives.c" />
+    <ClCompile Include="cd5.2\src\cd_text.c" />
+    <ClCompile Include="cd5.2\src\cd_util.c" />
+    <ClCompile Include="cd5.2\src\cd_vectortext.c" />
+    <ClCompile Include="cd5.2\src\rgb2map.c" />
+    <ClCompile Include="cd5.2\src\wd.c" />
+    <ClCompile Include="cd5.2\src\wdhdcpy.c" />
+    <ClCompile Include="cd5.2\src\lua5\cdlua5.c" />
+    <ClCompile Include="cd5.2\src\lua5\cdlua5_active.c" />
+    <ClCompile Include="cd5.2\src\lua5\cdlua5_canvas.c" />
+    <ClCompile Include="cd5.2\src\lua5\cdlua5ctx.c" />
+    <ClCompile Include="cd5.2\src\lua5\cdluacontextplus5.c" />
+    <ClCompile Include="cd5.2\src\lua5\cdluaim5.c" />
+    <ClCompile Include="cd5.2\src\lua5\cdluapdf5.c" />
+    <ClCompile Include="cd5.2\src\lua5\cdvoid5.c" />
+    <ClCompile Include="cd5.2\src\sim\cd_truetype.c" />
+    <ClCompile Include="cd5.2\src\sim\cdfontex.c" />
+    <ClCompile Include="cd5.2\src\sim\sim.c" />
+    <ClCompile Include="cd5.2\src\sim\sim_linepolyfill.c" />
+    <ClCompile Include="cd5.2\src\sim\sim_other.c" />
+    <ClCompile Include="cd5.2\src\sim\sim_primitives.c" />
+    <ClCompile Include="cd5.2\src\sim\sim_text.c" />
+    <ClCompile Include="cd5.2\src\freetype2\autofit\autofit.c" />
+    <ClCompile Include="cd5.2\src\freetype2\base\ftbase.c" />
+    <ClCompile Include="cd5.2\src\freetype2\base\ftbitmap.c" />
+    <ClCompile Include="cd5.2\src\freetype2\base\ftglyph.c" />
+    <ClCompile Include="cd5.2\src\freetype2\base\ftinit.c" />
+    <ClCompile Include="cd5.2\src\freetype2\base\ftsystem.c" />
+    <ClCompile Include="cd5.2\src\freetype2\bdf\bdf.c" />
+    <ClCompile Include="cd5.2\src\freetype2\cache\ftcache.c" />
+    <ClCompile Include="cd5.2\src\freetype2\cff\cff.c" />
+    <ClCompile Include="cd5.2\src\freetype2\cid\type1cid.c" />
+    <ClCompile Include="cd5.2\src\freetype2\gxvalid\gxvalid.c" />
+    <ClCompile Include="cd5.2\src\freetype2\lzw\ftlzw.c" />
+    <ClCompile Include="cd5.2\src\freetype2\otvalid\otvalid.c" />
+    <ClCompile Include="cd5.2\src\freetype2\pcf\pcf.c" />
+    <ClCompile Include="cd5.2\src\freetype2\psaux\psaux.c" />
+    <ClCompile Include="cd5.2\src\freetype2\pshinter\pshinter.c" />
+    <ClCompile Include="cd5.2\src\freetype2\psnames\psnames.c" />
+    <ClCompile Include="cd5.2\src\freetype2\raster\raster.c" />
+    <ClCompile Include="cd5.2\src\freetype2\sfnt\sfnt.c" />
+    <ClCompile Include="cd5.2\src\freetype2\smooth\smooth.c" />
+    <ClCompile Include="cd5.2\src\freetype2\truetype\truetype.c" />
+    <ClCompile Include="cd5.2\src\freetype2\type1\type1.c" />
+    <ClCompile Include="cd5.2\src\freetype2\type42\type42.c" />
+    <ClCompile Include="cd5.2\src\freetype2\winfonts\winfnt.c" />
+    <ClCompile Include="cd5.2\src\freetype2\gzip\ftgzip.c" />
+    <ClCompile Include="cd5.2\src\freetype2\pfr\pfr.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwclp.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwdbuf.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwdib.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwemf.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwimg.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwin.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwnative.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwprn.c" />
+    <ClCompile Include="cd5.2\src\win32\cdwwmf.c" />
+    <ClCompile Include="cd5.2\src\win32\wmf_emf.c" />
+    <ClCompile Include="cd5.2\src\drv\cdcgm.c" />
+    <ClCompile Include="cd5.2\src\drv\cddebug.c" />
+    <ClCompile Include="cd5.2\src\drv\cddgn.c" />
+    <ClCompile Include="cd5.2\src\drv\cddxf.c" />
+    <ClCompile Include="cd5.2\src\drv\cdirgb.c" />
+    <ClCompile Include="cd5.2\src\drv\cdmf.c" />
+    <ClCompile Include="cd5.2\src\drv\cdpdf.c" />
+    <ClCompile Include="cd5.2\src\drv\cdpicture.c" />
+    <ClCompile Include="cd5.2\src\drv\cdps.c" />
+    <ClCompile Include="cd5.2\src\drv\cgm.c" />
+    <ClCompile Include="cd5.2\src\intcgm\bparse.c" />
+    <ClCompile Include="cd5.2\src\intcgm\circle.c" />
+    <ClCompile Include="cd5.2\src\intcgm\ellipse.c" />
+    <ClCompile Include="cd5.2\src\intcgm\intcgm1.c" />
+    <ClCompile Include="cd5.2\src\intcgm\intcgm2.c" />
+    <ClCompile Include="cd5.2\src\intcgm\intcgm4.c" />
+    <ClCompile Include="cd5.2\src\intcgm\intcgm6.c" />
+    <ClCompile Include="cd5.2\src\intcgm\list.c" />
+    <ClCompile Include="cd5.2\src\intcgm\sism.c" />
+    <ClCompile Include="cd5.2\src\intcgm\tparse.c" />
+    <ClCompile Include="luasocket-2.0.2\src\auxiliar.c" />
+    <ClCompile Include="luasocket-2.0.2\src\buffer.c" />
+    <ClCompile Include="luasocket-2.0.2\src\except.c" />
+    <ClCompile Include="luasocket-2.0.2\src\inet.c" />
+    <ClCompile Include="luasocket-2.0.2\src\io.c" />
+    <ClCompile Include="luasocket-2.0.2\src\luasocket.c" />
+    <ClCompile Include="luasocket-2.0.2\src\mime.c" />
+    <ClCompile Include="luasocket-2.0.2\src\options.c" />
+    <ClCompile Include="luasocket-2.0.2\src\select.c" />
+    <ClCompile Include="luasocket-2.0.2\src\tcp.c" />
+    <ClCompile Include="luasocket-2.0.2\src\timeout.c" />
+    <ClCompile Include="luasocket-2.0.2\src\udp.c" />
+    <ClCompile Include="luasocket-2.0.2\src\wsocket.c" />
+    <ClCompile Include="stevedonovan-winapi-31-oct-2011\winapi.c" />
+    <ClCompile Include="stevedonovan-winapi-31-oct-2011\wutils.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="im3.5\src\libjasper\jasper\jasper.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_cm.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_config.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_debug.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_fix.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_getopt.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_icc.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_image.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_init.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_malloc.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_math.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_seq.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_stream.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_string.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_tmr.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_tvp.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_types.h" />
+    <ClInclude Include="im3.5\src\libjasper\jasper\jas_version.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jconfig.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jdct.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jerror.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jinclude.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jmemsys.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jmorecfg.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jpegint.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jpeglib.h" />
+    <ClInclude Include="im3.5\src\libjpeg\jversion.h" />
+    <ClInclude Include="im3.5\src\liblzf\lzf.h" />
+    <ClInclude Include="im3.5\src\liblzf\lzfP.h" />
+    <ClInclude Include="im3.5\src\libpng\png.h" />
+    <ClInclude Include="im3.5\src\libpng\pngconf.h" />
+    <ClInclude Include="im3.5\src\libtiff\t4.h" />
+    <ClInclude Include="im3.5\src\libtiff\tiff.h" />
+    <ClInclude Include="im3.5\src\libtiff\tiffio.h" />
+    <ClInclude Include="im3.5\src\libtiff\tiffiop.h" />
+    <ClInclude Include="im3.5\src\libtiff\tiffvers.h" />
+    <ClInclude Include="im3.5\src\libtiff\tif_config.h" />
+    <ClInclude Include="im3.5\src\libtiff\tif_dir.h" />
+    <ClInclude Include="im3.5\src\libtiff\tif_fax3.h" />
+    <ClInclude Include="im3.5\src\libtiff\tif_predict.h" />
+    <ClInclude Include="im3.5\src\libtiff\uvcode.h" />
+    <ClInclude Include="im3.5\src\zlib\crc32.h" />
+    <ClInclude Include="im3.5\src\zlib\deflate.h" />
+    <ClInclude Include="im3.5\src\zlib\inffast.h" />
+    <ClInclude Include="im3.5\src\zlib\inffixed.h" />
+    <ClInclude Include="im3.5\src\zlib\inflate.h" />
+    <ClInclude Include="im3.5\src\zlib\inftrees.h" />
+    <ClInclude Include="im3.5\src\zlib\trees.h" />
+    <ClInclude Include="im3.5\src\zlib\zconf.h" />
+    <ClInclude Include="im3.5\src\zlib\zlib.h" />
+    <ClInclude Include="im3.5\src\zlib\zutil.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_array.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_assert.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_attrib.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_box.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_button.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_canvas.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_childtree.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_class.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_classbase.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_dialog.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_dlglist.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_drv.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_drvfont.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_drvinfo.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_focus.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_frame.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_func.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_globalattrib.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_image.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_key.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_label.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_layout.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_ledlex.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_list.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_mask.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_maskmatch.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_maskparse.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_menu.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_names.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_object.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_predial.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_progressbar.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_register.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_stdcontrols.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_str.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_strmessage.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_table.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_tabs.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_text.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_timer.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_toggle.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_tree.h" />
+    <ClInclude Include="iup3.0-rc3\src\iup_val.h" />
+    <ClInclude Include="iup3.0-rc3\src\win\iupwin_brush.h" />
+    <ClInclude Include="iup3.0-rc3\src\win\iupwin_draw.h" />
+    <ClInclude Include="iup3.0-rc3\src\win\iupwin_drv.h" />
+    <ClInclude Include="iup3.0-rc3\src\win\iupwin_handle.h" />
+    <ClInclude Include="iup3.0-rc3\src\win\iupwin_info.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\iup_cdutil.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\iup_controls.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\color\iup_colorhsi.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_aux.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_cd.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_colres.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_def.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_draw.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_edit.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_focus.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_getset.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_key.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_mark.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_mem.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_mouse.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_numlc.h" />
+    <ClInclude Include="iup3.0-rc3\srccontrols\matrix\iupmat_scroll.h" />
+    <ClInclude Include="iup3.0-rc3\srclua5\il.h" />
+    <ClInclude Include="iup3.0-rc3\srclua5\il_controls.h" />
+    <ClInclude Include="iup3.0-rc3\srcole\tAmbientProperties.h" />
+    <ClInclude Include="iup3.0-rc3\srcole\tDispatch.h" />
+    <ClInclude Include="iup3.0-rc3\srcole\tLegacy.h" />
+    <ClInclude Include="iup3.0-rc3\srcole\tOleClientSite.h" />
+    <ClInclude Include="iup3.0-rc3\srcole\tOleControlSite.h" />
+    <ClInclude Include="iup3.0-rc3\srcole\tOleHandler.h" />
+    <ClInclude Include="iup3.0-rc3\srcole\tOleInPlaceFrame.h" />
+    <ClInclude Include="iup3.0-rc3\srcole\tOleInPlaceSite.h" />
+    <ClInclude Include="iup3.0-rc3\srcpplot\iupPPlot.h" />
+    <ClInclude Include="iup3.0-rc3\srcpplot\iuppplot.hpp" />
+    <ClInclude Include="iup3.0-rc3\srcpplot\iupPPlotInteraction.h" />
+    <ClInclude Include="cd5.2\src\lua5\cdvoid5.h" />
+    <ClInclude Include="cd5.2\src\sim\cd_truetype.h" />
+    <ClInclude Include="cd5.2\src\sim\sim.h" />
+    <ClInclude Include="cd5.2\src\sim\truetype.h" />
+    <ClInclude Include="cd5.2\src\win32\cdwin.h" />
+    <ClInclude Include="cd5.2\src\drv\cgm.h" />
+    <ClInclude Include="cd5.2\src\intcgm\bparse.h" />
+    <ClInclude Include="cd5.2\src\intcgm\circle.h" />
+    <ClInclude Include="cd5.2\src\intcgm\ellipse.h" />
+    <ClInclude Include="cd5.2\src\intcgm\intcgm.h" />
+    <ClInclude Include="cd5.2\src\intcgm\intcgm2.h" />
+    <ClInclude Include="cd5.2\src\intcgm\intcgm4.h" />
+    <ClInclude Include="cd5.2\src\intcgm\intcgm6.h" />
+    <ClInclude Include="cd5.2\src\intcgm\list.h" />
+    <ClInclude Include="cd5.2\src\intcgm\sism.h" />
+    <ClInclude Include="cd5.2\src\intcgm\tparse.h" />
+    <ClInclude Include="cd5.2\src\intcgm\types.h" />
+    <ClInclude Include="luasocket-2.0.2\src\auxiliar.h" />
+    <ClInclude Include="luasocket-2.0.2\src\buffer.h" />
+    <ClInclude Include="luasocket-2.0.2\src\except.h" />
+    <ClInclude Include="luasocket-2.0.2\src\inet.h" />
+    <ClInclude Include="luasocket-2.0.2\src\io.h" />
+    <ClInclude Include="luasocket-2.0.2\src\luasocket.h" />
+    <ClInclude Include="luasocket-2.0.2\src\mime.h" />
+    <ClInclude Include="luasocket-2.0.2\src\options.h" />
+    <ClInclude Include="luasocket-2.0.2\src\select.h" />
+    <ClInclude Include="luasocket-2.0.2\src\socket.h" />
+    <ClInclude Include="luasocket-2.0.2\src\tcp.h" />
+    <ClInclude Include="luasocket-2.0.2\src\timeout.h" />
+    <ClInclude Include="luasocket-2.0.2\src\udp.h" />
+    <ClInclude Include="luasocket-2.0.2\src\wsocket.h" />
+    <ClInclude Include="stevedonovan-winapi-31-oct-2011\wutils.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
