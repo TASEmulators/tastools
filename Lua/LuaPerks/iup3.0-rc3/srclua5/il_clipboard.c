@@ -35,7 +35,7 @@ int iupclipboardlua_open(lua_State * L)
 #else
 #ifdef TEC_64
 #ifdef WIN64
-#include "loh/clipboard_le64w.loh"
+//#include "loh/clipboard_le64w.loh"
 #else
 #include "loh/clipboard_le64.loh"
 #endif
