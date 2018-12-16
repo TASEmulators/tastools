@@ -169,6 +169,9 @@
     <Filter Include="im3.5\src\zlib">
       <UniqueIdentifier>{4379f3be-c6c1-438b-915b-ddf20ceecd5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="im3.5\src\lua5">
+      <UniqueIdentifier>{a65777a5-6c54-4734-b896-5887ca397947}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="iup3.0-rc3\src\iup.c">
@@ -1580,6 +1583,48 @@
     </ClCompile>
     <ClCompile Include="im3.5\src\zlib\inffast.c">
       <Filter>im3.5\src\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_aux.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_avi.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_capture.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_convert.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_fftw.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_file.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_image.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_jp2.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_kernel.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_palette.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_process.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_util.c">
+      <Filter>im3.5\src\lua5</Filter>
+    </ClCompile>
+    <ClCompile Include="im3.5\src\lua5\imlua_wmv.c">
+      <Filter>im3.5\src\lua5</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
